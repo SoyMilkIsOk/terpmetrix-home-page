@@ -6,14 +6,14 @@ import Service from '../components/Service';
 import About from '../components/About';
 import Footer from '../components/Footer';
 
-const Index = () => {
+const TestTerps = () => {
   return (
-    <Layout pageTitle="Terpene Testing for the Consumer | Terpmetrix">
+    <Layout pageTitle="Test Results - Terpmetrix">
       <Header />
-      <Hero />
+      <Service />
       <Footer />
     </Layout>
   )
 }
 
-export default Index;
+export default TestTerps;
