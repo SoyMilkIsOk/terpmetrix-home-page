@@ -5,12 +5,14 @@ import Feature from '../components/Feature';
 import Service from '../components/Service';
 import About from '../components/About';
 import Footer from '../components/Footer';
+import AccordianDropdown from "../components/AccordianDropdown";
 
 const TestTerps = () => {
   return (
-    <Layout pageTitle="Test Results - Terpmetrix">
+    <Layout pageTitle="Test Results - Double Lemon Gucci">
       <Header />
       <Service />
+      <AccordianDropdown />
       <Footer />
     </Layout>
   )
