@@ -1,4 +1,4 @@
-import {React, useState} from 'react';
+import {React, useState} from "react";
 import {  Accordion, AccordionItem, AccordionHeader, AccordionBody } from "reactstrap";
 
 
@@ -14,7 +14,7 @@ const AccordianDropdown = () => {
   }
 
   return (
-    <div className='container-md'>
+    <div className="container-md">
       <Accordion
         open={index}
         toggle={toggle}
@@ -25,13 +25,8 @@ const AccordianDropdown = () => {
           </AccordionHeader>
           <AccordionBody accordionId="1">
             <strong>
-              This is the first item's accordion body.
+              This is the first items accordion body.
             </strong>
-            You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the{' '}
-            <code>
-              .accordion-body
-            </code>
-            , though the transition does limit overflow.
           </AccordionBody>
         </AccordionItem>
         <AccordionItem>
@@ -40,13 +35,8 @@ const AccordianDropdown = () => {
           </AccordionHeader>
           <AccordionBody accordionId="2">
             <strong>
-              This is the second item's accordion body.
+              This is the second items accordion body.
             </strong>
-            You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the{' '}
-            <code>
-              .accordion-body
-            </code>
-            , though the transition does limit overflow.
           </AccordionBody>
         </AccordionItem>
         <AccordionItem>
@@ -55,13 +45,8 @@ const AccordianDropdown = () => {
           </AccordionHeader>
           <AccordionBody accordionId="3">
             <strong>
-              This is the third item's accordion body.
+              This is the third items accordion body.
             </strong>
-            You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the{' '}
-            <code>
-              .accordion-body
-            </code>
-            , though the transition does limit overflow.
           </AccordionBody>
         </AccordionItem>
       </Accordion>
