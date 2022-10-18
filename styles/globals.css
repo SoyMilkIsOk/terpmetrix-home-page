@@ -25,3 +25,19 @@ a {
   font-weight: 600;
   color: #259a47;
 }
+
+
+.logo {
+  padding-top: 20px;
+  width: 24vw;
+}  
+
+@media (max-width: 1000px) {
+.logo {
+  margin: auto;
+  width: 300px;
+}
+.section{
+padding-top: 50px;
+}
+}

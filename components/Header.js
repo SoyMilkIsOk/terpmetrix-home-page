@@ -15,7 +15,7 @@ const Header = () => {
   return (
       <Container>
         <Navbar light expand="md">
-          <NavbarBrand href="/"><object type="image/png" width="400" data="images/terpmetrix-color.png">Your browser does not support PNGs</object></NavbarBrand>
+          <NavbarBrand href="/"><object type="image/png" className='logo' data="images/terpmetrix-color.png">Your browser does not support PNGs</object></NavbarBrand>
         </Navbar>
       </Container>
   );
