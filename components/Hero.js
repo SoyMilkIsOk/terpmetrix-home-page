@@ -16,9 +16,9 @@ const Hero = () => {
               As the rest of the country prepares for legalization, these culture vultures will only inrease their grip upon the industry - fight back! <b>Join the revolution</b> and help us build a better future for cannabis consumers everywhere.
               </p>
 
-              <form className="Form" name="beta-users" data-netlify="true">
+              <form className="Form" name="beta-users" data-netlify="true" method="POST">
               <p>
-              <label><input type="email" placeholder="Enter your email" /></label>
+              <label><input name ="email" type="email" placeholder="Enter your email" /></label>
               </p>
               <p>
               <button type="submit">
