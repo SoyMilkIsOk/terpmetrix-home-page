@@ -17,6 +17,7 @@ const Hero = () => {
               </p>
 
               <form className="Form" name="beta-users" data-netlify="true">
+              <input type="hidden" name="form-name" value="beta-users" />
               <p>
               <label><input name ="email" type="email" placeholder="Enter your email" /></label>
               </p>
