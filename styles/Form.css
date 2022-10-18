@@ -1,9 +1,6 @@
 .Form {
     width: 600px;
-  }
-  
-  .form {
-    padding: 1em;
+    padding: 20px 1em 1em 0em;
   }
   
   input {

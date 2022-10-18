@@ -4,7 +4,7 @@ import { Container, Row, Col } from 'reactstrap';
 const Hero = () => {
   return (
     <section className="section position-relative">
-      <Container>
+      <Container className='xl'>
         <Row className="align-items-center">
           <Col lg={6}>
             <div className="pr-lg-5">
@@ -22,7 +22,7 @@ const Hero = () => {
               <label><input name ="email" type="email" placeholder="Enter your email" /></label>
               </p>
               <p>
-              <button type="submit">
+              <button type="submit" className='text-light'>
               Join the Beta <span className="ml-2 right-icon">&#8594;</span>
               </button>
               </p>
