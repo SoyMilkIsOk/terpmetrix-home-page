@@ -8,12 +8,25 @@ const Hero = () => {
         <Row className="align-items-center">
           <Col lg={6}>
             <div className="pr-lg-5">
-              <p className="text-uppercase text-primary font-weight-medium f-14 mb-4">Lorem Ipsum</p>
-              <h1 className="mb-4 font-weight-normal line-height-1_4">Simply dummy text of the printing <span className="text-primary font-weight-medium">Name</span></h1>
-              <p className="text-muted mb-4 pb-2">Lorem Ipsum has been the industry&apos;s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
-              <a href="#" className="btn btn-warning">
-                Find Out How <span className="ml-2 right-icon">&#8594;</span>
-              </a>
+              {/* <p className="text-uppercase text-primary font-weight-medium f-14 mb-4"></p> */}
+              <h1 className="mb-4 font-weight-normal line-height-1_4">The future of social cannabis consumption is <span className="important-text font-weight-medium">coming soon...</span></h1>
+              <p className="text-muted mb-4 pb-2">For too long, cannabis consumers have been fed marketing fluff and false flags about what's <b>really good</b> with the industry </p> 
+              <p className="text-muted mb-4">We're here to change that. </p>
+              <p className="text-muted mb-4 pb-2">
+              As the rest of the country prepares for legalization, these culture vultures will only inrease their grip upon the industry - fight back! <b>Join the revolution</b> and help us build a better future for cannabis consumers everywhere.
+              </p>
+
+              <form className="Form" name="beta-users" netlifly>
+              <p>
+              <label><input type="email" placeholder="Enter your email" /></label>
+              </p>
+              <p>
+              <button type="submit">
+              Join the Beta <span className="ml-2 right-icon">&#8594;</span>
+              </button>
+              </p>
+              </form>
+
             </div>
           </Col>
           <Col lg={6}>

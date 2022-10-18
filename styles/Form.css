@@ -1,0 +1,26 @@
+.Form {
+    width: 600px;
+  }
+  
+  .form {
+    padding: 1em;
+  }
+  
+  input {
+    border-radius: .4em;
+    height: 40px;
+    font-weight: 300;
+    padding: 0 1em;
+    border: 1px solid #ccc;
+    font-size: 1em;
+  }
+
+  button {
+    border-radius: .4em;
+    height: 40px;
+    font-weight: 600;
+    background-color: #259a47;
+    border-color: #259a47;
+    padding: 0 1em;
+    font-size: large;
+  }

@@ -9,7 +9,7 @@ import AccordianDropdown from "../components/AccordianDropdown";
 
 const Index = () => {
   return (
-    <Layout pageTitle="Terpene Testing for the Consumer | Terpmetrix">
+    <Layout pageTitle="The Future of Social Consumption | Terpmetrix">
       <Header />
       <Hero />
       <Footer />
