@@ -6,6 +6,8 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
     max-width: 100%;
     overflow-x: hidden;
+    height: 100%;
+    background-image: linear-gradient(to top, #cfd9df 0%, #e2ebf0 100%);
 }
 
 a {
@@ -17,10 +19,31 @@ a {
   box-sizing: border-box;
 }
 
+.grid{
+  width: 100%;
+  margin-top: 2%;
+}
+
+.grid-pic {
+  padding-left: 50px;
+}
+
 .section {
-  padding-top: 70px;
-  padding-bottom: 40px;
+  padding-top: 20px;
+  padding-bottom: 20px;
   position: relative;
+  margin: auto;
+}
+
+.footer {
+  width: 80%;
+  height: auto;
+  margin: auto;
+  margin-top: 7%;
+  display: flex;
+  border-top: 1px solid #ccc;
+  justify-content: center;
+  align-items: bottom;
 }
 
 .important-text{
@@ -32,7 +55,7 @@ a {
 .logo {
   padding-top: 20px;
   width: 24vw;
-}  
+}
 
 @media (max-width: 1000px) {
 .logo {
@@ -40,6 +63,15 @@ a {
   width: 300px;
 }
 .section{
-padding-top: 50px;
+  width: 90%;
+padding-top: 30px;
+}
+.footer {
+  margin: auto;
+  margin-top: 3vh;
+  display: flex;
+  border-top: 1px solid #ccc;
+  justify-content: center;
+  align-items: bottom;
 }
 }

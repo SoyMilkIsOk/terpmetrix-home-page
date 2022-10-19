@@ -4,18 +4,17 @@ import { Container, Row, Col } from 'reactstrap';
 const Hero = () => {
   return (
     <section className="section position-relative">
-      <Container className='xl'>
+      <Container fluid="lg" className='grid'>
         <Row className="align-items-center">
           <Col lg={6}>
             <div className="pr-lg-5">
               {/* <p className="text-uppercase text-primary font-weight-medium f-14 mb-4"></p> */}
-              <h1 className="mb-4 font-weight-normal line-height-1_4">The future of social cannabis consumption is <span className="important-text font-weight-medium">coming soon...</span></h1>
-              <p className="text-muted mb-4 pb-2">For too long, cannabis consumers have been fed marketing fluff and false information about what&apos;s <b>really good</b> in the industry </p> 
-              <p className="text-muted mb-4">We&apos;re here to change that. </p>
-              <p className="text-muted mb-4 pb-2">We&apos;re here to provide accurate information and uncensored media for the cannabis industry so that consumers can make informed decisions in a safe space. 
+              <h1 className="text-dark mb-4 font-weight-normal line-height-1_4">The future of social cannabis consumption is <span className="important-text font-weight-medium">coming soon...</span></h1>
+              <p className="text-dark mb-4 pb-2">For too long, cannabis consumers have been fed marketing fluff and false information, struggling to find what&apos;s <b>really good</b> in the industry.</p>
+              <p className="text-dark mb-4 pb-2">We&apos;re here to provide accurate information and an uncensored platform for the cannabis industry so that consumers can make informed decisions in a <i>safe space</i>. 
               </p>
-              <p className="text-muted mb-2">
-              Join us in building a better future for cannabis consumers everywhere. 
+              <p className="text-dark mb-2">
+              <b>Join us </b> in building a better future for cannabis consumers everywhere. 
               </p>
 
               <form className="Form" name="beta-users" data-netlify="true">
@@ -32,7 +31,7 @@ const Hero = () => {
 
             </div>
           </Col>
-          <Col lg={6}>
+          <Col lg={6} className="grid-pic">
             <div className="mt-5 mt-lg-0">
               <img src="/images/Group Members.png" alt="" className="img-fluid mx-auto d-block"/>
             </div>

@@ -4,7 +4,7 @@ import { Container, Row, Col } from "reactstrap";
 const Footer = () => {
   
   return (
-    <><section className="footer section">
+    <><section className="footer section pt-auto">
       <Container>
         {/* <Row>
             <Col md={4}>
@@ -21,7 +21,7 @@ const Footer = () => {
     <Row>
         <Col md={12}>
           <div className="text-center text-muted">
-            <p className="mb-0 f-15">2022 © Cascade Street Coders LLC.</p>
+            <p className="mt-auto f-15">2022 © Cascade Street Coders LLC.</p>
           </div>
         </Col>
       </Row>
