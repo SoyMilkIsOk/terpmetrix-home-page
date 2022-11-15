@@ -12,7 +12,7 @@ const Hero = () => {
               <h1 className="text-dark mb-4 font-weight-normal line-height-1_4">The future of cannabis analytics is <span className="important-text font-weight-medium">coming soon...</span></h1>
               <p className="text-dark mb-4 pb-2">For too long, the entire cannabis industry has been fed marketing fluff and false information, struggling to find what&apos;s <b>really good</b> in the industry.</p>
               <p className="text-dark mb-4 pb-2">Slowly but surely, the industry is coming to realize THC isn&apos;t the only thing that matters. <span className="important-text font-weight-medium">Terpenes</span> are quickly becoming the driving factor when it comes to purchasing cannabis.</p>
-              <p className="text-dark mb-4 pb-2">We&apos;re is here to provide <i> accurate, on-demand</i> testing for everyone ranging from home-growers to the biggest commercial grows. 
+              <p className="text-dark mb-4 pb-2">We&apos;re here to provide <i> accurate</i>, <i>on-demand</i> terpene testing for everyone ranging from home-growers to the biggest commercial grows. 
               </p>
               <p className="text-dark mb-2">
               <b>Join us </b> in building a better future for cannabis everywhere. 
