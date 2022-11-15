@@ -21,7 +21,7 @@ const Footer = () => {
     <Row>
         <Col md={12}>
           <div className="text-center text-muted">
-            <p className="mt-auto f-15">2022 © Cascade Street Coders LLC.</p>
+            <p className="mt-auto f-15">2022 © Glenwood Bio-Analytics Ltd.</p>
           </div>
         </Col>
       </Row>
