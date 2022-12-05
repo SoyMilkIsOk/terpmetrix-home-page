@@ -7,8 +7,9 @@ body {
     max-width: 100%;
     overflow-x: hidden;
     height: 100%;
-    background-image: linear-gradient(to top, #e6e9f0 0%, #eef1f5 100%);
-    }
+    background: linear-gradient(to bottom, #323232 0%, #3F3F3F 40%, #1C1C1C 150%), linear-gradient(to top, rgba(255,255,255,0.40) 0%, rgba(0,0,0,0.25) 200%);
+    background-blend-mode: multiply;
+  }
 
 a {
   color: inherit;
@@ -35,7 +36,7 @@ a {
   width: 80%;
   height: auto;
   margin: auto;
-  margin-top: 3.5%;
+  margin-top: 3.4%;
   display: flex;
   border-top: 1px solid #ccc;
   justify-content: center;
@@ -53,14 +54,23 @@ a {
   width: 24vw;
 }
 
+img {
+  padding-left: 6em;
+  padding-top: 0em;
+  padding-bottom: 2em;
+  max-height: 500px;
+}
+
 @media (max-width: 1000px) {
+
 .logo {
   margin: auto;
   width: 300px;
 }
+
 .section{
   width: 90%;
-padding-top: 30px;
+  padding-top: 30px;
 }
 .footer {
   margin: auto;
@@ -70,4 +80,11 @@ padding-top: 30px;
   justify-content: center;
   align-items: bottom;
 }
+
+img {
+  padding: 0;
+  max-height: 500px;
 }
+
+}
+
