@@ -34,7 +34,7 @@ const Hero = () => {
           </Col>
           <Col lg={6} className="grid-pic">
             <div className="mt-5 mt-lg-0 ms-4">
-              <img src="/images/people.png" alt="" className="img-fluid mx-auto d-block"/>
+              <img src="/images/people-v3.png" alt="" className="img-fluid mx-auto d-block"/>
             </div>
           </Col>
         </Row>
