@@ -12,19 +12,19 @@ const SurveyForm = () => {
                             <p className='text-light mb-2'>Select the flavors you smell:</p>
                             <div className="flavor-grid">
                                 <div className="flavor-grid-item">
-                                    <label for="fruit-1">
+                                    <label>
                                         <input type="checkbox" id="fruit-1" name="fruits" value="berry" />
                                         Berry
                                     </label>
                                 </div>
                                 <div className="flavor-grid-item">
-                                    <label for="fruit-2">
+                                    <label>
                                         <input type="checkbox" id="fruit-2" name="fruits" value="lemon" />
                                         Lemon
                                     </label>
                                 </div>
                                 <div className="flavor-grid-item">
-                                    <label for="fruit-3">
+                                    <label>
                                         <input type="checkbox" id="fruit-3" name="fruits" value="blueberry" />
                                         Blueberry
                                     </label>
