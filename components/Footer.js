@@ -21,7 +21,7 @@ const Footer = () => {
     <Row>
         <Col md={12}>
           <div className="text-center text-muted">
-            <p className="mt-auto text-light text-opacity-50 f-15">2022 © Glenwood Bio-Analytics Ltd.</p>
+            <p className="mt-auto text-light text-opacity-50 f-15">2023 © Terpmetrix</p>
           </div>
         </Col>
       </Row>
