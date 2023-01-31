@@ -4,11 +4,16 @@ body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-    max-width: 100%;
-    overflow-x: hidden;
-    height: 100%;
-    background-image: linear-gradient( 110.3deg,  rgb(73, 93, 109) 4.3%, rgba(49,55,82,1) 96.7% );
-    }
+  max-width: 100%;
+  overflow-x: hidden;
+  height: 100%;
+  background-image: url(/images/Terpmetrix-WebBG.png),linear-gradient(110.3deg,#495d6d 4.3%,#313752 96.7%);
+  background-size: 100vh,100%;
+  background-position-y: -100px,0;
+  background-position-x: 57vw,0;
+  background-repeat: no-repeat;
+
+}
 
 a {
   color: inherit;
@@ -19,7 +24,7 @@ a {
   box-sizing: border-box;
 }
 
-.grid{
+.grid {
   width: 100%;
   margin-top: 2%;
 }
@@ -35,14 +40,12 @@ a {
   width: 80%;
   height: auto;
   margin: auto;
-  margin-top: 3.4%;
   display: flex;
-  border-top: 1px solid #ccc;
   justify-content: center;
   align-items: bottom;
 }
 
-.important-text{
+.important-text {
   font-weight: 600;
   color: #259a47;
 }
@@ -53,37 +56,179 @@ a {
   width: 24vw;
 }
 
-img {
-  padding-left: 6em;
-  padding-top: 0em;
-  padding-bottom: 2em;
-  max-height: 500px;
+.emojis {
+  text-shadow: 5px 0 1.5rem rgba(0 0 0 / 0.25);
+  font-size: 3.5rem;
+  padding: 0 0.5rem;
+  animation: key1 .35s ease infinite alternate;
+  
+}
+
+@keyframes key1{
+  0% {transform: translateY(0px);}
+  100% {transform: translateY(-5px);}
+}
+
+.emojis.fire {
+  position: absolute;
+  top: -20%;
+  right: 9%;
+}
+
+.emojis.leaf {
+  position: absolute;
+  top: -5%;
+  right:25%;
+}
+
+.emojis.gas {
+  position: absolute;
+  top: 10%;
+  right: 5%;
+}
+
+.emojis.lemon {
+  position: absolute;
+  top: 25%;
+  right: 15%;
+}
+
+.emojis.orange {
+  position: absolute;
+  top: 50%;
+  right: 5%;
+}
+
+.emojis.peach {
+  position: absolute;
+  top: 70%;
+  right: 15%;
+}
+
+.emojis.grape {
+  position: absolute;
+  top: 95%;
+  right: 25%;
+}
+
+.emojis.cherry {
+  position: absolute;
+  top: 100%;
+  right: 3%;
+}
+
+.emojis.blueberry {
+  position: absolute;
+  top: 55%;
+  right: 35%;
 }
 
 @media (max-width: 1000px) {
 
-.logo {
-  margin: auto;
-  width: 300px;
+  body{
+    background-image: url(/images/Terpmetrix-MobileBG.png),linear-gradient(110.3deg,#495d6d 4.3%,#313752 96.7%);
+    background-size: 100vw,100%;
+    /* background-position: bottom,0; */
+    background-position-y: 55vh,0;
+    background-position-x: 0,0;
+    background-repeat: no-repeat;
+  }
+
+
+  .logo {
+    margin: auto;
+    width: 300px;
+  }
+
+  .section {
+    width: 90%;
+    padding-top: 30px;
+  }
+
+  .footer {
+    margin: auto;
+    display: flex;
+    padding-top: auto;
+    justify-content: center;
+    align-items: bottom;
+  }
+
+  img {
+    padding: 0;
+    max-height: 500px;
+  }
+
+  .emojis {
+    font-size: 2.5rem;
+  }
+
+  .emojis.fire {
+    position: absolute;
+    top: 100%;
+    left: 5%;
+  }
+
+  .emojis.leaf {
+    position: absolute;
+    top: 120%;
+    left: 30%;
+  }
+
+  .emojis.gas {
+    position: absolute;
+    top: 95%;
+    left: 25%;
+  }
+
+  .emojis.lemon {
+    position: absolute;
+    top: 130%;
+    left: 55%;
+  }
+
+  .emojis.orange {
+    position: absolute;
+    top: 90%;
+    left: 70%;
+  }
+
+  .emojis.peach {
+    position: absolute;
+    top: 130%;
+    left: 95%;
+  }
+
+  .emojis.grape {
+    position: absolute;
+    top: 70%;
+    left: 95%;
+  }
+
+  .emojis.cherry {
+    position: absolute;
+    top: 130%;
+    left: 10%;
+  }
+
+  .emojis.blueberry {
+    position: absolute;
+    top: 110%;
+    left: 80%;
+  }
+
+
+
 }
 
-.section{
-  width: 90%;
-  padding-top: 30px;
-}
-.footer {
-  margin: auto;
-  margin-top: 3vh;
-  display: flex;
-  border-top: 1px solid #ccc;
-  justify-content: center;
-  align-items: bottom;
-}
+@media (max-width: 700px) {
 
-img {
-  padding: 0;
-  max-height: 500px;
-}
+
+  body{
+
+    background-image: url(/images/Terpmetrix-MobileBG.png),linear-gradient(110.3deg,#495d6d 4.3%,#313752 96.7%);
+    background-size: 100vw,100%;
+    background-position: bottom,0;
+    background-repeat: no-repeat;
+  }
 
 }
-
