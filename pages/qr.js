@@ -3,7 +3,8 @@ import Router from 'next/router';
 
 export default function QR() {
   useEffect(() => {
-    Router.push('/');
+    const instagramUrl = 'https://www.instagram.com/terpmetr.x/';
+    Router.push(instagramUrl);
   }, []);
 
   return null;
