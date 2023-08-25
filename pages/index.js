@@ -5,7 +5,7 @@ import Footer from '../components/Footer';
 
 const Index = () => {
   return (
-    <Layout pageTitle="The Future of Cannabis - Terpmetrix">
+    <Layout pageTitle="The Future of Cannatech - Terpmetrix">
       <Header />
       <Hero />
       <Footer />
