@@ -9,7 +9,7 @@ const Hero = () => {
           <Col lg={6}>
             <div className="pr-lg-5">
               {/* <p className="text-uppercase text-primary font-weight-medium f-14 mb-4"></p> */}
-              <h1 className="text-light mb-4 font-weight-normal line-height-1_4">The future of cannabis is <span className="important-text font-weight-medium">coming soon...</span></h1>
+              <h1 className="text-light mb-4 font-weight-normal line-height-1_4">The future of cannatech is <span className="important-text font-weight-medium">coming soon...</span></h1>
 
               <p className="text-light mb-4 pb-1">
                 Welcome to <span className="important-text font-weight-medium">Terpmetrix</span>, the pioneering force in the cannabis industry dedicated to unlocking the full potential of terpenes. Our innovative technology is revolutionizing the way consumers explore, understand, and experience cannabis.
