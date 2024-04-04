@@ -7,12 +7,7 @@ body {
   max-width: 100%;
   overflow-x: hidden;
   height: 100%;
-  background-image: url(/images/Terpmetrix-WebBG.png),linear-gradient(110.3deg,#495d6d 4.3%,#313752 96.7%);
-  background-size: 100vh,100%;
-  background-position-y: -100px,0;
-  background-position-x: 57vw,0;
-  background-repeat: no-repeat;
-
+  background-image: linear-gradient(110.3deg,#495d6d 4.3%,#313752 96.7%);
 }
 
 a {
@@ -126,12 +121,7 @@ a {
 @media (max-width: 1000px) {
 
   body{
-    background-image: url(/images/Terpmetrix-MobileBG.png),linear-gradient(110.3deg,#495d6d 4.3%,#313752 96.7%);
-    background-size: 100vw,100%;
-    /* background-position: bottom,0; */
-    background-position-y: 55vh,0;
-    background-position-x: 0,0;
-    background-repeat: no-repeat;
+    background-image: linear-gradient(110.3deg,#495d6d 4.3%,#313752 96.7%);
   }
 
 
@@ -224,11 +214,7 @@ a {
 
 
   body{
-
-    background-image: url(/images/Terpmetrix-MobileBG.png),linear-gradient(110.3deg,#495d6d 4.3%,#313752 96.7%);
-    background-size: 100vw,100%;
-    background-position: bottom,0;
-    background-repeat: no-repeat;
+    background-image: linear-gradient(110.3deg,#495d6d 4.3%,#313752 96.7%);
   }
 
 }

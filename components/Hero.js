@@ -1,5 +1,6 @@
 import React from 'react';
 import { Container, Row, Col } from 'reactstrap';
+import { Button } from '@chakra-ui/react';
 
 const Hero = () => {
   return (
@@ -30,9 +31,9 @@ Sign up to learn more about our groundbreaking solutions, receive updates on our
                   <label><input name="email" type="email" placeholder="Enter your email" /></label>
                 </p>
                 <p>
-                  <button type="submit" className='text-light'>
+                  <Button colorScheme='green' type="submit" className='text-light'>
                     Get Updates <span className="ml-2 right-icon">&#8594;</span>
-                  </button>
+                  </Button>
                 </p>
               </form>
 
