@@ -30,7 +30,7 @@ Sign up to learn more about our groundbreaking solutions, receive updates on our
                   <label><input name="email" type="email" placeholder="Enter your email" /></label>
                 </p>
                 <p>
-                  <div data-netlify-recaptcha="true"></div>
+                  
                   <button type="submit" className='text-light'>
                     Get Updates <span className="ml-2 right-icon">&#8594;</span>
                   </button>
