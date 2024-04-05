@@ -24,7 +24,7 @@ const Hero = () => {
 Sign up to learn more about our groundbreaking solutions, receive updates on our latest advancements, and be part of the future of cannabis.
               </p>
 
-              <form className="Form" name="beta-users" data-netlify="true">
+              <form className="Form" name="beta-users" data-netlify="true" method='POST'>
                 <input type="hidden" name="form-name" value="beta-users" />
                 <p>
                   <label><input name="email" type="email" placeholder="Enter your email" /></label>
