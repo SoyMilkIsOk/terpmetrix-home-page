@@ -17,7 +17,7 @@ const Maikoh1 = () => {
         <h1>Maikoh Boulder</h1>
         <p>Enter your Instagram handle below to get another entry into the giveaway!</p>
         <FormControl className="Form" name="maikoh-1-entries" data-netlify="true">
-          <Input type="hidden" name="form-name" value="beta-users" />
+          <Input type="hidden" name="form-name" value="maikoh-1-entries" />
           <FormLabel>Instagram Handle</FormLabel>
           <Input name="username" type="text" placeholder="Enter your Instagram handle" />
           <Button type="submit" colorScheme="blue" mt={4}>Submit</Button>
