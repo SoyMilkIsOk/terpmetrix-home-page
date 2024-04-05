@@ -31,9 +31,10 @@ Sign up to learn more about our groundbreaking solutions, receive updates on our
                   <label><input name="email" type="email" placeholder="Enter your email" /></label>
                 </p>
                 <p>
-                  <Button colorScheme='green' type="submit" className='text-light'>
-                    Get Updates <span className="ml-2 right-icon">&#8594;</span>
-                  </Button>
+                  <button type="submit" style={{ backgroundColor: 'green', padding: '5px 20px 30px 20px', borderRadius: '8px', color: 'white',
+                 }}>
+                    <div>Get Updates <span className="ml-2 right-icon">&#8594;</span></div>
+                  </button>
                 </p>
               </form>
 
