@@ -24,12 +24,13 @@ const Hero = () => {
 Sign up to learn more about our groundbreaking solutions, receive updates on our latest advancements, and be part of the future of cannabis.
               </p>
 
-              <form className='Form' name="beta-users" method='POST' data-netlify='true'>
+              <form className='Form' name="beta-users" method='POST' data-netlify='true' data-netlify-recaptcha="true">
                 <input type="hidden" name="form-name" value="beta-users" />
                 <p>
                   <label><input name="email" type="email" placeholder="Enter your email" /></label>
                 </p>
                 <p>
+                  <div data-netlify-recaptcha="true"></div>
                   <button type="submit" className='text-light'>
                     Get Updates <span className="ml-2 right-icon">&#8594;</span>
                   </button>
