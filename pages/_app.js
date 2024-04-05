@@ -1,5 +1,3 @@
-'use client'
-
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/globals.css';
 import '../styles/header.css';
