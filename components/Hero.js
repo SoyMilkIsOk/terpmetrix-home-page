@@ -38,6 +38,7 @@ const Hero = () => {
                 receive updates on our latest advancements, and be part of the
                 future of cannabis.
               </p>
+              
 
               <form
                 className="Form"
@@ -55,6 +56,8 @@ const Hero = () => {
                     Get Updates <span className="ml-2 right-icon">&#8594;</span>
                   </button>
               </form>
+
+
             </div>
           </Col>
         </Row>
