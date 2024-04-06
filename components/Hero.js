@@ -2,6 +2,7 @@ import React from "react";
 import { Container, Row, Col } from "reactstrap";
 
 const Hero = () => {
+  "use client";
   return (
     <section className="section position-relative">
       <Container fluid="lg" className="grid">
