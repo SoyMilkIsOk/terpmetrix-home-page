@@ -46,20 +46,14 @@ const Hero = () => {
                 data-netlify-recaptcha="true"
               >
                 <input type="hidden" name="form-name" value="beta-users" />
-                <p>
-                  <label>
                     <input
                       name="email"
                       type="email"
                       placeholder="Enter your email"
                     />
-                  </label>
-                </p>
-                <p>
                   <button type="submit" className="text-light">
                     Get Updates <span className="ml-2 right-icon">&#8594;</span>
                   </button>
-                </p>
               </form>
             </div>
           </Col>
