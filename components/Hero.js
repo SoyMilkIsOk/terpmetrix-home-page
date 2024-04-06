@@ -1,8 +1,15 @@
 import React from "react";
 import { Container, Row, Col } from "reactstrap";
+import { useEffect } from "react";
 
 const Hero = () => {
-  "use client";
+
+  const [formReady, setFormReady] = React.useState(false);
+
+  useEffect(() => {
+      setFormReady(true)
+  }, [])
+
   return (
     <section className="section position-relative">
       <Container fluid="lg" className="grid">
@@ -39,7 +46,7 @@ const Hero = () => {
                 future of cannabis.
               </p>
 
-
+              {formReady && (
               <form
                 name="beta-users"
                 data-netlify="true"
@@ -55,6 +62,7 @@ const Hero = () => {
                     Get Updates <span className="ml-2 right-icon">&#8594;</span>
                   </button>
               </form>
+              )}
 
 
             </div>
