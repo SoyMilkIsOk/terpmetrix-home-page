@@ -3,12 +3,11 @@ import { Container, Row, Col } from "reactstrap";
 import { useEffect } from "react";
 
 const Hero = () => {
-
   const [formReady, setFormReady] = React.useState(false);
 
   useEffect(() => {
-      setFormReady(true)
-  }, [])
+    setFormReady(true);
+  }, []);
 
   return (
     <section className="section position-relative">
@@ -47,26 +46,24 @@ const Hero = () => {
               </p>
 
               {formReady && (
-              <form
-                name="beta-users"
-                data-netlify="true"
-                action={'/success'}
-                method="POST"
-                encType={"application/x-www-form-urlencoded"}
-              >
-                <input type="hidden" name="form-name" value="beta-users" />
-                    <input
-                      name="email"
-                      type="email"
-                      placeholder="Enter your email"
-                    />
+                <form
+                  name="beta-users"
+                  data-netlify="true"
+                  action={"/success"}
+                  method="POST"
+                  encType={"application/x-www-form-urlencoded"}
+                >
+                  <input type="hidden" name="form-name" value="beta-users" />
+                  <input
+                    name="email"
+                    type="email"
+                    placeholder="Enter your email"
+                  />
                   <button type="submit" className="text-light">
                     Get Updates <span className="ml-2 right-icon">&#8594;</span>
                   </button>
-              </form>
+                </form>
               )}
-
-
             </div>
           </Col>
         </Row>
