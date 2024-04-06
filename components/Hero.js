@@ -50,7 +50,9 @@ const Hero = () => {
               <form
                 name="beta-users"
                 data-netlify="true"
-                action="/success"
+                action={'/success'}
+                method="POST"
+                encType={"application/x-www-form-urlencoded"}
               >
                 <input type="hidden" name="form-name" value="beta-users" />
                     <input
