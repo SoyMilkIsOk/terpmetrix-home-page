@@ -38,10 +38,9 @@ const Hero = () => {
                 receive updates on our latest advancements, and be part of the
                 future of cannabis.
               </p>
-              
+
 
               <form
-                className="Form"
                 name="beta-users"
                 data-netlify="true"
                 action="/success"
