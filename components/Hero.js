@@ -38,19 +38,6 @@ const Hero = () => {
                 future of cannabis.
               </p>
 
-              <html lang="en">
-                <body>
-                  <form
-                    name="beta-users"
-                    netlify
-                    netlify-honeypot="bot-field"
-                    hidden
-                  >
-                    <input type="email" name="email" />
-                  </form>
-                </body>
-              </html>
-
               <form
                 className="Form"
                 name="beta-users"
