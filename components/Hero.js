@@ -45,6 +45,7 @@ const Hero = () => {
                 method="POST"
                 data-netlify="true"
                 data-netlify-recaptcha="true"
+                action="/success"
               >
                 <input type="hidden" name="form-name" value="beta-users" />
                     <input
