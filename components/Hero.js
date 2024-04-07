@@ -1,13 +1,13 @@
 import React from "react";
 import { Container, Row, Col } from "reactstrap";
-import { useEffect } from "react";
+// import { useEffect } from "react";
 
 const Hero = () => {
-  const [formReady, setFormReady] = React.useState(false);
+  // const [formReady, setFormReady] = React.useState(false);
 
-  useEffect(() => {
-    setFormReady(true);
-  }, []);
+  // useEffect(() => {
+  //   setFormReady(true);
+  // }, []);
 
   return (
     <section className="section position-relative">
@@ -39,13 +39,18 @@ const Hero = () => {
                 <a className='text-light' href='/Terpmetrix-WhitePaper.pdf'>Read Whitepaper <span className="ml-2 right-icon">&#8594;</span></a>
               </button> */}
 
-              <p className="text-light mb-4 pb-1">
-                Sign up to learn more about our groundbreaking solutions,
-                receive updates on our latest advancements, and be part of the
-                future of cannabis.
-              </p>
+              {/* <p className="text-light mb-4 pb-1">
+                More information coming soon...
+              </p> */}
 
-              {formReady && (
+              {/* <button>
+                <a className="text-light" href="/Terpmetrix-WhitePaper.pdf">
+                  Read Whitepaper{" "}
+                  <span className="ml-2 right-icon">&#8594;</span>
+                </a>
+              </button> */}
+
+              {/* {formReady && (
                 <form
                   name="beta-users"
                   data-netlify="true"
@@ -63,7 +68,7 @@ const Hero = () => {
                     Get Updates <span className="ml-2 right-icon">&#8594;</span>
                   </button>
                 </form>
-              )}
+              )} */}
             </div>
           </Col>
         </Row>
