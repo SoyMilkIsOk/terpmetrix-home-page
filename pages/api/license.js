@@ -1,3 +1,3 @@
 export default function handler(req, res) {
-    res.status(200).json({ license: 'Maikoh-License-2022' })
+    res.status(200).json({ license: '' })
   }
