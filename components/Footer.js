@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Image from 'next/image';
+import Image from "next/image";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -90,15 +90,15 @@ const Footer = () => {
               <div className="contact-info">
                 <div className="contact-item">
                   <i className="fas fa-map-marker-alt"></i>
-                  <span>123 Innovation Street, Tech City, CA 90210</span>
+                  <span>Boulder, CO</span>
                 </div>
                 <div className="contact-item">
                   <i className="fas fa-envelope"></i>
-                  <a href="mailto:info@terpmetrix.com">info@terpmetrix.com</a>
+                  <a href="mailto:inbox@terpmetrix.com">inbox@terpmetrix.com</a>
                 </div>
                 <div className="contact-item">
                   <i className="fas fa-phone"></i>
-                  <a href="tel:+1234567890">(123) 456-7890</a>
+                  <a href="tel:+3015250428">(301) 525-4028</a>
                 </div>
               </div>
             </div>
@@ -302,8 +302,8 @@ const Footer = () => {
         }
 
         .input-group {
-          display: flex;
           position: relative;
+          z-index: 0;
         }
 
         .form-control {
@@ -315,6 +315,7 @@ const Footer = () => {
           color: #fff;
           font-size: 14px;
           transition: all 0.3s ease;
+          z-index: 0;
         }
 
         .form-control:focus {
@@ -346,6 +347,7 @@ const Footer = () => {
           display: flex;
           align-items: center;
           justify-content: center;
+          z-index: 1;
         }
 
         .btn-submit:hover {

@@ -66,24 +66,23 @@ const About = () => {
               <div className="about-content">
                 <h2>Our Story</h2>
                 <p>
-                  Terpmetrix was founded in 2022 by a team of scientists,
-                  engineers, and cannabis enthusiasts who recognized a gap in
-                  the industry: while THC and CBD content were being analyzed
-                  and optimized, the crucial role of terpenes in the cannabis
-                  experience was being overlooked.
+
+                Terpmetrix was founded in 2023 on the belief that cannabis deserves 
+                better tools. What started as a personal solution — designing the
+                Terpscoop to make dosing and handling cannabis more 
+                precise — quickly evolved into a brand focused on innovation, 
+                functionality, and improving the user experience. Sam, the 
+                founder, transitioned from skepticism about cannabis to a 
+                deep appreciation for its potential, fueling his drive to 
+                create thoughtful, high-quality products.
                 </p>
                 <p>
-                  Our founder, Dr. Sarah Johnson, spent years researching the
-                  chemical compounds in cannabis and their effects. She
-                  assembled a diverse team of experts to develop technology that
-                  would make terpene analysis accessible, affordable, and
-                  actionable for everyone in the cannabis ecosystem.
-                </p>
-                <p>
-                  Today, Terpmetrix is at the forefront of cannabis technology,
-                  providing innovative solutions that help growers, processors,
-                  retailers, and consumers understand and harness the power of
-                  terpenes for better products and experiences.
+                Today, Terpmetrix is dedicated to bridging the gap between 
+                tradition and technology in the cannabis space. From ergonomic 
+                tools to future-forward solutions, the company is committed to
+                enhancing product consistency, usability, and transparency. With 
+                an emphasis on smart design and practical innovation, Terpmetrix 
+                continues to push the industry forward — one solution at a time.
                 </p>
               </div>
             </div>
@@ -92,7 +91,7 @@ const About = () => {
                 <Image
                   width={1000}
                   height={500}
-                  src="/images/about-story.jpg"
+                  src="/images/about-story.jpeg"
                   alt="Terpmetrix Story"
                   className="img-fluid"
                 />
@@ -221,7 +220,7 @@ const About = () => {
         </div>
       </section>
 
-      <section className="team-section">
+      {/* <section className="team-section">
         <div className="container">
           <div className="row justify-content-center" data-aos="fade-up">
             <div className="col-lg-8 text-center">
@@ -271,7 +270,7 @@ const About = () => {
           </div>
         </div>
       </section>
-
+ */}
       <Footer />
 
       <style jsx>{`

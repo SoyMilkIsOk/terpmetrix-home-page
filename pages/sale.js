@@ -6,6 +6,7 @@ const JarSale = () => {
   return (
     <Layout pageTitle="Terpscoop Jar Sale">
       <Header />
+      <div className="container">
         <iframe
           src="https://docs.google.com/forms/d/e/1FAIpQLSdatgGtDFDtchHdryNZuETIP6mLa3cjQy6XCSyAkUKWI_-fLQ/viewform?embedded=true"
           width="100%"
@@ -15,6 +16,12 @@ const JarSale = () => {
         >
           Loading…
         </iframe>
+        </div>
+        <style jsx>{`
+          .container {
+            padding: 100px 0;
+          }
+        `}</style>
       <Footer />
     </Layout>
   );

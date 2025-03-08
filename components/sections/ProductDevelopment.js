@@ -1,31 +1,31 @@
 import Link from "next/link";
-import Image from 'next/image';
+import Image from "next/image";
 
 const ProductDevelopment = () => {
   const products = [
     {
       id: 1,
-      title: "Terpene Analysis Kit",
+      title: "TerpFocus",
       description:
-        "Our portable analysis kit allows growers and processors to quickly test and analyze terpene profiles on-site with laboratory-grade accuracy.",
-      image: "/images/product-1.jpg",
-      link: "/projects#terpene-analysis",
+        "TerpFocus is a premier cannabis photography service dedicated to capturing the essence of high-quality flower, concentrates, and cannabis culture through stunning macro and lifestyle photography.",
+      image: "/images/terpfocus.jpg",
+      link: "/projects#terpfocus",
     },
     {
       id: 2,
-      title: "TerpTracker™ Software",
+      title: "TerpScoops",
       description:
-        "Cloud-based software solution for tracking, analyzing, and optimizing terpene profiles throughout the cultivation and processing lifecycle.",
-      image: "/images/product-2.jpg",
-      link: "/projects#terptracker",
+        "TerpScoops are the ultimate precision tool for dosing and packing cannabis. Designed for connoisseurs and detail-oriented consumers, it ensures a clean, consistent experience every time.",
+      image: "/images/terpscoops.jpg",
+      link: "/projects#terpscoops",
     },
     {
       id: 3,
-      title: "Consumer App",
+      title: "TerpForge",
       description:
-        "Our mobile application helps consumers find products with specific terpene profiles matching their desired effects and preferences.",
-      image: "/images/product-3.jpg",
-      link: "/projects#consumer-app",
+        "TerpForge is a cannabis-focused web development and digital branding agency, helping dispensaries, brands, and tech startups build high-performance websites optimized for growth.",
+      image: "/images/terpforge.jpg",
+      link: "/projects#terpforge",
     },
   ];
 
@@ -52,7 +52,14 @@ const ProductDevelopment = () => {
             >
               <div className="product-card">
                 <div className="product-image">
-                  <Image src={product.image} alt={product.title} width={1000} height={500} />
+                  <Image
+                    src={product.image}
+                    alt={product.title}
+                    width={0}
+                    height={0}
+                    sizes="100vw"
+                    style={{ width: "100%", height: "auto" }} // optional
+                  />
                   <div className="product-overlay">
                     <Link href={product.link} className="btn btn-light">
                       Learn More
@@ -62,7 +69,7 @@ const ProductDevelopment = () => {
                 <div className="product-info">
                   <h3>{product.title}</h3>
                   <p>{product.description}</p>
-                  <Link href={product.link} className="product-link" passHref>  
+                  <Link href={product.link} className="product-link" passHref>
                     Explore <i className="fas fa-arrow-right"></i>
                   </Link>
                 </div>

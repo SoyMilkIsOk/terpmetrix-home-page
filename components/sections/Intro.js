@@ -25,7 +25,7 @@ const Intro = () => {
           </div>
           <div className="col-lg-6" data-aos="fade-left" data-aos-delay="200">
             <div className="intro-image">
-              <Image width={1000} height={500} src="/images/hero-image.jpg" alt="Cannabis Technology" className="img-fluid" />
+              <Image width={1000} height={500} src="/images/hero-image.png" alt="Cannabis Technology" className="img-fluid" />
             </div>
           </div>
         </div>

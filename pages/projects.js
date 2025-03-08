@@ -4,7 +4,7 @@ import Footer from "../components/Footer";
 import { useEffect } from "react";
 import Link from "next/link";
 import AOS from "aos";
-import Image from 'next/image';
+import Image from "next/image";
 
 const Projects = () => {
   useEffect(() => {
@@ -16,49 +16,55 @@ const Projects = () => {
 
   const projects = [
     {
-      id: "terpene-analysis",
-      title: "Terpene Analysis Kit",
+      id: "terpscoops",
+      title: "TerpScoops",
       description:
-        "Our portable analysis kit allows growers and processors to quickly test and analyze terpene profiles on-site with laboratory-grade accuracy. The kit uses advanced spectroscopy and machine learning to deliver results in minutes, not days.",
+        "TerpScoops are the ultimate precision tool for dosing and packing cannabis. Designed for connoisseurs and detail-oriented consumers, it ensures a clean, consistent experience every time. Its ergonomic design and durable acrylic construction make it a must-have accessory for modern cannabis users.",
       features: [
-        "Portable and rugged design for field use",
-        "Results in under 5 minutes",
-        "Cloud sync with TerpTracker™ software",
-        "95% accuracy compared to lab tests",
-        "Rechargeable battery with 8-hour life",
+        "Ergonomic and stylish design",
+        "Compact size fits in most grinders",
+        "Made from durable injection-molded acrylic",
+        "Available in eight vibrant colors",
+        "Perfectly measures 'one terp' for consistent dosing",
       ],
-      image: "/images/product-1-large.jpg",
+      image: "/images/terpscoops-large.jpg",
       status: "Available Now",
+      link: "https://terpscoops.com",
+      link_text: "Shop Now",
     },
     {
-      id: "terptracker",
-      title: "TerpTracker™ Software",
+      id: "terpfocus",
+      title: "TerpFocus",
       description:
-        "Cloud-based software solution for tracking, analyzing, and optimizing terpene profiles throughout the cultivation and processing lifecycle. This platform helps growers understand the factors affecting terpene development and make data-driven decisions.",
+        "TerpFocus is a premier cannabis photography service dedicated to capturing the essence of high-quality flower, concentrates, and cannabis culture. Our expert photographers use cutting-edge macro photography techniques to showcase products with stunning detail and clarity.",
       features: [
-        "Real-time dashboards and analytics",
-        "Environmental correlation analysis",
-        "Strain profile library and comparison tools",
-        "Harvest optimization recommendations",
-        "API integration with existing systems",
+        "High-resolution macro and lifestyle cannabis photography",
+        "Professional lighting and editing for premium visuals",
+        "Custom shoots for brands, dispensaries, and processors",
+        "Fast turnaround and cloud delivery",
+        "Available for product, marketing, and event photography",
       ],
-      image: "/images/product-2-large.jpg",
-      status: "Available Now",
+      image: "/images/terpfocus-large.jpg",
+      status: "Available for Booking",
+      link: "https://terpfocus.com",
+      link_text: "Visit Website",
     },
     {
-      id: "consumer-app",
-      title: "Consumer App",
+      id: "terpforge",
+      title: "TerpForge",
       description:
-        "Our mobile application helps consumers find products with specific terpene profiles matching their desired effects and preferences. The app connects consumers with products that are scientifically matched to their needs.",
+        "TerpForge is a cannabis-focused web development and digital branding agency, helping dispensaries, brands, and tech startups build high-performance websites. We specialize in e-commerce, SEO optimization, and seamless user experiences tailored to the cannabis industry.",
       features: [
-        "Personalized product recommendations",
-        "Effect-based search and filtering",
-        "Integrated review system",
-        "Product scanner with terpene information",
-        "Consumption journal and tracking",
+        "Custom-built websites optimized for cannabis businesses",
+        "SEO and performance-driven design",
+        "E-commerce solutions with compliance in mind",
+        "Integrated branding, UI/UX, and conversion optimization",
+        "Ongoing support and maintenance plans",
       ],
-      image: "/images/product-3-large.jpg",
-      status: "Coming Spring 2025",
+      image: "/images/terpforge-large.jpg",
+      status: "Accepting New Clients",
+      link: "https://calendly.com/terps-terpmetrix/quote-call",
+      link_text: "Schedule a Call",
     },
   ];
 
@@ -70,7 +76,7 @@ const Projects = () => {
         <div className="container">
           <div className="row">
             <div className="col-12 text-center">
-              <h1>Our Projects</h1>
+              <h1>What We Do</h1>
               <p className="lead">
                 Explore our innovative cannabis technology solutions
               </p>
@@ -88,15 +94,32 @@ const Projects = () => {
               id={project.id}
               data-aos="fade-up"
             >
+              <div className="project-header">
+                <div className="project-status">{project.status}</div>
+                <h2>{project.title}</h2>
+              </div>
+
               <div
-                className={`row align-items-center ${
-                  index % 2 !== 0 ? "flex-row-reverse" : ""
+                className={`row project-content-wrapper ${
+                  index % 2 !== 0 ? "flex-lg-row-reverse" : ""
                 }`}
               >
+                {/* Image - Will show after title on mobile */}
+                <div className="col-lg-6 project-image-wrapper">
+                  <div className="project-image">
+                    <Image
+                      width={1000}
+                      height={500}
+                      src={project.image}
+                      alt={project.title}
+                      className="img-fluid"
+                    />
+                  </div>
+                </div>
+
+                {/* Content */}
                 <div className="col-lg-6">
                   <div className="project-content">
-                    <div className="project-status">{project.status}</div>
-                    <h2>{project.title}</h2>
                     <p className="project-description">{project.description}</p>
 
                     <div className="project-features">
@@ -108,21 +131,16 @@ const Projects = () => {
                       </ul>
                     </div>
 
-                    <Link href="/contact" className="btn btn-primary">
-                      Request Information
-                    </Link>
-                  </div>
-                </div>
-
-                <div className="col-lg-6">
-                  <div className="project-image">
-                    <Image
-                      width={1000}
-                      height={500}
-                      src={project.image}
-                      alt={project.title}
-                      className="img-fluid"
-                    />
+                    <div className="button-container">
+                      <a
+                        href={project.link}
+                        className="custom-project-button btn-primary"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {project.link_text}
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -140,8 +158,10 @@ const Projects = () => {
                 Contact us today to learn how our technology can help optimize
                 your cultivation, processing, and product development.
               </p>
-              <Link href="/contact" className="btn btn-light btn-lg">
-                Contact Us
+              <Link href="/contact" passHref>
+                <button className="btn btn-primary custom-contact-button">
+                  <p>Contact Us</p>
+                </button>
               </Link>
             </div>
           </div>
@@ -151,6 +171,56 @@ const Projects = () => {
       <Footer />
 
       <style jsx>{`
+        .custom-contact-button {
+          padding: 15px 40px;
+          font-size: 1.2rem;
+          border-radius: 8px;
+          font-weight: 800;
+          transition: all 0.3s ease;
+          text-align: center;
+          background-color: var(--primary-color);
+          color: white;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .custom-contact-button:hover {
+          transform: translateY(-5px);
+          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Remove the padding from the paragraph */
+        .custom-contact-button p {
+          padding: 0;
+          margin-top: 30px;
+        }
+        .custom-project-button {
+          padding: 15px 40px !important;
+          font-size: 1.2rem !important;
+          border-radius: 8px !important;
+          font-weight: 800 !important;
+          transition: all 0.3s ease !important;
+          min-width: 200px !important;
+          text-align: center !important;
+          display: inline-block;
+          text-decoration: none;
+        }
+
+        .custom-project-button:hover {
+          transform: translateY(-5px) !important;
+          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15) !important;
+        }
+
+        .btn-primary {
+          background-color: var(--primary-color);
+          color: white;
+        }
+
+        .btn-light {
+          background-color: white;
+          color: var(--primary-color);
+        }
         .page-hero {
           background: linear-gradient(
             135deg,
@@ -176,16 +246,26 @@ const Projects = () => {
         }
 
         .projects-section {
-          padding-bottom: 80px;
+          padding: 60px 0 80px;
         }
 
         .project-item {
           margin-bottom: 100px;
           scroll-margin-top: 100px;
+          position: relative;
         }
 
         .project-item:last-child {
           margin-bottom: 0;
+        }
+
+        .project-header {
+          margin-bottom: 25px;
+        }
+
+        .project-content-wrapper {
+          display: flex;
+          flex-wrap: wrap;
         }
 
         .project-content {
@@ -195,7 +275,7 @@ const Projects = () => {
         .project-status {
           display: inline-block;
           background-color: var(--accent-color);
-          color: var(--dark-color);
+          color: var(--light-color);
           font-weight: 600;
           font-size: 14px;
           padding: 5px 15px;
@@ -203,9 +283,9 @@ const Projects = () => {
           margin-bottom: 15px;
         }
 
-        .project-content h2 {
+        .project-header h2 {
           font-size: 32px;
-          margin-bottom: 20px;
+          margin-bottom: 10px;
           color: var(--dark-color);
         }
 
@@ -252,6 +332,10 @@ const Projects = () => {
           transform: translateY(-10px);
         }
 
+        .project-image-wrapper {
+          margin-bottom: 25px;
+        }
+
         .cta-section {
           background: linear-gradient(
             135deg,
@@ -260,8 +344,8 @@ const Projects = () => {
           );
           color: white;
           padding: 80px 0;
-          position: relative;
           overflow: hidden;
+          z-index: 0; /* Added z-index */
         }
 
         .cta-section:before {
@@ -272,6 +356,7 @@ const Projects = () => {
           width: 100%;
           height: 100%;
           opacity: 0.1;
+          z-index: 0; /* Added z-index */
         }
 
         .cta-section h2 {
@@ -287,19 +372,49 @@ const Projects = () => {
           margin-right: auto;
         }
 
-        .cta-section .btn {
-          position: relative;
+        .button-container {
+          display: flex;
+          justify-content: center;
+          margin-top: 30px;
+          width: 100%;
+        }
+
+        @media (min-width: 992px) {
+          .project-content {
+            padding: 30px;
+          }
+
+          .project-image-wrapper {
+            margin-bottom: 0;
+          }
+
+          .project-content:before {
+            content: "";
+            display: block;
+          }
+
+          .project-content .project-status {
+            display: inline-block;
+          }
+
+          .project-content h2 {
+            display: block;
+          }
         }
 
         @media (max-width: 991px) {
-          .project-content {
-            margin-bottom: 40px;
-            padding: 0;
+          .project-header {
+            text-align: center;
+            margin-bottom: 20px;
           }
 
-          .row.flex-row-reverse .project-content {
-            margin-top: 40px;
-            margin-bottom: 0;
+          .project-content {
+            padding: 20px 0 0;
+          }
+
+          .project-content .project-status,
+          .project-content h2 {
+            display: none;
           }
         }
 
@@ -323,6 +438,14 @@ const Projects = () => {
 
           .cta-section h2 {
             font-size: 2rem;
+          }
+
+          .project-header h2 {
+            font-size: 28px;
+          }
+
+          .projects-section {
+            padding: 40px 0 60px;
           }
         }
       `}</style>

@@ -128,7 +128,7 @@ const Contact = () => {
                     </div>
                     <div className="info">
                       <h3>Visit Us</h3>
-                      <p>123 Innovation Street<br />Tech City, CA 90210</p>
+                      <p>Boulder, CO</p>
                     </div>
                   </div>
                   
@@ -139,7 +139,7 @@ const Contact = () => {
                     <div className="info">
                       <h3>Call Us</h3>
                       <p>
-                        <a href="tel:+1234567890">(123) 456-7890</a>
+                        <a href="tel:+3015254028">(301) 525-4028</a>
                       </p>
                     </div>
                   </div>
@@ -151,7 +151,7 @@ const Contact = () => {
                     <div className="info">
                       <h3>Email Us</h3>
                       <p>
-                        <a href="mailto:info@terpmetrix.com">info@terpmetrix.com</a>
+                        <a href="mailto:inbox@terpmetrix.com">inbox@terpmetrix.com</a>
                       </p>
                     </div>
                   </div>
@@ -338,7 +338,7 @@ const Contact = () => {
         <div className="container-fluid p-0">
           <div className="map-container">
             <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d26430.393553120906!2d-118.43209796322542!3d34.10028176292281!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80c2bc35fbd217ef%3A0xcf1ef9352700d95c!2sBeverly%20Hills%2C%20CA%2090210!5e0!3m2!1sen!2sus!4v1647544417351!5m2!1sen!2sus" 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d97767.33201232801!2d-105.23990249999999!3d40.02566354999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x876b8d4e278dafd3%3A0xc8393b7ca01b8058!2sBoulder%2C%20CO!5e0!3m2!1sen!2sus!4v1741428187252!5m2!1sen!2sus"
               width="100%" 
               height="450" 
               style={{ border: 0 }} 

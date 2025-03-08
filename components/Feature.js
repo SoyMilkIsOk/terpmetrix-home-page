@@ -11,7 +11,7 @@ const FeatureBox = (props) => {
         <Row key={key} className={feature.id === 1 ? "align-items-center" : "align-items-center mt-5"}>
           <Col md={5} >
             <div>
-              <Image width={500} height={500} src={feature.img} alt="" className="img-fluid d-block mx-auto"/>
+              <Image width={500} height={0} src={feature.img} alt="" className="img-fluid d-block mx-auto"/>
             </div>
           </Col>
             <Col md={{size:6, offset:1}}>

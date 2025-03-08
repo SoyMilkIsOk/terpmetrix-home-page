@@ -28,7 +28,7 @@ const Layout = ({ children, pageTitle }) => {
         :root {
           --primary-color: #3a9e42;
           --secondary-color: #245828;
-          --accent-color: #f8b500;
+          --accent-color: #3a9e42;
           --dark-color: #1a1a1a;
           --light-color: #f9f9f9;
           --transition-speed: 0.3s;
