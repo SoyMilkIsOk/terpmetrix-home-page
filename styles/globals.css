@@ -72,9 +72,9 @@ section {
 
 /* Links */
 a {
-  color: var(--primary-color);
-  text-decoration: none;
-  transition: color 0.3s;
+  color: var(--primary-color) !important;
+  text-decoration: none !important;
+  transition: color 0.3s !important;
 }
 
 a:hover {
