@@ -4,6 +4,7 @@ import Footer from "../components/Footer";
 import { useEffect } from "react";
 import Link from "next/link";
 import AOS from "aos";
+import Image from 'next/image';
 
 const Projects = () => {
   useEffect(() => {
@@ -115,7 +116,7 @@ const Projects = () => {
 
                 <div className="col-lg-6">
                   <div className="project-image">
-                    <img
+                    <Image
                       src={project.image}
                       alt={project.title}
                       className="img-fluid"

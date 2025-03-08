@@ -4,6 +4,7 @@ import Footer from "../components/Footer";
 import { useEffect } from "react";
 import Link from "next/link";
 import AOS from "aos";
+import Image from 'next/image';
 
 const About = () => {
   useEffect(() => {
@@ -88,7 +89,7 @@ const About = () => {
             </div>
             <div className="col-lg-6" data-aos="fade-left">
               <div className="about-image">
-                <img
+                <Image
                   src="/images/about-story.jpg"
                   alt="Terpmetrix Story"
                   className="img-fluid"
@@ -122,7 +123,7 @@ const About = () => {
                 </div>
                 <h3>Scientific Integrity</h3>
                 <p>
-                  We're committed to rigorous science and data accuracy. All our
+                  We&apos;re committed to rigorous science and data accuracy. All our
                   products undergo extensive testing and validation before
                   reaching our customers.
                 </p>
@@ -140,7 +141,7 @@ const About = () => {
                 </div>
                 <h3>Innovation</h3>
                 <p>
-                  We continuously push the boundaries of what's possible in
+                  We continuously push the boundaries of what&apos;s possible in
                   cannabis technology, investing heavily in research and
                   development.
                 </p>
@@ -175,7 +176,7 @@ const About = () => {
                 </div>
                 <h3>Sustainability</h3>
                 <p>
-                  We're committed to environmentally responsible practices in
+                  We&apos;re committed to environmentally responsible practices in
                   our operations and product development.
                 </p>
               </div>
@@ -192,7 +193,7 @@ const About = () => {
                 </div>
                 <h3>Trust & Transparency</h3>
                 <p>
-                  We're open about our methods, data handling, and results,
+                  We&apos;re open about our methods, data handling, and results,
                   fostering trust with our partners and customers.
                 </p>
               </div>
@@ -239,7 +240,7 @@ const About = () => {
               >
                 <div className="team-card">
                   <div className="team-image">
-                    <img src={member.image} alt={member.name} />
+                    <Image src={member.image} alt={member.name} />
                   </div>
                   <div className="team-info">
                     <h3>{member.name}</h3>

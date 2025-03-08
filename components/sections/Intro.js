@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 const Intro = () => {
   return (
@@ -9,7 +10,7 @@ const Intro = () => {
             <div className="intro-content">
               <h1>Pioneering the Future of Cannabis Technology</h1>
               <p className="lead">
-                At Terpmetrix, we're revolutionizing the cannabis industry through cutting-edge technology, 
+                At Terpmetrix, we&apos;re revolutionizing the cannabis industry through cutting-edge technology, 
                 data analytics, and innovative product development.
               </p>
               <div className="intro-buttons">
@@ -24,7 +25,7 @@ const Intro = () => {
           </div>
           <div className="col-lg-6" data-aos="fade-left" data-aos-delay="200">
             <div className="intro-image">
-              <img src="/images/hero-image.jpg" alt="Cannabis Technology" className="img-fluid" />
+              <Image src="/images/hero-image.jpg" alt="Cannabis Technology" className="img-fluid" />
             </div>
           </div>
         </div>

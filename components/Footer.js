@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from 'next/image';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -9,8 +10,8 @@ const Footer = () => {
         <div className="row">
           <div className="col-lg-4 col-md-6 mb-5">
             <div className="footer-info">
-              <Link href="/" className="footer-logo">
-                <img
+              <Link href="/" className="footer-logo" passHref>
+                <Image
                   className="logo-circle"
                   src="/images/logo-circle.png"
                   alt="Terpmetrix Logo"

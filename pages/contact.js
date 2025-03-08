@@ -319,7 +319,7 @@ const Contact = () => {
                       <i className="fas fa-check-circle"></i>
                     </div>
                     <h2>Thank You!</h2>
-                    <p>Your message has been sent successfully. We'll get back to you as soon as possible.</p>
+                    <p>Your message has been sent successfully. We&apos;ll get back to you as soon as possible.</p>
                     <button 
                       className="btn btn-primary btn-lg"
                       onClick={resetForm}

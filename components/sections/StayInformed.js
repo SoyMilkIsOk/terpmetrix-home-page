@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import Image from 'next/image';
 
 const StayInformed = () => {
   const [email, setEmail] = useState('');
@@ -66,7 +67,7 @@ const StayInformed = () => {
           <div className="col-lg-6" data-aos="fade-left" data-aos-delay="200">
             <div className="newsletter-wrapper">
               <div className="newsletter-image-container">
-                <img src="/images/newsletter-img.jpg" alt="Stay Informed" className="newsletter-image" />
+                <Image src="/images/newsletter-img.jpg" alt="Stay Informed" className="newsletter-image" />
               </div>
               <div className="newsletter-form-container">
                 {!submitted ? (
@@ -112,7 +113,7 @@ const StayInformed = () => {
                       <i className="fas fa-check-circle"></i>
                     </div>
                     <h3>Thank You!</h3>
-                    <p>You've successfully subscribed to our newsletter.</p>
+                    <p>You&apos;ve successfully subscribed to our newsletter.</p>
                     <button 
                       className="btn btn-outline-primary"
                       onClick={() => setSubmitted(false)}

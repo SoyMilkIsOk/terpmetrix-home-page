@@ -37,7 +37,7 @@ const Products = () => {
                   <i className="fas fa-tools"></i>
                 </div>
                 <h2>Complete Product Information Coming Soon</h2>
-                <p>We're currently updating our product information. In the meantime, you can explore our projects or contact us for specific information.</p>
+                <p>We&apos;re currently updating our product information. In the meantime, you can explore our projects or contact us for specific information.</p>
                 <div className="buttons">
                   <Link href="/projects" className="btn btn-primary btn-lg">
                     View Projects

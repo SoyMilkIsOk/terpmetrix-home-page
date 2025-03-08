@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import Image from "next/image";
 
 const Header = () => {
   const [isNavOpen, setIsNavOpen] = useState(false);
@@ -36,8 +37,8 @@ const Header = () => {
       <div className="container">
         <div className="header-inner">
           <div className="logo">
-            <Link href="/" className="logo-link">
-              <img src="/images/logo-circle.png" alt="Terpmetrix Logo" />
+            <Link href="/" className="logo-link" passHref>
+              <Image src="/images/logo-circle.png" alt="Terpmetrix Logo" />
               <span>TERPMETRIX</span>
             </Link>
           </div>
