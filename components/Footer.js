@@ -12,6 +12,8 @@ const Footer = () => {
             <div className="footer-info">
               <Link href="/" className="footer-logo" passHref>
                 <Image
+                  width={50}
+                  height={50}
                   className="logo-circle"
                   src="/images/logo-circle.png"
                   alt="Terpmetrix Logo"

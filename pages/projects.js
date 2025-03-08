@@ -117,6 +117,8 @@ const Projects = () => {
                 <div className="col-lg-6">
                   <div className="project-image">
                     <Image
+                      width={1000}
+                      height={500}
                       src={project.image}
                       alt={project.title}
                       className="img-fluid"

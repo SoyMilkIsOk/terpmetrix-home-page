@@ -52,7 +52,7 @@ const ProductDevelopment = () => {
             >
               <div className="product-card">
                 <div className="product-image">
-                  <Image src={product.image} alt={product.title} />
+                  <Image src={product.image} alt={product.title} width={1000} height={500} />
                   <div className="product-overlay">
                     <Link href={product.link} className="btn btn-light">
                       Learn More

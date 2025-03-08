@@ -38,7 +38,7 @@ const Header = () => {
         <div className="header-inner">
           <div className="logo">
             <Link href="/" className="logo-link" passHref>
-              <Image src="/images/logo-circle.png" alt="Terpmetrix Logo" />
+              <Image width={50} height={50} src="/images/logo-circle.png" alt="Terpmetrix Logo" className="logo-circle" style={{marginRight: '10px'}} />
               <span>TERPMETRIX</span>
             </Link>
           </div>
@@ -156,7 +156,7 @@ const Header = () => {
           }
         }
 
-        .logo img {
+        .logo-circle {
           height: 40px;
           margin-right: 10px;
         }

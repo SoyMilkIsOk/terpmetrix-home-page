@@ -67,7 +67,7 @@ const StayInformed = () => {
           <div className="col-lg-6" data-aos="fade-left" data-aos-delay="200">
             <div className="newsletter-wrapper">
               <div className="newsletter-image-container">
-                <Image src="/images/newsletter-img.jpg" alt="Stay Informed" className="newsletter-image" />
+                <Image width={1000} height={500} src="/images/newsletter-img.jpg" alt="Stay Informed" className="newsletter-image" />
               </div>
               <div className="newsletter-form-container">
                 {!submitted ? (

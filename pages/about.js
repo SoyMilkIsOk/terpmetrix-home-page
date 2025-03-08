@@ -90,6 +90,8 @@ const About = () => {
             <div className="col-lg-6" data-aos="fade-left">
               <div className="about-image">
                 <Image
+                  width={1000}
+                  height={500}
                   src="/images/about-story.jpg"
                   alt="Terpmetrix Story"
                   className="img-fluid"
@@ -240,7 +242,7 @@ const About = () => {
               >
                 <div className="team-card">
                   <div className="team-image">
-                    <Image src={member.image} alt={member.name} />
+                    <Image width={1000} height={500} src={member.image} alt={member.name} />
                   </div>
                   <div className="team-info">
                     <h3>{member.name}</h3>
