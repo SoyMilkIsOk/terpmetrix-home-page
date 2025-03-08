@@ -1,220 +1,95 @@
-html,
-body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
-  max-width: 100%;
+/* Import Noto Sans Mono from Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+:root {
+  --primary-color: #3a9e42;
+  --secondary-color: #245828;
+  --accent-color: #f8b500;
+  --dark-color: #1a1a1a;
+  --light-color: #f9f9f9;
+  --transition-speed: 0.3s;
+  --font-family:   font-family: "Montserrat", sans-serif;
+}
+
+html, body {
+  scroll-behavior: smooth;
+  font-family: var(--font-family);
+  background-color: var(--light-color);
+  color: var(--dark-color);
   overflow-x: hidden;
-  height: 100%;
-  background-image: linear-gradient(110.3deg,#495d6d 4.3%,#313752 96.7%);
+  margin: 0;
+  padding: 0;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
+/* Typography */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-family);
+  font-weight: 700;
 }
 
-* {
-  box-sizing: border-box;
+p, span, a, li, button, input, textarea, label, div {
+  font-family: var(--font-family);
 }
 
-.grid {
-  width: 100%;
-  margin-top: 2%;
+/* Buttons */
+.btn {
+  font-family: var(--font-family);
 }
 
-.section {
-  padding-top: 20px;
-  padding-bottom: 20px;
+.btn-primary {
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  transition: all var(--transition-speed);
+}
+
+.btn-primary:hover {
+  background-color: var(--secondary-color);
+  border-color: var(--secondary-color);
+  transform: translateY(-3px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Common Section Styling */
+section {
+  padding: 80px 0;
+}
+
+.section-heading {
+  margin-bottom: 60px;
   position: relative;
-  margin: auto;
+  padding-bottom: 15px;
+  font-family: var(--font-family);
 }
 
-.footer {
-  width: 80%;
-  height: auto;
-  margin: auto;
-  display: flex;
-  justify-content: center;
-  align-items: bottom;
-}
-
-.important-text {
-  font-weight: 600;
-  color: #259a47;
-}
-
-
-.logo {
-  padding-top: 20px;
-  width: 24vw;
-}
-
-.emojis {
-  text-shadow: 0 0 2.5rem rgba(255 255 255 / 0.1);
-  font-size: 3.5rem;
-  padding: 0 0.5rem;
-  animation: key1 .35s ease infinite alternate;
-  
-}
-
-@keyframes key1{
-  0% {transform: translateY(0px);}
-  100% {transform: translateY(-5px);}
-}
-
-.emojis.fire {
+.section-heading:after {
+  content: '';
   position: absolute;
-  top: -20%;
-  right: 9%;
+  width: 60px;
+  height: 3px;
+  background-color: var(--accent-color);
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
-.emojis.leaf {
-  position: absolute;
-  top: -5%;
-  right:25%;
+/* Links */
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: color 0.3s;
 }
 
-.emojis.gas {
-  position: absolute;
-  top: 10%;
-  right: 5%;
+a:hover {
+  color: var(--secondary-color);
 }
 
-.emojis.lemon {
-  position: absolute;
-  top: 25%;
-  right: 15%;
+/* Images */
+img {
+  max-width: 100%;
 }
 
-.emojis.orange {
-  position: absolute;
-  top: 50%;
-  right: 5%;
-}
-
-.emojis.peach {
-  position: absolute;
-  top: 70%;
-  right: 15%;
-}
-
-.emojis.grape {
-  position: absolute;
-  top: 95%;
-  right: 25%;
-}
-
-.emojis.cherry {
-  position: absolute;
-  top: 100%;
-  right: 3%;
-}
-
-.emojis.wood {
-  position: absolute;
-  top: 55%;
-  right: 35%;
-}
-
-@media (max-width: 1000px) {
-
-  body{
-    background-image: linear-gradient(110.3deg,#495d6d 4.3%,#313752 96.7%);
+/* Media Queries */
+@media (max-width: 768px) {
+  section {
+    padding: 60px 0;
   }
-
-
-  .logo {
-    margin: auto;
-    width: 300px;
-  }
-
-  .section {
-    width: 90%;
-    padding-top: 30px;
-  }
-
-  .footer {
-    margin: auto;
-    display: flex;
-    padding-top: auto;
-    justify-content: center;
-    align-items: bottom;
-  }
-
-  img {
-    padding: 0;
-    max-height: 500px;
-  }
-
-  .emojis {
-    font-size: 2.5rem;
-  }
-
-  .emojis.fire {
-    position: absolute;
-    top: 100%;
-    left: 5%;
-  }
-
-  .emojis.leaf {
-    position: absolute;
-    top: 120%;
-    left: 30%;
-  }
-
-  .emojis.gas {
-    position: absolute;
-    top: 95%;
-    left: 25%;
-  }
-
-  .emojis.lemon {
-    position: absolute;
-    top: 130%;
-    left: 55%;
-  }
-
-  .emojis.orange {
-    position: absolute;
-    top: 90%;
-    left: 70%;
-  }
-
-  .emojis.peach {
-    position: absolute;
-    top: 130%;
-    left: 95%;
-  }
-
-  .emojis.grape {
-    position: absolute;
-    top: 70%;
-    left: 95%;
-  }
-
-  .emojis.cherry {
-    position: absolute;
-    top: 130%;
-    left: 10%;
-  }
-
-  .emojis.wood {
-    position: absolute;
-    top: 110%;
-    left: 80%;
-  }
-
-
-
-}
-
-@media (max-width: 700px) {
-
-
-  body{
-    background-image: linear-gradient(110.3deg,#495d6d 4.3%,#313752 96.7%);
-  }
-
 }
