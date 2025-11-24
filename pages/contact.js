@@ -181,19 +181,6 @@ const Contact = () => {
               <div className="contact-form-container">
                 {!formStatus.submitted ? (
                   <>
-                    {/* Hidden Netlify form for bot detection - netlify needs this to identify the form */}
-                    {/* Hidden Netlify form for bot detection - netlify needs this to identify the form */}
-                    <form name="contact" data-netlify="true" netlify-honeypot="bot-field" hidden>
-                      <input type="text" name="name" />
-                      <input type="email" name="email" />
-                      <input type="tel" name="phone" />
-                      <input type="text" name="company" />
-                      <input type="text" name="subject" />
-                      <textarea name="message"></textarea>
-                      <input name="bot-field" />
-                      <input type="hidden" name="form-name" value="contact" />
-                    </form>
-                    
                     <form 
                       onSubmit={handleSubmit} 
                       className="contact-form" 

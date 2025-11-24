@@ -99,12 +99,7 @@ const StayInformed = () => {
                 />
               </div>
               <div className="newsletter-form-container">
-                {/* Hidden Netlify form for bot detection */}
-                <form name="newsletter" data-netlify="true" netlify-honeypot="bot-field" hidden>
-                  <input type="email" name="email" />
-                  <input name="bot-field" />
-                  <input type="hidden" name="form-name" value="newsletter" />
-                </form>
+
 
                 {!submitted ? (
                   <form
