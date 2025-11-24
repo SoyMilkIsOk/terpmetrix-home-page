@@ -10,12 +10,29 @@ const StayInformed = () => {
     e.preventDefault();
     setLoading(true);
 
-    // Simulate form submission to Netlify
-    setTimeout(() => {
-      setSubmitted(true);
+    try {
+      const formBody = new URLSearchParams();
+      formBody.append('email', email);
+      formBody.append('form-name', 'newsletter');
+      
+      const response = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: formBody.toString()
+      });
+      
+      if (response.ok) {
+        setSubmitted(true);
+        setLoading(false);
+        setEmail("");
+      } else {
+        throw new Error('Form submission failed');
+      }
+    } catch (error) {
+      console.error(error);
       setLoading(false);
-      setEmail("");
-    }, 1500);
+      // Optionally handle error state here
+    }
   };
 
   return (
@@ -82,6 +99,13 @@ const StayInformed = () => {
                 />
               </div>
               <div className="newsletter-form-container">
+                {/* Hidden Netlify form for bot detection */}
+                <form name="newsletter" data-netlify="true" netlify-honeypot="bot-field" hidden>
+                  <input type="email" name="email" />
+                  <input name="bot-field" />
+                  <input type="hidden" name="form-name" value="newsletter" />
+                </form>
+
                 {!submitted ? (
                   <form
                     onSubmit={handleSubmit}
@@ -89,6 +113,10 @@ const StayInformed = () => {
                     data-netlify="true"
                     name="newsletter"
                   >
+                    <input type="hidden" name="form-name" value="newsletter" />
+                    <div hidden>
+                      <input name="bot-field" />
+                    </div>
                     <h3>Subscribe to Our Newsletter</h3>
                     <p>
                       No spam, just the latest releases and tips, interesting
