@@ -1,62 +1,118 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800;900&display=swap');
+
 :root {
-  --primary-color: #3a9e42;
-  --secondary-color: #245828;
-  --accent-color: #3a9e42;
-  --dark-color: #1a1a1a;
-  --light-color: #f9f9f9;
+  /* Dark Palette */
+  --dark-bg: #0A0A0F;
+  --dark-surface: #12121A;
+  --dark-surface-2: #1A1A25;
+  --dark-border: rgba(255,255,255,0.06);
+
+  /* Accent Colors */
+  --primary: #10B981;
+  --primary-hover: #0D9668;
+  --primary-glow: rgba(16,185,129,0.15);
+  --primary-glow-strong: rgba(16,185,129,0.3);
+  --secondary: #3B82F6;
+  --gradient-accent: linear-gradient(135deg, #10B981, #3B82F6);
+  --gradient-hero: linear-gradient(135deg, #10B981 0%, #059669 50%, #3B82F6 100%);
+
+  /* Text */
+  --text-primary: #E2E8F0;
+  --text-secondary: rgba(226,232,240,0.6);
+  --text-muted: rgba(226,232,240,0.4);
+
+  /* Legacy compat */
+  --primary-color: #10B981;
+  --secondary-color: #0D9668;
+  --accent-color: #10B981;
+  --dark-color: #E2E8F0;
+  --light-color: #0A0A0F;
+
+  /* Motion */
   --transition-speed: 0.3s;
-  --font-family:   font-family: "Montserrat", sans-serif;
+  --transition-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Fonts */
+  --font-heading: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 html, body {
   scroll-behavior: smooth;
-  font-family: var(--font-family);
-  background-color: var(--light-color);
-  color: var(--dark-color);
+  font-family: var(--font-body);
+  background-color: var(--dark-bg);
+  color: var(--text-primary);
   overflow-x: hidden;
   margin: 0;
   padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 16px;
+  line-height: 1.6;
 }
 
 /* Typography */
 h1, h2, h3, h4, h5, h6 {
-  font-family: var(--font-family);
+  font-family: var(--font-heading);
   font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
 }
 
+h1 { font-size: 3.5rem; font-weight: 800; }
+h2 { font-size: 2.5rem; font-weight: 700; }
+h3 { font-size: 1.5rem; font-weight: 600; }
+h4 { font-size: 1.25rem; font-weight: 600; }
+
 p, span, a, li, button, input, textarea, label, div {
-  font-family: var(--font-family);
+  font-family: var(--font-body);
+}
+
+p {
+  color: var(--text-secondary);
+  line-height: 1.7;
+  font-size: 1rem;
 }
 
 /* Buttons */
 .btn {
-  font-family: var(--font-family);
+  font-family: var(--font-body);
+  font-weight: 500;
+  letter-spacing: 0.01em;
+  border-radius: 8px;
+  transition: all var(--transition-speed) var(--transition-smooth);
 }
 
 .btn-primary {
-  background-color: var(--primary-color);
-  border-color: var(--primary-color);
-  transition: all var(--transition-speed);
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+  font-weight: 600;
 }
 
 .btn-primary:hover {
-  background-color: var(--secondary-color);
-  border-color: var(--secondary-color);
-  transform: translateY(-3px);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  background-color: var(--primary-hover);
+  border-color: var(--primary-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px var(--primary-glow-strong);
 }
 
 /* Common Section Styling */
 section {
-  padding: 80px 0;
+  padding: 100px 0;
 }
 
 .section-heading {
   margin-bottom: 60px;
   position: relative;
-  padding-bottom: 15px;
-  font-family: var(--font-family);
+  padding-bottom: 18px;
+  font-family: var(--font-heading);
+  color: var(--text-primary);
 }
 
 .section-heading:after {
@@ -64,21 +120,22 @@ section {
   position: absolute;
   width: 60px;
   height: 3px;
-  background-color: var(--accent-color);
+  background: var(--gradient-accent);
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
+  border-radius: 2px;
 }
 
 /* Links */
 a {
-  color: var(--primary-color);
-  text-decoration: none; 
-  transition: color 0.3s;
+  color: var(--primary);
+  text-decoration: none;
+  transition: color 0.3s var(--transition-smooth);
 }
 
 a:hover {
-  color: var(--secondary-color);
+  color: var(--primary-hover);
 }
 
 /* Images */
@@ -86,9 +143,48 @@ img {
   max-width: 100%;
 }
 
+/* Glassmorphic Utility */
+.glass-card {
+  background: rgba(18, 18, 26, 0.7);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--dark-border);
+  border-radius: 16px;
+}
+
+/* Glow effects */
+.glow-emerald {
+  box-shadow: 0 0 30px var(--primary-glow), 0 0 60px rgba(16,185,129,0.05);
+}
+
+/* Selection */
+::selection {
+  background-color: var(--primary);
+  color: #fff;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--dark-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--dark-surface-2);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255,255,255,0.15);
+}
+
 /* Media Queries */
 @media (max-width: 768px) {
   section {
-    padding: 60px 0;
+    padding: 70px 0;
   }
+
+  h1 { font-size: 2.25rem; }
+  h2 { font-size: 1.75rem; }
+  h3 { font-size: 1.25rem; }
 }

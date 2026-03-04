@@ -24,36 +24,16 @@ const Footer = () => {
                 Building smarter tools and services for the modern cannabis industry, from precision accessories to professional digital solutions.
               </p>
               <div className="social-links mt-4">
-                <a
-                  href="https://twitter.com/terpmetrix"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Twitter"
-                >
+                <a href="https://twitter.com/terpmetrix" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
                   <i className="fab fa-twitter"></i>
                 </a>
-                <a
-                  href="https://facebook.com/terpmetrix"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Facebook"
-                >
+                <a href="https://facebook.com/terpmetrix" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
                   <i className="fab fa-facebook-f"></i>
                 </a>
-                <a
-                  href="https://instagram.com/terpmetrix"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Instagram"
-                >
+                <a href="https://instagram.com/terpmetrix" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
                   <i className="fab fa-instagram"></i>
                 </a>
-                <a
-                  href="https://linkedin.com/company/terpmetrix"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="LinkedIn"
-                >
+                <a href="https://linkedin.com/company/terpmetrix" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                   <i className="fab fa-linkedin-in"></i>
                 </a>
               </div>
@@ -64,21 +44,11 @@ const Footer = () => {
             <div className="footer-widget">
               <h4>Quick Links</h4>
               <ul className="footer-links">
-                <li>
-                  <Link href="/">Home</Link>
-                </li>
-                <li>
-                  <Link href="/projects">Projects</Link>
-                </li>
-                <li>
-                  <Link href="/about">About</Link>
-                </li>
-                <li>
-                  <Link href="https://terpscoops.com">Shop</Link>{" "}
-                </li>
-                <li>
-                  <Link href="/contact">Contact</Link>
-                </li>
+                <li><Link href="/">Home</Link></li>
+                <li><Link href="/projects">Projects</Link></li>
+                <li><Link href="/about">About</Link></li>
+                <li><Link href="https://terpscoops.com">Shop</Link>{" "}</li>
+                <li><Link href="/contact">Contact</Link></li>
               </ul>
             </div>
           </div>
@@ -139,11 +109,12 @@ const Footer = () => {
 
       <style jsx>{`
         .footer {
-          background-color: #1a1a1a;
-          color: #f5f5f5;
+          background-color: #08080D;
+          color: var(--text-secondary);
           padding: 80px 0 30px;
           position: relative;
-          font-family: var(--font-family);
+          font-family: var(--font-body);
+          border-top: 1px solid var(--dark-border);
         }
 
         .footer-widget {
@@ -151,11 +122,11 @@ const Footer = () => {
         }
 
         .logo-circle {
-          width: 50px;
-          height: 50px;
+          width: 44px;
+          height: 44px;
           border-radius: 50%;
           object-fit: cover;
-          border: 2px solid var(--primary-color);
+          border: 2px solid var(--primary);
           padding: 2px;
           transition: transform 0.3s ease;
         }
@@ -163,24 +134,24 @@ const Footer = () => {
         .footer-logo {
           display: flex;
           align-items: center;
-          font-size: 24px;
+          font-size: 20px;
           font-weight: 700;
-          color: #fff;
+          color: var(--text-primary);
           text-decoration: none;
           transition: all 0.3s ease;
-          margin-right: 10px;
+          font-family: var(--font-heading);
+          letter-spacing: 1.5px;
         }
 
         .footer-info span {
-          margin-left: 8px;
-          letter-spacing: 0.5px;
-          line-height: 50px; /* Match the height of the logo to center text vertically */
-          height: 50px;
+          margin-left: 10px;
+          line-height: 44px;
+          height: 44px;
           font-weight: 700;
         }
 
         .footer-logo:hover {
-          color: var(--primary-color);
+          color: var(--primary);
         }
 
         .footer-logo:hover .logo-circle {
@@ -188,14 +159,15 @@ const Footer = () => {
         }
 
         .footer-info p {
-          color: rgba(255, 255, 255, 0.7);
-          line-height: 1.6;
+          color: var(--text-secondary);
+          line-height: 1.7;
           margin-bottom: 20px;
+          font-size: 14px;
         }
 
         .social-links {
           display: flex;
-          gap: 12px;
+          gap: 10px;
         }
 
         .social-links a {
@@ -204,27 +176,30 @@ const Footer = () => {
           justify-content: center;
           width: 38px;
           height: 38px;
-          background-color: rgba(255, 255, 255, 0.1);
-          border-radius: 50%;
-          color: #fff;
+          background: rgba(255, 255, 255, 0.05);
+          border: 1px solid var(--dark-border);
+          border-radius: 8px;
+          color: var(--text-secondary);
           text-decoration: none;
           transition: all 0.3s;
-          font-size: 16px;
+          font-size: 15px;
         }
 
         .social-links a:hover {
-          background-color: var(--primary-color);
-          transform: translateY(-5px);
-          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+          background: var(--primary-glow);
+          border-color: rgba(16, 185, 129, 0.3);
+          color: var(--primary);
+          transform: translateY(-3px);
         }
 
         h4 {
-          font-size: 18px;
+          font-size: 16px;
           font-weight: 600;
-          margin-bottom: 25px;
+          margin-bottom: 24px;
           position: relative;
           padding-bottom: 12px;
-          color: #fff;
+          color: var(--text-primary);
+          font-family: var(--font-heading);
         }
 
         h4:after {
@@ -232,10 +207,10 @@ const Footer = () => {
           position: absolute;
           left: 0;
           bottom: 0;
-          width: 35px;
-          height: 3px;
-          background-color: var(--primary-color);
-          border-radius: 3px;
+          width: 30px;
+          height: 2px;
+          background: var(--gradient-accent);
+          border-radius: 2px;
         }
 
         .footer-links {
@@ -246,58 +221,63 @@ const Footer = () => {
 
         .footer-links li {
           margin-bottom: 12px;
-          position: relative;
         }
 
         .footer-links a {
-          color: rgba(255, 255, 255, 0.7);
+          color: var(--text-secondary);
           text-decoration: none;
           transition: all 0.3s;
           display: inline-block;
           font-weight: 400;
+          font-size: 14px;
+          font-family: var(--font-body);
         }
 
         .footer-links a:hover {
-          color: var(--primary-color);
-          transform: translateX(8px);
+          color: var(--primary);
+          transform: translateX(6px);
         }
 
         .contact-item {
           display: flex;
-          margin-bottom: 18px;
+          margin-bottom: 16px;
           align-items: flex-start;
         }
 
         .contact-item i {
-          margin-right: 15px;
-          color: var(--primary-color);
-          font-size: 16px;
+          margin-right: 12px;
+          color: var(--primary);
+          font-size: 14px;
           padding-top: 3px;
+          width: 16px;
+          text-align: center;
         }
 
         .contact-item span,
         .contact-item a {
-          color: rgba(255, 255, 255, 0.7);
+          color: var(--text-secondary);
           text-decoration: none;
           transition: color 0.3s;
-          font-size: 15px;
+          font-size: 14px;
           line-height: 1.5;
+          font-family: var(--font-body);
         }
 
         .contact-item a:hover {
-          color: var(--primary-color);
+          color: var(--primary);
         }
 
         .footer-widget p {
-          color: rgba(255, 255, 255, 0.7);
-          margin-bottom: 20px;
-          font-size: 15px;
+          color: var(--text-secondary);
+          margin-bottom: 16px;
+          font-size: 14px;
           line-height: 1.6;
+          font-family: var(--font-body);
         }
 
         .newsletter-form {
           position: relative;
-          margin-top: 20px;
+          margin-top: 16px;
         }
 
         .input-group {
@@ -307,24 +287,26 @@ const Footer = () => {
 
         .form-control {
           width: 100%;
-          padding: 12px 15px;
-          border: none;
-          border-radius: 5px;
-          background-color: rgba(255, 255, 255, 0.1);
-          color: #fff;
+          padding: 12px 50px 12px 16px;
+          border: 1px solid var(--dark-border);
+          border-radius: 8px;
+          background: rgba(255, 255, 255, 0.04);
+          color: var(--text-primary);
           font-size: 14px;
           transition: all 0.3s ease;
           z-index: 0;
+          font-family: var(--font-body);
         }
 
         .form-control:focus {
-          background-color: rgba(255, 255, 255, 0.15);
+          background: rgba(255, 255, 255, 0.06);
           outline: none;
-          box-shadow: 0 0 0 3px rgba(58, 158, 66, 0.3);
+          border-color: rgba(16, 185, 129, 0.4);
+          box-shadow: 0 0 0 3px var(--primary-glow);
         }
 
         .form-control::placeholder {
-          color: rgba(255, 255, 255, 0.5);
+          color: var(--text-muted);
         }
 
         .input-group-append {
@@ -335,11 +317,11 @@ const Footer = () => {
         }
 
         .btn-submit {
-          background-color: var(--primary-color);
+          background: var(--primary);
           border: none;
-          height: 36px;
-          width: 36px;
-          border-radius: 3px;
+          height: 34px;
+          width: 34px;
+          border-radius: 6px;
           color: #fff;
           cursor: pointer;
           transition: all 0.3s ease;
@@ -347,17 +329,18 @@ const Footer = () => {
           align-items: center;
           justify-content: center;
           z-index: 1;
+          font-size: 13px;
         }
 
         .btn-submit:hover {
-          background-color: var(--secondary-color);
+          background: var(--primary-hover);
           transform: translateY(-2px);
         }
 
         .footer-bottom {
           margin-top: 20px;
-          padding-top: 25px;
-          border-top: 1px solid rgba(255, 255, 255, 0.1);
+          padding-top: 24px;
+          border-top: 1px solid var(--dark-border);
           display: flex;
           justify-content: space-between;
           align-items: center;
@@ -365,8 +348,9 @@ const Footer = () => {
         }
 
         .copyright {
-          font-size: 14px;
-          color: rgba(255, 255, 255, 0.6);
+          font-size: 13px;
+          color: var(--text-muted);
+          font-family: var(--font-body);
         }
 
         .footer-bottom-links {
@@ -375,19 +359,20 @@ const Footer = () => {
         }
 
         .footer-bottom-links a {
-          color: rgba(255, 255, 255, 0.6);
+          color: var(--text-muted);
           text-decoration: none;
-          font-size: 14px;
+          font-size: 13px;
           transition: all 0.3s ease;
+          font-family: var(--font-body);
         }
 
         .footer-bottom-links a:hover {
-          color: var(--primary-color);
+          color: var(--primary);
         }
 
         @media (max-width: 991px) {
           .footer-widget {
-            margin-bottom: 30px;
+            margin-bottom: 24px;
           }
         }
 
@@ -399,7 +384,7 @@ const Footer = () => {
           .footer-bottom {
             flex-direction: column;
             text-align: center;
-            gap: 15px;
+            gap: 12px;
           }
 
           .footer-bottom-links {
@@ -409,11 +394,11 @@ const Footer = () => {
 
         @media (max-width: 576px) {
           .footer-logo span {
-            font-size: 20px;
+            font-size: 18px;
           }
 
           .social-links {
-            justify-content: center;
+            justify-content: flex-start;
           }
         }
       `}</style>

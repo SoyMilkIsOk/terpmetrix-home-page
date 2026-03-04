@@ -31,41 +31,30 @@ const Layout = ({ children, pageTitle }) => {
         {children}
       </div>
       <style jsx global>{`
-        :root {
-          --primary-color: #3a9e42;
-          --secondary-color: #245828;
-          --accent-color: #3a9e42;
-          --dark-color: #1a1a1a;
-          --light-color: #f9f9f9;
-          --transition-speed: 0.3s;
-        }
-
         html,
         body {
           scroll-behavior: smooth;
-          font-family: "Poppins", -apple-system, BlinkMacSystemFont, Segoe UI,
-            Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans,
-            Helvetica Neue, sans-serif;
-          background-color: var(--light-color);
-          color: var(--dark-color);
+          font-family: var(--font-body);
+          background-color: var(--dark-bg);
+          color: var(--text-primary);
           overflow-x: hidden;
           margin: 0;
           padding: 0;
         }
 
         a {
-          color: var(--primary-color);
+          color: var(--primary);
           text-decoration: none;
-          transition: color 0.3s;
+          transition: color 0.3s var(--transition-smooth);
         }
 
         a:hover {
-          color: var(--secondary-color);
+          color: var(--primary-hover);
         }
 
         .site-wrapper {
           opacity: 0;
-          transition: opacity 0.5s ease-in-out;
+          transition: opacity 0.6s ease-in-out;
         }
 
         .fade-in {
@@ -73,7 +62,7 @@ const Layout = ({ children, pageTitle }) => {
         }
 
         section {
-          padding: 80px 0;
+          padding: 100px 0;
         }
 
         h1,
@@ -82,26 +71,29 @@ const Layout = ({ children, pageTitle }) => {
         h4,
         h5,
         h6 {
+          font-family: var(--font-heading);
           font-weight: 700;
+          color: var(--text-primary);
         }
 
         .btn-primary {
-          background-color: var(--primary-color);
-          border-color: var(--primary-color);
-          transition: all var(--transition-speed);
+          background-color: var(--primary);
+          border-color: var(--primary);
+          transition: all var(--transition-speed) var(--transition-smooth);
         }
 
         .btn-primary:hover {
-          background-color: var(--secondary-color);
-          border-color: var(--secondary-color);
-          transform: translateY(-3px);
-          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          background-color: var(--primary-hover);
+          border-color: var(--primary-hover);
+          transform: translateY(-2px);
+          box-shadow: 0 8px 25px var(--primary-glow-strong);
         }
 
         .section-heading {
           margin-bottom: 60px;
           position: relative;
-          padding-bottom: 15px;
+          padding-bottom: 18px;
+          font-family: var(--font-heading);
         }
 
         .section-heading:after {
@@ -109,10 +101,11 @@ const Layout = ({ children, pageTitle }) => {
           position: absolute;
           width: 60px;
           height: 3px;
-          background-color: var(--accent-color);
+          background: var(--gradient-accent);
           bottom: 0;
           left: 50%;
           transform: translateX(-50%);
+          border-radius: 2px;
         }
 
         img {
@@ -121,7 +114,7 @@ const Layout = ({ children, pageTitle }) => {
 
         @media (max-width: 768px) {
           section {
-            padding: 60px 0;
+            padding: 70px 0;
           }
         }
       `}</style>

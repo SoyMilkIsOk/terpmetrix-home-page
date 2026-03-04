@@ -73,6 +73,7 @@ const Projects = () => {
       <Header />
 
       <section className="page-hero">
+        <div className="hero-glow"></div>
         <div className="container">
           <div className="row">
             <div className="col-12 text-center">
@@ -104,7 +105,6 @@ const Projects = () => {
                   index % 2 !== 0 ? "flex-lg-row-reverse" : ""
                 }`}
               >
-                {/* Image - Will show after title on mobile */}
                 <div className="col-lg-6 project-image-wrapper">
                   <div className="project-image">
                     <Image
@@ -117,7 +117,6 @@ const Projects = () => {
                   </div>
                 </div>
 
-                {/* Content */}
                 <div className="col-lg-6">
                   <div className="project-content">
                     <p className="project-description">{project.description}</p>
@@ -126,7 +125,10 @@ const Projects = () => {
                       <h3>Key Features</h3>
                       <ul>
                         {project.features.map((feature, i) => (
-                          <li key={i}>{feature}</li>
+                          <li key={i}>
+                            <i className="fas fa-check"></i>
+                            {feature}
+                          </li>
                         ))}
                       </ul>
                     </div>
@@ -134,11 +136,11 @@ const Projects = () => {
                     <div className="button-container">
                       <a
                         href={project.link}
-                        className="custom-project-button btn-primary"
+                        className="custom-project-button"
                         target="_blank"
                         rel="noopener noreferrer"
                       >
-                        {project.link_text}
+                        {project.link_text} <i className="fas fa-arrow-right"></i>
                       </a>
                     </div>
                   </div>
@@ -150,6 +152,7 @@ const Projects = () => {
       </section>
 
       <section className="cta-section">
+        <div className="cta-glow"></div>
         <div className="container">
           <div className="row justify-content-center">
             <div className="col-lg-8 text-center">
@@ -157,10 +160,8 @@ const Projects = () => {
               <p>
                 Whether you need a precision tool, professional photography, or a high-performance website, we're here to help elevate your cannabis brand.
               </p>
-              <Link href="/contact" passHref>
-                <button className="btn btn-primary custom-contact-button">
-                  <p>Contact Us</p>
-                </button>
+              <Link href="/contact" className="btn btn-primary btn-lg cta-btn">
+                Contact Us
               </Link>
             </div>
           </div>
@@ -170,82 +171,48 @@ const Projects = () => {
       <Footer />
 
       <style jsx>{`
-        .custom-contact-button {
-          padding: 15px 40px;
-          font-size: 1.2rem;
-          border-radius: 8px;
-          font-weight: 800;
-          transition: all 0.3s ease;
-          text-align: center;
-          background-color: var(--primary-color);
-          color: white;
-          display: inline-flex;
-          align-items: center;
-          justify-content: center;
-        }
-
-        .custom-contact-button:hover {
-          transform: translateY(-5px);
-          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-        }
-
-        /* Remove the padding from the paragraph */
-        .custom-contact-button p {
-          padding: 0;
-          margin-top: 30px;
-        }
-        .custom-project-button {
-          padding: 15px 40px !important;
-          font-size: 1.2rem !important;
-          border-radius: 8px !important;
-          font-weight: 800 !important;
-          transition: all 0.3s ease !important;
-          min-width: 200px !important;
-          text-align: center !important;
-          display: inline-block;
-          text-decoration: none;
-        }
-
-        .custom-project-button:hover {
-          transform: translateY(-5px) !important;
-          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15) !important;
-        }
-
-        .btn-primary {
-          background-color: var(--primary-color);
-          color: white;
-        }
-
-        .btn-light {
-          background-color: white;
-          color: var(--primary-color);
-        }
         .page-hero {
-          background: linear-gradient(
-            135deg,
-            var(--primary-color) 0%,
-            var(--secondary-color) 100%
-          );
+          background: var(--dark-surface);
           color: white;
-          padding: 120px 0 80px;
-          margin-bottom: 0px;
+          padding: 160px 0 80px;
+          position: relative;
+          overflow: hidden;
+          border-bottom: 1px solid var(--dark-border);
+        }
+
+        .hero-glow {
+          position: absolute;
+          top: -100px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 600px;
+          height: 300px;
+          background: radial-gradient(ellipse, var(--primary-glow) 0%, transparent 70%);
+          pointer-events: none;
         }
 
         .page-hero h1 {
           font-size: 3rem;
           font-weight: 800;
           margin-bottom: 20px;
-          padding-top: 60px;
+          font-family: var(--font-heading);
+          background: linear-gradient(135deg, #fff 0%, var(--primary) 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
         }
 
         .page-hero .lead {
-          font-size: 1.25rem;
+          font-size: 1.15rem;
           max-width: 700px;
           margin: 0 auto;
+          color: var(--text-secondary);
+          font-family: var(--font-body);
         }
 
         .projects-section {
-          padding: 60px 0 80px;
+          background: var(--dark-bg);
+          padding: 80px 0;
         }
 
         .project-item {
@@ -259,172 +226,213 @@ const Projects = () => {
         }
 
         .project-header {
-          margin-bottom: 25px;
-        }
-
-        .project-content-wrapper {
-          display: flex;
-          flex-wrap: wrap;
-        }
-
-        .project-content {
-          padding: 30px;
+          margin-bottom: 28px;
         }
 
         .project-status {
           display: inline-block;
-          background-color: var(--accent-color);
-          color: var(--light-color);
+          background: var(--primary-glow);
+          color: var(--primary);
           font-weight: 600;
-          font-size: 14px;
-          padding: 5px 15px;
-          border-radius: 20px;
-          margin-bottom: 15px;
+          font-size: 13px;
+          padding: 6px 16px;
+          border-radius: 50px;
+          margin-bottom: 14px;
+          border: 1px solid rgba(16, 185, 129, 0.2);
+          font-family: var(--font-body);
+          letter-spacing: 0.03em;
         }
 
         .project-header h2 {
-          font-size: 32px;
+          font-size: 2rem;
           margin-bottom: 10px;
-          color: var(--dark-color);
+          color: var(--text-primary);
+          font-family: var(--font-heading);
+        }
+
+        .project-content {
+          padding: 10px 20px;
         }
 
         .project-description {
-          color: #666;
-          margin-bottom: 25px;
+          color: var(--text-secondary);
+          margin-bottom: 28px;
+          line-height: 1.8;
+          font-family: var(--font-body);
+          font-size: 15px;
         }
 
         .project-features {
-          background-color: #f8f9fa;
-          padding: 25px;
-          border-radius: 10px;
+          background: var(--dark-surface);
+          border: 1px solid var(--dark-border);
+          padding: 24px;
+          border-radius: 12px;
           margin-bottom: 30px;
         }
 
         .project-features h3 {
-          font-size: 20px;
-          margin-bottom: 15px;
-          color: var(--dark-color);
+          font-size: 18px;
+          margin-bottom: 16px;
+          color: var(--text-primary);
+          font-family: var(--font-heading);
+          font-weight: 600;
         }
 
         .project-features ul {
-          padding-left: 25px;
+          padding-left: 0;
           margin-bottom: 0;
+          list-style: none;
         }
 
         .project-features li {
           margin-bottom: 10px;
-          color: #555;
+          color: var(--text-secondary);
+          font-family: var(--font-body);
+          font-size: 14px;
+          display: flex;
+          align-items: flex-start;
+          gap: 10px;
         }
 
         .project-features li:last-child {
           margin-bottom: 0;
         }
 
+        .project-features li i {
+          color: var(--primary);
+          font-size: 12px;
+          margin-top: 4px;
+          flex-shrink: 0;
+        }
+
         .project-image {
-          border-radius: 10px;
+          border-radius: 16px;
           overflow: hidden;
-          box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-          transition: transform 0.5s ease;
+          border: 1px solid var(--dark-border);
+          box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+          transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .project-image:hover {
-          transform: translateY(-10px);
+          transform: translateY(-8px);
+          box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5), 0 0 30px var(--primary-glow);
         }
 
         .project-image-wrapper {
-          margin-bottom: 25px;
+          margin-bottom: 24px;
+        }
+
+        .button-container {
+          display: flex;
+          justify-content: flex-start;
+          margin-top: 20px;
+        }
+
+        .custom-project-button {
+          display: inline-flex;
+          align-items: center;
+          gap: 10px;
+          padding: 14px 36px;
+          font-size: 15px;
+          border-radius: 10px;
+          font-weight: 600;
+          background: var(--primary);
+          color: #fff;
+          text-decoration: none;
+          font-family: var(--font-body);
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .custom-project-button:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 8px 25px var(--primary-glow-strong);
+          color: #fff;
+        }
+
+        .custom-project-button i {
+          font-size: 12px;
+          transition: transform 0.3s;
+        }
+
+        .custom-project-button:hover i {
+          transform: translateX(4px);
         }
 
         .cta-section {
-          background: linear-gradient(
-            135deg,
-            var(--primary-color) 0%,
-            var(--secondary-color) 100%
-          );
+          background: var(--dark-surface);
           color: white;
-          padding: 80px 0;
+          padding: 100px 0;
+          position: relative;
           overflow: hidden;
-          z-index: 0; /* Added z-index */
+          border-top: 1px solid var(--dark-border);
         }
 
-        .cta-section:before {
-          content: "";
+        .cta-glow {
           position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          opacity: 0.1;
-          z-index: 0; /* Added z-index */
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 600px;
+          height: 300px;
+          background: radial-gradient(ellipse, var(--primary-glow) 0%, transparent 70%);
+          pointer-events: none;
         }
 
         .cta-section h2 {
           font-size: 2.5rem;
           margin-bottom: 20px;
+          font-family: var(--font-heading);
+          color: var(--text-primary);
         }
 
         .cta-section p {
-          font-size: 1.1rem;
-          margin-bottom: 30px;
+          font-size: 1.05rem;
+          margin-bottom: 32px;
           max-width: 700px;
           margin-left: auto;
           margin-right: auto;
+          color: var(--text-secondary);
+          font-family: var(--font-body);
         }
 
-        .button-container {
-          display: flex;
-          justify-content: center;
-          margin-top: 30px;
-          width: 100%;
+        .cta-btn {
+          padding: 14px 36px;
+          font-weight: 600;
+          border-radius: 10px;
+          font-family: var(--font-body);
         }
 
         @media (min-width: 992px) {
-          .project-content {
-            padding: 30px;
-          }
-
           .project-image-wrapper {
             margin-bottom: 0;
           }
 
-          .project-content:before {
-            content: "";
-            display: block;
-          }
-
-          .project-content .project-status {
-            display: inline-block;
-          }
-
-          .project-content h2 {
-            display: block;
+          .project-content {
+            padding: 10px 30px;
           }
         }
 
         @media (max-width: 991px) {
           .project-header {
             text-align: center;
-            margin-bottom: 20px;
           }
 
           .project-content {
             padding: 20px 0 0;
           }
 
-          .project-content .project-status,
-          .project-content h2 {
-            display: none;
+          .button-container {
+            justify-content: center;
           }
         }
 
         @media (max-width: 768px) {
           .page-hero {
-            padding: 100px 0 60px;
-            margin-bottom: 20px;
+            padding: 130px 0 60px;
           }
 
           .page-hero h1 {
-            font-size: 2.5rem;
+            font-size: 2.25rem;
           }
 
           .project-item {
@@ -432,19 +440,15 @@ const Projects = () => {
           }
 
           .cta-section {
-            padding: 60px 0;
+            padding: 70px 0;
           }
 
           .cta-section h2 {
-            font-size: 2rem;
+            font-size: 1.75rem;
           }
 
           .project-header h2 {
-            font-size: 28px;
-          }
-
-          .projects-section {
-            padding: 40px 0 60px;
+            font-size: 1.75rem;
           }
         }
       `}</style>

@@ -4,10 +4,16 @@ import Image from 'next/image';
 const Intro = () => {
   return (
     <section className="intro-section">
+      {/* Animated background orbs */}
+      <div className="bg-orb orb-1"></div>
+      <div className="bg-orb orb-2"></div>
+      <div className="bg-orb orb-3"></div>
+      
       <div className="container">
         <div className="row align-items-center">
           <div className="col-lg-6" data-aos="fade-right">
             <div className="intro-content">
+              <div className="badge-tag">Cannabis Technology Platform</div>
               <h1>Advancing Cannabis Through Innovation & Technology</h1>
               <p className="lead">
                 Terpmetrix builds purpose-driven tools, services, and digital solutions that elevate the cannabis experience, 
@@ -17,7 +23,7 @@ const Intro = () => {
                 <Link href="/projects" className="btn btn-primary btn-lg">
                   Explore Our Projects
                 </Link>
-                <Link href="/contact" className="btn btn-outline-dark btn-lg">
+                <Link href="/contact" className="btn btn-glass btn-lg">
                   Contact Us
                 </Link>
               </div>
@@ -33,79 +39,136 @@ const Intro = () => {
       
       <style jsx>{`
         .intro-section {
-          padding: 180px 0 100px;
+          padding: 180px 0 120px;
           position: relative;
           overflow: hidden;
-          background: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(240,255,240,0.9) 100%);
+          background: var(--dark-bg);
         }
         
-        .intro-section:before {
-          content: '';
+        /* Animated gradient orbs */
+        .bg-orb {
           position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background-image: url('/images/pattern-bg.svg');
-          background-size: cover;
-          opacity: 0.05;
-          z-index: -1;
+          border-radius: 50%;
+          filter: blur(80px);
+          opacity: 0.4;
+          animation: float 8s ease-in-out infinite;
+          pointer-events: none;
+        }
+        
+        .orb-1 {
+          width: 400px;
+          height: 400px;
+          background: var(--primary-glow-strong);
+          top: -100px;
+          right: -100px;
+          animation-delay: 0s;
+        }
+        
+        .orb-2 {
+          width: 300px;
+          height: 300px;
+          background: rgba(59, 130, 246, 0.12);
+          bottom: -50px;
+          left: -80px;
+          animation-delay: -3s;
+        }
+        
+        .orb-3 {
+          width: 200px;
+          height: 200px;
+          background: rgba(16, 185, 129, 0.08);
+          top: 50%;
+          left: 50%;
+          animation-delay: -5s;
+        }
+        
+        @keyframes float {
+          0%, 100% { transform: translateY(0) scale(1); }
+          50% { transform: translateY(-30px) scale(1.05); }
+        }
+        
+        .badge-tag {
+          display: inline-block;
+          padding: 6px 16px;
+          background: var(--primary-glow);
+          border: 1px solid rgba(16, 185, 129, 0.2);
+          border-radius: 50px;
+          color: var(--primary);
+          font-size: 13px;
+          font-weight: 600;
+          font-family: var(--font-body);
+          letter-spacing: 0.05em;
+          text-transform: uppercase;
+          margin-bottom: 24px;
         }
         
         h1 {
           font-size: 3.5rem;
           font-weight: 800;
-          line-height: 1.2;
-          margin-bottom: 25px;
-          background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+          line-height: 1.1;
+          margin-bottom: 24px;
+          font-family: var(--font-heading);
+          background: linear-gradient(135deg, #ffffff 0%, #10B981 50%, #3B82F6 100%);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
+          background-clip: text;
         }
         
         .lead {
-          font-size: 1.25rem;
-          margin-bottom: 30px;
-          color: #555;
+          font-size: 1.15rem;
+          margin-bottom: 16px;
+          color: var(--text-secondary);
+          line-height: 1.7;
+          font-family: var(--font-body);
         }
         
         .intro-buttons {
           display: flex;
-          gap: 15px;
-          margin-top: 30px;
+          gap: 16px;
+          margin-top: 32px;
         }
         
-        .btn-outline-dark {
-          transition: all var(--transition-speed);
+        .intro-buttons :global(.btn-primary) {
+          padding: 14px 32px;
+          font-weight: 600;
+          font-family: var(--font-body);
+          border-radius: 10px;
+          box-shadow: 0 4px 20px var(--primary-glow-strong);
         }
-        
-        .btn-outline-dark:hover {
-          background-color: var(--dark-color);
-          color: white;
-          transform: translateY(-3px);
-          box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+
+        .intro-buttons :global(.btn-glass) {
+          padding: 14px 32px;
+          font-weight: 600;
+          font-family: var(--font-body);
+          border-radius: 10px;
+          background: rgba(255, 255, 255, 0.05);
+          border: 1px solid rgba(255, 255, 255, 0.1);
+          color: var(--text-primary);
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .intro-buttons :global(.btn-glass:hover) {
+          background: rgba(255, 255, 255, 0.1);
+          border-color: rgba(255, 255, 255, 0.2);
+          transform: translateY(-2px);
+          box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+          color: #fff;
         }
         
         .intro-image {
           position: relative;
-          border-radius: 10px;
+          border-radius: 16px;
           overflow: hidden;
-          box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-          transition: transform 0.5s ease;
+          border: 1px solid var(--dark-border);
+          box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 40px var(--primary-glow);
+          transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
         
         .intro-image:hover {
-          transform: translateY(-10px);
-        }
-        
-        .intro-image:after {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: linear-gradient(to bottom right, rgba(58,158,66,0.2), rgba(248,181,0,0.2));
-          pointer-events: none;
+          transform: translateY(-8px);
+          box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5), 0 0 60px var(--primary-glow);
         }
         
         @media (max-width: 991px) {
@@ -118,8 +181,13 @@ const Intro = () => {
           }
           
           .intro-content {
-            margin-bottom: 40px;
+            margin-bottom: 50px;
             text-align: center;
+          }
+
+          .badge-tag {
+            margin-left: auto;
+            margin-right: auto;
           }
           
           .intro-buttons {
@@ -131,9 +199,18 @@ const Intro = () => {
           h1 {
             font-size: 2rem;
           }
+
+          .intro-section {
+            padding: 130px 0 60px;
+          }
           
           .intro-buttons {
             flex-direction: column;
+          }
+
+          .intro-buttons :global(.btn) {
+            width: 100%;
+            text-align: center;
           }
         }
       `}</style>

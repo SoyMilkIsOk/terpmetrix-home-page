@@ -43,7 +43,6 @@ const Contact = () => {
       loading: true
     });
     
-    // Netlify form submission
     try {
       const formBody = new URLSearchParams();
       Object.keys(formData).forEach(key => {
@@ -100,6 +99,7 @@ const Contact = () => {
       <Header />
       
       <section className="page-hero">
+        <div className="hero-glow"></div>
         <div className="container">
           <div className="row">
             <div className="col-12 text-center">
@@ -116,7 +116,7 @@ const Contact = () => {
             <div className="col-lg-5" data-aos="fade-right">
               <div className="contact-info">
                 <h2>Get In Touch</h2>
-                <p className="lead">
+                <p className="lead-text">
                   Have questions about our products, technology, or how we can help your business? 
                   Reach out to us and our team will be happy to assist you.
                 </p>
@@ -157,7 +157,7 @@ const Contact = () => {
                   </div>
                 </div>
                 
-                <div className="social-links">
+                <div className="social-section">
                   <h3>Connect With Us</h3>
                   <div className="social-icons">
                     <a href="https://twitter.com/terpmetrix" target="_blank" rel="noopener noreferrer" aria-label="Twitter">
@@ -290,7 +290,7 @@ const Contact = () => {
                       
                       <button 
                         type="submit" 
-                        className="btn btn-primary btn-lg"
+                        className="btn btn-primary btn-lg submit-btn"
                         disabled={formStatus.loading}
                       >
                         {formStatus.loading ? (
@@ -298,7 +298,7 @@ const Contact = () => {
                             <i className="fas fa-spinner fa-spin"></i> Sending...
                           </span>
                         ) : (
-                          'Send Message'
+                          <>Send Message <i className="fas fa-paper-plane"></i></>
                         )}
                       </button>
                     </form>
@@ -311,7 +311,7 @@ const Contact = () => {
                     <h2>Thank You!</h2>
                     <p>Your message has been sent successfully. We&apos;ll get back to you as soon as possible.</p>
                     <button 
-                      className="btn btn-primary btn-lg"
+                      className="btn btn-glass-outline"
                       onClick={resetForm}
                     >
                       Send Another Message
@@ -331,7 +331,7 @@ const Contact = () => {
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d97767.33201232801!2d-105.23990249999999!3d40.02566354999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x876b8d4e278dafd3%3A0xc8393b7ca01b8058!2sBoulder%2C%20CO!5e0!3m2!1sen!2sus!4v1741428187252!5m2!1sen!2sus"
               width="100%" 
               height="450" 
-              style={{ border: 0 }} 
+              style={{ border: 0, filter: 'invert(0.9) hue-rotate(180deg) brightness(0.7) contrast(1.2)' }} 
               allowFullScreen="" 
               loading="lazy"
               title="Terpmetrix Location Map"
@@ -344,104 +344,142 @@ const Contact = () => {
       
       <style jsx>{`
         .page-hero {
-          background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+          background: var(--dark-surface);
           color: white;
-          padding: 120px 0 80px;
-          margin-bottom: 0px;
+          padding: 160px 0 80px;
+          position: relative;
+          overflow: hidden;
+          border-bottom: 1px solid var(--dark-border);
+        }
+
+        .hero-glow {
+          position: absolute;
+          top: -100px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 600px;
+          height: 300px;
+          background: radial-gradient(ellipse, var(--primary-glow) 0%, transparent 70%);
+          pointer-events: none;
         }
         
         .page-hero h1 {
           font-size: 3rem;
           font-weight: 800;
           margin-bottom: 20px;
-          padding-top: 60px;
+          font-family: var(--font-heading);
+          background: linear-gradient(135deg, #fff 0%, var(--primary) 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
         }
         
         .page-hero .lead {
-          font-size: 1.25rem;
+          font-size: 1.15rem;
           max-width: 700px;
           margin: 0 auto;
+          color: var(--text-secondary);
+          font-family: var(--font-body);
         }
         
         .contact-section {
+          background: var(--dark-bg);
           padding-bottom: 80px;
         }
         
         .contact-info h2,
         .contact-form h2 {
-          font-size: 2rem;
+          font-size: 1.75rem;
           margin-bottom: 20px;
-          color: var(--dark-color);
+          color: var(--text-primary);
+          font-family: var(--font-heading);
         }
         
-        .contact-info .lead {
-          color: #666;
-          margin-bottom: 30px;
+        .lead-text {
+          color: var(--text-secondary);
+          margin-bottom: 16px;
+          font-family: var(--font-body);
+          line-height: 1.7;
         }
         
         .contact-methods {
-          margin-top: 40px;
+          margin-top: 36px;
         }
         
         .contact-method {
           display: flex;
-          margin-bottom: 30px;
+          margin-bottom: 24px;
+          padding: 12px;
+          border-radius: 12px;
+          transition: all 0.3s;
+        }
+
+        .contact-method:hover {
+          background: rgba(255, 255, 255, 0.02);
         }
         
         .contact-method .icon {
-          width: 60px;
-          height: 60px;
-          min-width: 60px;
-          border-radius: 50%;
-          background-color: rgba(58,158,66,0.1);
+          width: 52px;
+          height: 52px;
+          min-width: 52px;
+          border-radius: 12px;
+          background: var(--primary-glow);
           display: flex;
           align-items: center;
           justify-content: center;
-          margin-right: 20px;
-          color: var(--primary-color);
-          font-size: 24px;
+          margin-right: 18px;
+          color: var(--primary);
+          font-size: 20px;
           transition: all 0.3s;
         }
         
         .contact-method:hover .icon {
-          background-color: var(--primary-color);
+          background: var(--primary);
           color: white;
-          transform: scale(1.1);
+          transform: scale(1.05);
         }
         
         .contact-method .info h3 {
-          font-size: 18px;
-          margin-bottom: 5px;
-          color: var(--dark-color);
+          font-size: 16px;
+          margin-bottom: 4px;
+          color: var(--text-primary);
+          font-family: var(--font-heading);
+          font-weight: 600;
         }
         
         .contact-method .info p {
           margin-bottom: 0;
-          color: #666;
+          color: var(--text-secondary);
+          font-family: var(--font-body);
+          font-size: 14px;
         }
         
         .contact-method .info a {
-          color: #666;
+          color: var(--text-secondary);
           text-decoration: none;
           transition: color 0.3s;
+          font-family: var(--font-body);
         }
         
         .contact-method .info a:hover {
-          color: var(--primary-color);
+          color: var(--primary);
         }
         
-        .social-links {
-          margin-top: 40px;
+        .social-section {
+          margin-top: 36px;
         }
         
-        .social-links h3 {
-          font-size: 18px;
-          margin-bottom: 15px;
-          color: var(--dark-color);
+        .social-section h3 {
+          font-size: 16px;
+          margin-bottom: 14px;
+          color: var(--text-primary);
+          font-family: var(--font-heading);
+          font-weight: 600;
         }
         
         .social-icons {
           display: flex;
+          gap: 10px;
         }
         
         .social-icons a {
@@ -450,96 +488,148 @@ const Contact = () => {
           justify-content: center;
           width: 40px;
           height: 40px;
-          background-color: #f5f5f5;
-          border-radius: 50%;
-          margin-right: 15px;
-          color: #555;
+          background: rgba(255, 255, 255, 0.05);
+          border: 1px solid var(--dark-border);
+          border-radius: 8px;
+          color: var(--text-secondary);
           text-decoration: none;
-          font-size: 18px;
+          font-size: 16px;
           transition: all 0.3s;
         }
         
         .social-icons a:hover {
-          background-color: var(--primary-color);
-          color: white;
-          transform: translateY(-5px);
+          background: var(--primary-glow);
+          border-color: rgba(16, 185, 129, 0.3);
+          color: var(--primary);
+          transform: translateY(-3px);
         }
         
         .contact-form-container {
-          background-color: white;
-          border-radius: 10px;
-          padding: 40px;
-          box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+          background: var(--dark-surface);
+          border: 1px solid var(--dark-border);
+          border-radius: 16px;
+          padding: 36px;
         }
         
         .form-group {
-          margin-bottom: 25px;
+          margin-bottom: 22px;
         }
         
         .form-group label {
           display: block;
           margin-bottom: 8px;
           font-weight: 500;
-          color: #555;
+          color: var(--text-secondary);
+          font-family: var(--font-body);
+          font-size: 14px;
         }
         
         .form-control {
-          height: 50px;
-          border: 1px solid #e0e0e0;
-          border-radius: 5px;
-          padding: 10px 15px;
+          height: 48px;
+          border: 1px solid var(--dark-border);
+          border-radius: 8px;
+          padding: 10px 16px;
           width: 100%;
-          font-size: 1rem;
+          font-size: 15px;
           transition: all 0.3s;
+          background: rgba(255, 255, 255, 0.04);
+          color: var(--text-primary);
+          font-family: var(--font-body);
         }
         
         .form-control:focus {
-          border-color: var(--primary-color);
-          box-shadow: 0 0 0 0.2rem rgba(58,158,66,0.25);
+          border-color: rgba(16, 185, 129, 0.4);
+          box-shadow: 0 0 0 3px var(--primary-glow);
           outline: none;
+          background: rgba(255, 255, 255, 0.06);
+        }
+
+        .form-control::placeholder {
+          color: var(--text-muted);
         }
         
         textarea.form-control {
           height: auto;
+          resize: vertical;
+        }
+        
+        .submit-btn {
+          width: 100%;
+          padding: 14px;
+          font-weight: 600;
+          font-size: 15px;
+          border-radius: 10px;
+          font-family: var(--font-body);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
+        }
+
+        .submit-btn i {
+          font-size: 13px;
         }
         
         .error-message {
-          background-color: #fff8f8;
-          border-left: 4px solid #e74c3c;
-          padding: 12px 15px;
-          margin-bottom: 25px;
-          border-radius: 4px;
+          background: rgba(239, 68, 68, 0.1);
+          border-left: 3px solid #EF4444;
+          padding: 12px 16px;
+          margin-bottom: 24px;
+          border-radius: 8px;
         }
         
         .error-message p {
-          color: #e74c3c;
+          color: #EF4444;
           margin: 0;
+          font-family: var(--font-body);
+          font-size: 14px;
         }
         
         .success-message {
           text-align: center;
-          padding: 40px 20px;
+          padding: 50px 20px;
         }
         
         .success-icon {
           font-size: 70px;
-          color: var(--primary-color);
-          margin-bottom: 20px;
+          color: var(--primary);
+          margin-bottom: 24px;
         }
         
         .success-message h2 {
           font-size: 2rem;
-          margin-bottom: 15px;
+          margin-bottom: 12px;
+          font-family: var(--font-heading);
         }
         
         .success-message p {
-          color: #666;
-          margin-bottom: 25px;
-          font-size: 1.1rem;
+          color: var(--text-secondary);
+          margin-bottom: 28px;
+          font-size: 1rem;
+          font-family: var(--font-body);
+        }
+
+        .btn-glass-outline {
+          padding: 12px 28px;
+          background: transparent;
+          border: 1px solid rgba(255, 255, 255, 0.15);
+          color: var(--text-primary);
+          border-radius: 10px;
+          font-weight: 600;
+          font-family: var(--font-body);
+          cursor: pointer;
+          transition: all 0.3s;
+        }
+
+        .btn-glass-outline:hover {
+          background: rgba(255, 255, 255, 0.05);
+          border-color: var(--primary);
+          color: var(--primary);
         }
         
         .map-section {
           margin-bottom: -7px;
+          border-top: 1px solid var(--dark-border);
         }
         
         .map-container {
@@ -554,19 +644,17 @@ const Contact = () => {
           }
           
           .contact-form-container {
-            padding: 30px;
+            padding: 28px;
           }
         }
         
         @media (max-width: 768px) {
           .page-hero {
-            padding: 100px 0 60px;
-            margin-bottom: 20px;
+            padding: 130px 0 60px;
           }
           
           .page-hero h1 {
-            font-size: 2.5rem;
-            padding-top: 40px;
+            font-size: 2.25rem;
           }
         }
       `}</style>

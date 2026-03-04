@@ -101,6 +101,9 @@ const Header = () => {
               </li>
             </ul>
           </nav>
+
+          {/* Overlay for mobile nav */}
+          {isNavOpen && <div className="nav-overlay" onClick={closeNav}></div>}
         </div>
       </div>
 
@@ -111,15 +114,18 @@ const Header = () => {
           left: 0;
           width: 100%;
           z-index: 1000;
-          padding: 15px 0;
-          transition: all 0.3s ease;
-          background-color: rgba(255, 255, 255, 0.85);
+          padding: 18px 0;
+          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+          background-color: transparent;
         }
 
         .header.scrolled {
-          background-color: rgba(255, 255, 255, 0.95);
-          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-          padding: 10px 0;
+          background-color: rgba(10, 10, 15, 0.85);
+          backdrop-filter: blur(20px);
+          -webkit-backdrop-filter: blur(20px);
+          border-bottom: 1px solid var(--dark-border);
+          box-shadow: 0 4px 30px rgba(0, 0, 0, 0.3);
+          padding: 12px 0;
         }
 
         .header-inner {
@@ -132,37 +138,48 @@ const Header = () => {
           display: flex;
           align-items: center;
           text-decoration: none;
-          color: var(--dark-color);
+          color: var(--text-primary);
           font-weight: 700;
           font-size: 24px;
+          font-family: var(--font-heading);
+          transition: color 0.3s;
         }
+
+        .logo a:hover {
+          color: var(--primary);
+        }
+
         .logo span {
           margin-left: 4px;
-          letter-spacing: 0.5px;
-          font-size: 20px;
+          letter-spacing: 2px;
+          font-size: 18px;
           font-weight: 700;
           display: inline-block;
           vertical-align: middle;
           line-height: normal;
+          font-family: var(--font-heading);
         }
+
         @media (max-width: 768px) {
           .logo span {
-            font-size: 16px;
+            font-size: 15px;
             margin-left: 2px;
-            letter-spacing: 0.4px;
-            display: inline-block;
-            vertical-align: middle;
-            line-height: normal;
+            letter-spacing: 1.5px;
           }
         }
 
         .logo-circle {
           height: 40px;
           margin-right: 10px;
+          transition: transform 0.3s ease;
+        }
+
+        .logo a:hover .logo-circle {
+          transform: rotate(10deg) scale(1.05);
         }
 
         .navbar {
-          transition: transform 0.4s ease;
+          transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .navbar ul {
@@ -170,70 +187,75 @@ const Header = () => {
           list-style: none;
           margin: 0;
           padding: 0;
+          gap: 8px;
         }
 
         .navbar li {
-          margin-left: 30px;
+          margin-left: 10px;
         }
 
         .navbar a {
-          color: var(--dark-color);
+          color: var(--text-secondary);
           text-decoration: none;
-          transition: color 0.3s;
-          position: relative;
           font-weight: 500;
           font-size: 14px;
-          transition: color 0.3s;
+          font-family: var(--font-body);
+          letter-spacing: 0.02em;
+          padding: 6px 14px;
+          border-radius: 6px;
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
           position: relative;
         }
 
-        .navbar Link {
-          color: var(--dark-color);
-          text-decoration: none;
-          font-weight: 500;
-          font-size: 16px;
-          transition: color 0.3s;
-          position: relative;
+        .navbar a:hover {
+          color: var(--text-primary);
+          background: rgba(255, 255, 255, 0.05);
         }
 
-        .navbar a:hover,
-        .navbar a.active,
-        .navbar Link:hover,
-        .navbar Link.active {
-          color: var(--primary-color);
+        .navbar a.active {
+          color: var(--primary);
+          background: var(--primary-glow);
         }
 
-        .navbar a.active:after,
-        .navbar a:hover:after,
-        .navbar Link.active:after,
-        .navbar Link:hover:after {
+        .navbar a:after {
           content: "";
           position: absolute;
-          width: 100%;
+          width: 0;
           height: 2px;
-          background-color: var(--primary-color);
-          bottom: -5px;
-          left: 0;
-          transform: scaleX(1);
-          transition: transform 0.3s;
+          background: var(--primary);
+          bottom: 0;
+          left: 50%;
+          transform: translateX(-50%);
+          transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+          border-radius: 1px;
+        }
+
+        .navbar a:hover:after,
+        .navbar a.active:after {
+          width: 60%;
         }
 
         .hamburger {
           display: none;
           flex-direction: column;
           justify-content: space-between;
-          width: 30px;
-          height: 21px;
+          width: 28px;
+          height: 20px;
           cursor: pointer;
           z-index: 1002;
+          padding: 4px;
         }
 
         .hamburger span {
           display: block;
-          height: 3px;
-          background-color: var(--dark-color);
-          border-radius: 3px;
+          height: 2px;
+          background-color: var(--text-primary);
+          border-radius: 2px;
           transition: all 0.3s ease;
+        }
+
+        .hamburger.active span {
+          background-color: var(--primary);
         }
 
         .hamburger.active span:nth-child(1) {
@@ -248,9 +270,26 @@ const Header = () => {
           transform: translateY(-9px) rotate(-45deg);
         }
 
+        .nav-overlay {
+          display: none;
+        }
+
         @media (max-width: 991px) {
           .hamburger {
             display: flex;
+          }
+
+          .nav-overlay {
+            display: block;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+            backdrop-filter: blur(4px);
+            -webkit-backdrop-filter: blur(4px);
           }
 
           .navbar {
@@ -258,12 +297,14 @@ const Header = () => {
             top: 0;
             right: 0;
             height: 100vh;
-            width: 250px;
-            background-color: white;
-            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
-            padding: 80px 20px 40px;
+            width: 280px;
+            background: var(--dark-surface);
+            border-left: 1px solid var(--dark-border);
+            box-shadow: -10px 0 40px rgba(0, 0, 0, 0.4);
+            padding: 100px 30px 40px;
             transform: translateX(100%);
             overflow-y: auto;
+            z-index: 1001;
           }
 
           .navbar.open {
@@ -272,10 +313,31 @@ const Header = () => {
 
           .navbar ul {
             flex-direction: column;
+            gap: 4px;
           }
 
           .navbar li {
-            margin: 15px 0;
+            margin: 0;
+          }
+
+          .navbar a {
+            display: block;
+            padding: 12px 16px;
+            font-size: 16px;
+            border-radius: 8px;
+          }
+
+          .navbar a:hover {
+            background: rgba(255, 255, 255, 0.05);
+          }
+
+          .navbar a.active {
+            background: var(--primary-glow);
+            border-left: 3px solid var(--primary);
+          }
+
+          .navbar a:after {
+            display: none;
           }
         }
       `}</style>

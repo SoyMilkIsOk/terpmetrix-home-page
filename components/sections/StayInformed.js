@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Image from "next/image";
 
 const StayInformed = () => {
   const [email, setEmail] = useState("");
@@ -31,12 +30,14 @@ const StayInformed = () => {
     } catch (error) {
       console.error(error);
       setLoading(false);
-      // Optionally handle error state here
     }
   };
 
   return (
     <section className="stay-informed-section">
+      {/* Background glow */}
+      <div className="bg-glow"></div>
+      
       <div className="container">
         <div className="row align-items-center">
           <div className="col-lg-6" data-aos="fade-right">
@@ -86,20 +87,7 @@ const StayInformed = () => {
 
           <div className="col-lg-6" data-aos="fade-left" data-aos-delay="200">
             <div className="newsletter-wrapper">
-              <div className="newsletter-image-container">
-                <Image
-                  width={0}
-                  height={0}
-                  sizes="100vw"
-                  style={{ width: "100%", height: "auto", bottom: 0 }}
-                  src="/images/newsletter-img.jpg"
-                  alt="Stay Informed"
-                  className="newsletter-image"
-                />
-              </div>
               <div className="newsletter-form-container">
-
-
                 {!submitted ? (
                   <form
                     onSubmit={handleSubmit}
@@ -111,7 +99,12 @@ const StayInformed = () => {
                     <div hidden>
                       <input name="bot-field" />
                     </div>
-                    <h3>Subscribe to Our Newsletter</h3>
+                    <div className="form-header">
+                      <div className="form-icon">
+                        <i className="fas fa-envelope"></i>
+                      </div>
+                      <h3>Subscribe to Our Newsletter</h3>
+                    </div>
                     <p>
                       No spam, just the latest releases and tips, interesting
                       articles, and exclusive interviews in your inbox.
@@ -121,7 +114,7 @@ const StayInformed = () => {
                       <input
                         type="email"
                         className="form-control"
-                        placeholder="Enter your email"
+                        placeholder="Enter your email address"
                         required
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
@@ -130,7 +123,7 @@ const StayInformed = () => {
 
                     <button
                       type="submit"
-                      className="btn btn-primary btn-block"
+                      className="btn btn-primary btn-block submit-btn"
                       disabled={loading}
                     >
                       {loading ? (
@@ -139,7 +132,7 @@ const StayInformed = () => {
                           Subscribing...
                         </span>
                       ) : (
-                        "Subscribe Now"
+                        <>Subscribe Now <i className="fas fa-arrow-right"></i></>
                       )}
                     </button>
 
@@ -168,7 +161,7 @@ const StayInformed = () => {
                       You&apos;ve successfully subscribed to our newsletter.
                     </p>
                     <button
-                      className="btn btn-outline-primary"
+                      className="btn btn-glass-outline"
                       onClick={() => setSubmitted(false)}
                     >
                       Subscribe Another Email
@@ -183,31 +176,29 @@ const StayInformed = () => {
 
       <style jsx>{`
         .stay-informed-section {
-          background-color: #f9f9f9;
+          background-color: var(--dark-surface);
           position: relative;
           overflow: hidden;
         }
 
-        .stay-informed-section:before {
-          content: "";
+        .bg-glow {
           position: absolute;
-          top: 0;
-          right: 0;
-          width: 300px;
-          height: 300px;
-          background: radial-gradient(
-            circle,
-            rgba(58, 158, 66, 0.1) 0%,
-            rgba(58, 158, 66, 0) 70%
-          );
+          top: 50%;
+          right: -100px;
+          width: 400px;
+          height: 400px;
+          background: radial-gradient(circle, var(--primary-glow) 0%, transparent 70%);
           border-radius: 50%;
-          z-index: 1;
+          pointer-events: none;
+          transform: translateY(-50%);
         }
 
         .lead {
-          font-size: 1.2rem;
-          margin-bottom: 30px;
-          color: #555;
+          font-size: 1.1rem;
+          margin-bottom: 16px;
+          color: var(--text-secondary);
+          font-family: var(--font-body);
+          line-height: 1.7;
         }
 
         .features {
@@ -216,121 +207,219 @@ const StayInformed = () => {
 
         .feature-item {
           display: flex;
-          margin-bottom: 25px;
+          margin-bottom: 24px;
+          padding: 12px;
+          border-radius: 12px;
+          transition: all 0.3s;
+        }
+
+        .feature-item:hover {
+          background: rgba(255, 255, 255, 0.02);
         }
 
         .feature-icon {
-          width: 50px;
-          height: 50px;
-          min-width: 50px;
-          border-radius: 50%;
-          background-color: rgba(58, 158, 66, 0.1);
+          width: 48px;
+          height: 48px;
+          min-width: 48px;
+          border-radius: 12px;
+          background: var(--primary-glow);
           display: flex;
           align-items: center;
           justify-content: center;
-          margin-right: 20px;
-          color: var(--primary-color);
-          font-size: 20px;
+          margin-right: 18px;
+          color: var(--primary);
+          font-size: 18px;
           transition: all 0.3s;
         }
 
         .feature-item:hover .feature-icon {
-          background-color: var(--primary-color);
+          background: var(--primary);
           color: white;
-          transform: scale(1.1);
+          transform: scale(1.05);
         }
 
         .feature-text h4 {
-          font-size: 18px;
-          margin-bottom: 8px;
+          font-size: 16px;
+          margin-bottom: 6px;
+          color: var(--text-primary);
+          font-family: var(--font-heading);
+          font-weight: 600;
+        }
+
+        .feature-text h4:after {
+          display: none;
         }
 
         .feature-text p {
-          color: #666;
+          color: var(--text-secondary);
           margin-bottom: 0;
+          font-size: 14px;
+          line-height: 1.6;
+          font-family: var(--font-body);
         }
 
         .newsletter-wrapper {
           position: relative;
-          border-radius: 10px;
-          overflow: hidden;
-          box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .newsletter-image-container {
-          position: relative;
-          height: 200px;
-          overflow: hidden;
-        }
-
-        .newsletter-image {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          transition: transform 0.5s ease;
-        }
-
-        .newsletter-wrapper:hover .newsletter-image {
-          transform: scale(1.1);
+          z-index: 2;
         }
 
         .newsletter-form-container {
-          background-color: white;
-          padding: 30px;
+          background: var(--dark-surface-2);
+          border: 1px solid var(--dark-border);
+          border-radius: 16px;
+          padding: 36px;
+          backdrop-filter: blur(20px);
+          -webkit-backdrop-filter: blur(20px);
+        }
+
+        .form-header {
+          display: flex;
+          align-items: center;
+          gap: 14px;
+          margin-bottom: 12px;
+        }
+
+        .form-icon {
+          width: 44px;
+          height: 44px;
+          border-radius: 10px;
+          background: var(--primary-glow);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: var(--primary);
+          font-size: 18px;
         }
 
         .newsletter-form h3 {
-          font-size: 22px;
-          margin-bottom: 15px;
+          font-size: 20px;
+          margin-bottom: 0;
+          color: var(--text-primary);
+          font-family: var(--font-heading);
+          font-weight: 600;
         }
 
         .newsletter-form p {
-          color: #666;
-          margin-bottom: 20px;
+          color: var(--text-secondary);
+          margin-bottom: 24px;
+          font-size: 14px;
+          line-height: 1.6;
+          font-family: var(--font-body);
         }
 
         .form-control {
-          height: 50px;
-          margin-bottom: 20px;
-          border: 1px solid #ddd;
-          border-radius: 5px;
+          height: 52px;
+          margin-bottom: 16px;
+          border: 1px solid var(--dark-border);
+          border-radius: 10px;
+          background: rgba(255, 255, 255, 0.04);
+          color: var(--text-primary);
+          font-size: 15px;
+          padding: 0 16px;
+          font-family: var(--font-body);
+          transition: all 0.3s;
+          width: 100%;
+        }
+
+        .form-control:focus {
+          background: rgba(255, 255, 255, 0.06);
+          outline: none;
+          border-color: rgba(16, 185, 129, 0.4);
+          box-shadow: 0 0 0 3px var(--primary-glow);
+        }
+
+        .form-control::placeholder {
+          color: var(--text-muted);
+        }
+
+        .submit-btn {
+          width: 100%;
+          padding: 14px;
+          font-weight: 600;
+          font-size: 15px;
+          border-radius: 10px;
+          font-family: var(--font-body);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 8px;
+        }
+
+        .submit-btn i {
+          font-size: 12px;
+          transition: transform 0.3s;
+        }
+
+        .submit-btn:hover i {
+          transform: translateX(4px);
         }
 
         .form-check-input {
-          height: 30px;
+          height: 18px;
+          width: 18px;
+          background: rgba(255, 255, 255, 0.04);
+          border: 1px solid var(--dark-border);
+          border-radius: 4px;
+          cursor: pointer;
+        }
+
+        .form-check-input:checked {
+          background-color: var(--primary);
+          border-color: var(--primary);
         }
 
         .form-check-label {
           margin-left: 10px;
-          font-size: 16px;
-          color: #666;
-          
+          font-size: 13px;
+          color: var(--text-muted);
+          font-family: var(--font-body);
         }
 
         .form-check-label a {
-          color: var(--primary-color);
+          color: var(--primary);
           text-decoration: none;
         }
 
         .success-message {
           text-align: center;
-          padding: 30px 20px;
+          padding: 40px 20px;
         }
 
         .success-icon {
           font-size: 60px;
-          color: var(--primary-color);
+          color: var(--primary);
           margin-bottom: 20px;
         }
 
         .success-message h3 {
-          font-size: 24px;
-          margin-bottom: 15px;
+          font-size: 22px;
+          margin-bottom: 12px;
+          color: var(--text-primary);
+          font-family: var(--font-heading);
         }
 
         .success-message p {
-          color: #666;
-          margin-bottom: 20px;
+          color: var(--text-secondary);
+          margin-bottom: 24px;
+          font-family: var(--font-body);
+        }
+
+        .btn-glass-outline {
+          padding: 12px 28px;
+          background: transparent;
+          border: 1px solid rgba(255, 255, 255, 0.15);
+          color: var(--text-primary);
+          border-radius: 10px;
+          font-weight: 600;
+          font-family: var(--font-body);
+          cursor: pointer;
+          transition: all 0.3s;
+        }
+
+        .btn-glass-outline:hover {
+          background: rgba(255, 255, 255, 0.05);
+          border-color: var(--primary);
+          color: var(--primary);
         }
 
         @media (max-width: 991px) {
