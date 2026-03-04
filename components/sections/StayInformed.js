@@ -41,10 +41,9 @@ const StayInformed = () => {
         <div className="row align-items-center">
           <div className="col-lg-6" data-aos="fade-right">
             <div className="info-content">
-              <h2 className="section-heading">Stay Informed</h2>
+              <h2 className="section-heading">Stay in the Loop</h2>
               <p className="lead">
-                Join our newsletter to receive the latest updates on our
-                technology, products, and innovations in the cannabis industry.
+                Get the latest on new products, project launches, and insights from the Terpmetrix team, delivered straight to your inbox.
               </p>
 
               <div className="features">
@@ -53,8 +52,8 @@ const StayInformed = () => {
                     <i className="fas fa-bell"></i>
                   </div>
                   <div className="feature-text">
-                    <h4>Product Announcements</h4>
-                    <p>Be the first to know about new products and features.</p>
+                    <h4>Product Drops & Updates</h4>
+                    <p>Be the first to hear about new launches and feature releases.</p>
                   </div>
                 </div>
 
@@ -63,9 +62,9 @@ const StayInformed = () => {
                     <i className="fas fa-flask"></i>
                   </div>
                   <div className="feature-text">
-                    <h4>Research Insights</h4>
+                    <h4>Industry Insights</h4>
                     <p>
-                      Get access to our latest findings and industry research.
+                      Curated news and perspectives from across the cannabis technology space.
                     </p>
                   </div>
                 </div>
@@ -75,9 +74,9 @@ const StayInformed = () => {
                     <i className="fas fa-calendar-alt"></i>
                   </div>
                   <div className="feature-text">
-                    <h4>Event Invitations</h4>
+                    <h4>Events & Community</h4>
                     <p>
-                      Exclusive invitations to webinars and industry events.
+                      Invitations to events, pop-ups, and early-access opportunities.
                     </p>
                   </div>
                 </div>

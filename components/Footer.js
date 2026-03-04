@@ -21,8 +21,7 @@ const Footer = () => {
                 <span>TERPMETRIX</span>
               </Link>
               <p className="mt-4">
-                Pioneering the future of cannabis technology with innovative
-                solutions for growers, processors, and consumers.
+                Building smarter tools and services for the modern cannabis industry, from precision accessories to professional digital solutions.
               </p>
               <div className="social-links mt-4">
                 <a

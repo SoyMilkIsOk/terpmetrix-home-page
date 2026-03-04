@@ -7,7 +7,7 @@ const ProductDevelopment = () => {
       id: 1,
       title: "TerpFocus",
       description:
-        "TerpFocus is a premier cannabis photography service dedicated to capturing the essence of high-quality flower, concentrates, and cannabis culture through stunning macro and lifestyle photography.",
+        "TerpFocus delivers professional cannabis photography, from detailed macro shots of flower and concentrates to lifestyle imagery that captures your brand's identity. Built for dispensaries, processors, and brands that demand visual excellence.",
       image: "/images/terpfocus.jpg",
       link: "/projects#terpfocus",
     },
@@ -15,7 +15,7 @@ const ProductDevelopment = () => {
       id: 2,
       title: "TerpScoops",
       description:
-        "TerpScoops are the ultimate precision tool for dosing and packing cannabis. Designed for connoisseurs and detail-oriented consumers, it ensures a clean, consistent experience every time.",
+        "With thousands of units sold, TerpScoops has become the go-to precision dosing and packing tool for quality-conscious cannabis consumers. Compact, durable, and ergonomically crafted for consistency and ease of use.",
       image: "/images/terpscoops.jpg",
       link: "/projects#terpscoops",
     },
@@ -23,7 +23,7 @@ const ProductDevelopment = () => {
       id: 3,
       title: "TerpForge",
       description:
-        "TerpForge is a cannabis-focused web development and digital branding agency, helping dispensaries, brands, and tech startups build high-performance websites optimized for growth.",
+        "TerpForge is a cannabis-industry web development and digital branding studio. We help dispensaries, cultivators, and ancillary brands build high-performance, compliance-ready websites with a focus on conversion, SEO, and seamless user experience.",
       image: "/images/terpforge.jpg",
       link: "/projects#terpforge",
     },
@@ -34,10 +34,10 @@ const ProductDevelopment = () => {
       <div className="container">
         <div className="row justify-content-center">
           <div className="col-lg-8 text-center" data-aos="fade-up">
-            <h2 className="section-heading">Product Development</h2>
+            <h2 className="section-heading">Our Ecosystem</h2>
             <p className="section-subheading">
-              We&apos;re developing innovative solutions to revolutionize how
-              cannabis compounds are analyzed, tracked, and utilized.
+              From hands-on accessories to digital services, each Terpmetrix product and service
+              is designed to solve a real need in the cannabis space.
             </p>
           </div>
         </div>

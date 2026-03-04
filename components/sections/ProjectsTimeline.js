@@ -2,93 +2,35 @@ import Link from 'next/link';
 import { useState } from 'react';
 
 const ProjectsTimeline = () => {
-  const [activeTab, setActiveTab] = useState(2023);
+  const [activeTab, setActiveTab] = useState(2024);
   
   const timelineData = {
-    2022: [
-      { 
-        id: 1, 
-        title: "Company Founding", 
-        date: "February 2022", 
-        description: "Terpmetrix was founded with a mission to bring advanced technology to the cannabis industry." 
-      },
-      { 
-        id: 2, 
-        title: "Seed Funding", 
-        date: "May 2022", 
-        description: "Successfully secured $1.5M in seed funding to develop our initial prototypes." 
-      },
-      { 
-        id: 3, 
-        title: "R&D Team Formation", 
-        date: "August 2022", 
-        description: "Assembled a team of scientists and engineers to begin product development." 
-      }
-    ],
-    2023: [
-      { 
-        id: 1, 
-        title: "Prototype Development", 
-        date: "January 2023", 
-        description: "First prototype of our Terpene Analysis Kit completed and tested with select partners." 
-      },
-      { 
-        id: 2, 
-        title: "TerpTracker™ Alpha", 
-        date: "April 2023", 
-        description: "Alpha version of our software platform launched with key cultivation partners." 
-      },
-      { 
-        id: 3, 
-        title: "Series A Funding", 
-        date: "July 2023", 
-        description: "Raised $5M in Series A funding to scale operations and accelerate product development."
-      },
-      { 
-        id: 4, 
-        title: "Beta Testing Program", 
-        date: "October 2023", 
-        description: "Launched beta testing program with 20 licensed cannabis producers across three states." 
-      }
-    ],
     2024: [
       { 
         id: 1, 
-        title: "Product Launch", 
-        date: "March 2024", 
-        description: "Official launch of Terpene Analysis Kit and TerpTracker™ Software at CannaTech 2024." 
+        title: "Company Founded", 
+        date: "2024", 
+        description: "Terpmetrix launched with a mission to bring terpene data and analytics to the state of Colorado, aiming to make cannabis compound information more accessible and actionable for consumers and operators alike." 
       },
       { 
         id: 2, 
-        title: "Consumer App Development", 
-        date: "June 2024", 
-        description: "Started development of our consumer-facing mobile application." 
-      },
-      { 
-        id: 3, 
-        title: "Expansion to Canada", 
-        date: "September 2024", 
-        description: "Expanded operations to the Canadian market with key distribution partnerships." 
+        title: "TerpScoops Launched", 
+        date: "2024", 
+        description: "First product released: a precision dosing and packing tool, now available in eight distinct colorways." 
       }
     ],
     2025: [
       { 
         id: 1, 
-        title: "Consumer App Launch", 
-        date: "January 2025", 
-        description: "Launch of our consumer mobile application for iOS and Android." 
+        title: "TerpFocus Launched", 
+        date: "2025", 
+        description: "Professional cannabis photography service launched, serving dispensaries, cultivators, and brands." 
       },
       { 
         id: 2, 
-        title: "International Expansion", 
-        date: "Current", 
-        description: "Exploring partnerships in European markets with focus on Germany and Portugal." 
-      },
-      { 
-        id: 3, 
-        title: "Next Generation R&D", 
-        date: "Ongoing", 
-        description: "Research and development for next generation of terpene analysis technology." 
+        title: "TerpForge Launched", 
+        date: "2025", 
+        description: "Cannabis-focused web development studio opened for client projects." 
       }
     ]
   };
@@ -98,9 +40,9 @@ const ProjectsTimeline = () => {
       <div className="container">
         <div className="row justify-content-center">
           <div className="col-lg-8 text-center" data-aos="fade-up">
-            <h2 className="section-heading">Our Journey</h2>
+            <h2 className="section-heading">Milestones & Roadmap</h2>
             <p className="section-subheading">
-              Tracking our progress from concept to market-leading cannabis technology solutions.
+              Key milestones in Terpmetrix's growth, from founding through product launches and ongoing development.
             </p>
           </div>
         </div>

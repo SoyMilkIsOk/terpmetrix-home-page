@@ -8,10 +8,10 @@ const Intro = () => {
         <div className="row align-items-center">
           <div className="col-lg-6" data-aos="fade-right">
             <div className="intro-content">
-              <h1>Pioneering the Future of Cannabis Technology</h1>
+              <h1>Advancing Cannabis Through Innovation & Technology</h1>
               <p className="lead">
-                At Terpmetrix, we&apos;re revolutionizing the cannabis industry through cutting-edge technology, 
-                data analytics, and innovative product development.
+                Terpmetrix builds purpose-driven tools, services, and digital solutions that elevate the cannabis experience, 
+                from precision accessories to professional-grade photography and industry-focused web development.
               </p>
               <div className="intro-buttons">
                 <Link href="/projects" className="btn btn-primary btn-lg">
@@ -25,7 +25,7 @@ const Intro = () => {
           </div>
           <div className="col-lg-6" data-aos="fade-left" data-aos-delay="200">
             <div className="intro-image">
-              <Image width={1000} height={500} src="/images/hero-image.png" alt="Cannabis Technology" className="img-fluid" />
+              <Image width={1000} height={500} src="/images/hero.png" alt="Cannabis Technology" className="img-fluid" />
             </div>
           </div>
         </div>

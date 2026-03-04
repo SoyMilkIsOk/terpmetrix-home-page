@@ -19,13 +19,13 @@ const Projects = () => {
       id: "terpscoops",
       title: "TerpScoops",
       description:
-        "TerpScoops are the ultimate precision tool for dosing and packing cannabis. Designed for connoisseurs and detail-oriented consumers, it ensures a clean, consistent experience every time. Its ergonomic design and durable acrylic construction make it a must-have accessory for modern cannabis users.",
+        "TerpScoops are a precision dosing and packing accessory engineered for consistency and ease of use. With thousands of units sold, the ergonomic form factor and durable injection-molded acrylic construction deliver a clean, reliable experience, whether you're loading a bowl, packing a cone, or measuring your preferred dose. Purpose-built for consumers who value quality and intention in their cannabis ritual.",
       features: [
-        "Ergonomic and stylish design",
-        "Compact size fits in most grinders",
-        "Made from durable injection-molded acrylic",
-        "Available in eight vibrant colors",
-        "Perfectly measures 'one terp' for consistent dosing",
+        "Ergonomic design for comfortable, one-handed use",
+        "Compact form factor that fits inside most standard grinders",
+        "Constructed from durable, injection-molded acrylic",
+        "Available in eight distinct colorways",
+        "Standardized 'one terp' measure for repeatable dosing",
       ],
       image: "/images/terpscoops-large.jpg",
       status: "Available Now",
@@ -36,13 +36,13 @@ const Projects = () => {
       id: "terpfocus",
       title: "TerpFocus",
       description:
-        "TerpFocus is a premier cannabis photography service dedicated to capturing the essence of high-quality flower, concentrates, and cannabis culture. Our expert photographers use cutting-edge macro photography techniques to showcase products with stunning detail and clarity.",
+        "TerpFocus is a professional cannabis photography studio specializing in high-resolution macro and lifestyle imagery. We work with dispensaries, cultivators, processors, and brands to produce visual content that communicates product quality, brand identity, and market differentiation, from trichome-level macro detail to full campaign-ready lifestyle shoots.",
       features: [
         "High-resolution macro and lifestyle cannabis photography",
-        "Professional lighting and editing for premium visuals",
-        "Custom shoots for brands, dispensaries, and processors",
-        "Fast turnaround and cloud delivery",
-        "Available for product, marketing, and event photography",
+        "Studio-grade lighting, color grading, and post-production",
+        "Custom sessions for brands, dispensaries, cultivators, and processors",
+        "Rapid turnaround with secure cloud delivery",
+        "Product, marketing, campaign, and event photography services",
       ],
       image: "/images/terpfocus-large.jpg",
       status: "Available for Booking",
@@ -53,13 +53,13 @@ const Projects = () => {
       id: "terpforge",
       title: "TerpForge",
       description:
-        "TerpForge is a cannabis-focused web development and digital branding agency, helping dispensaries, brands, and tech startups build high-performance websites. We specialize in e-commerce, SEO optimization, and seamless user experiences tailored to the cannabis industry.",
+        "TerpForge is a cannabis-industry web development and digital branding studio. We partner with dispensaries, cultivators, ancillary brands, and cannabis tech companies to build conversion-optimized, compliant websites that perform. Our approach combines clean UI/UX design, technical SEO, and deep industry knowledge to drive real business outcomes.",
       features: [
-        "Custom-built websites optimized for cannabis businesses",
-        "SEO and performance-driven design",
-        "E-commerce solutions with compliance in mind",
-        "Integrated branding, UI/UX, and conversion optimization",
-        "Ongoing support and maintenance plans",
+        "Custom-built, responsive websites tailored for cannabis businesses",
+        "Technical SEO strategy and performance optimization",
+        "E-commerce solutions with regulatory compliance baked in",
+        "End-to-end branding, UI/UX design, and conversion rate optimization",
+        "Ongoing support, maintenance, and growth retainer packages",
       ],
       image: "/images/terpforge-large.jpg",
       status: "Accepting New Clients",
@@ -76,9 +76,9 @@ const Projects = () => {
         <div className="container">
           <div className="row">
             <div className="col-12 text-center">
-              <h1>What We Do</h1>
+              <h1>What We Build</h1>
               <p className="lead">
-                Explore our innovative cannabis technology solutions
+                Products and services designed for the modern cannabis industry
               </p>
             </div>
           </div>
@@ -153,10 +153,9 @@ const Projects = () => {
         <div className="container">
           <div className="row justify-content-center">
             <div className="col-lg-8 text-center">
-              <h2>Ready to Transform Your Cannabis Operations?</h2>
+              <h2>Let's Build Something Together</h2>
               <p>
-                Contact us today to learn how our technology can help optimize
-                your cultivation, processing, and product development.
+                Whether you need a precision tool, professional photography, or a high-performance website, we're here to help elevate your cannabis brand.
               </p>
               <Link href="/contact" passHref>
                 <button className="btn btn-primary custom-contact-button">
