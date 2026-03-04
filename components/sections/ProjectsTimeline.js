@@ -42,7 +42,7 @@ const ProjectsTimeline = () => {
           <div className="col-lg-8 text-center" data-aos="fade-up">
             <h2 className="section-heading">Milestones & Roadmap</h2>
             <p className="section-subheading">
-              Key milestones in Terpmetrix's growth, from founding through product launches and ongoing development.
+              Key milestones in Terpmetrix&apos;s growth, from founding through product launches and ongoing development.
             </p>
           </div>
         </div>

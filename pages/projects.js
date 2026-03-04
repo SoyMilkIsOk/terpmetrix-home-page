@@ -156,9 +156,9 @@ const Projects = () => {
         <div className="container">
           <div className="row justify-content-center">
             <div className="col-lg-8 text-center">
-              <h2>Let's Build Something Together</h2>
+              <h2>Let&apos;s Build Something Together</h2>
               <p>
-                Whether you need a precision tool, professional photography, or a high-performance website, we're here to help elevate your cannabis brand.
+                Whether you need a precision tool, professional photography, or a high-performance website, we&apos;re here to help elevate your cannabis brand.
               </p>
               <Link href="/contact" className="btn btn-primary btn-lg cta-btn">
                 Contact Us
