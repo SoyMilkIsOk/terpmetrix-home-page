@@ -66,6 +66,22 @@ const Projects = () => {
       link: "https://calendly.com/terps-terpmetrix/quote-call",
       link_text: "Schedule a Call",
     },
+    {
+      id: "terptier",
+      title: "TerpTier",
+      description:
+        "TerpTier is a community-driven cannabis discovery platform where enthusiasts rank, review, and celebrate top producers and strains nationwide. Featuring live leaderboards, weekly drop tracking, and a three-part strain scoring system, TerpTier surfaces the best in cannabis through authentic peer recommendations, not marketing spend.",
+      features: [
+        "Live producer rankings powered by real-time community votes",
+        "Weekly drop tracking with upcoming and past release history",
+        "Three-part strain review system covering flavor, effect, and smoke quality",
+        "Rich producer profiles with strain cards and community tasting notes",
+      ],
+      image: "/images/terptier-large.jpg",
+      status: "Live Now",
+      link: "https://terptier.com",
+      link_text: "Explore TerpTier",
+    },
   ];
 
   return (

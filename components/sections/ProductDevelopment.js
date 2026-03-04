@@ -30,6 +30,15 @@ const ProductDevelopment = () => {
       link: "/projects#terpforge",
       icon: "fas fa-code",
     },
+    {
+      id: 4,
+      title: "TerpTier",
+      description:
+        "TerpTier is a community-powered cannabis discovery platform. Live producer rankings, weekly drop alerts, and peer-driven strain reviews help enthusiasts find top-tier flower and hash from coast to coast.",
+      image: "/images/terptier.jpg",
+      link: "/projects#terptier",
+      icon: "fas fa-trophy",
+    },
   ];
 
   return (
@@ -119,7 +128,7 @@ const ProductDevelopment = () => {
 
         .products-grid {
           display: grid;
-          grid-template-columns: repeat(3, 1fr);
+          grid-template-columns: repeat(4, 1fr);
           gap: 28px;
           margin-top: 48px;
         }

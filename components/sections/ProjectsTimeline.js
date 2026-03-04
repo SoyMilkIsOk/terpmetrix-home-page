@@ -32,6 +32,20 @@ const ProjectsTimeline = () => {
         date: "2025", 
         description: "Cannabis-focused web development studio opened for client projects." 
       }
+    ],
+    2026: [
+      { 
+        id: 1, 
+        title: "TerpTier Launched", 
+        date: "2026", 
+        description: "Community-driven cannabis discovery platform launched, featuring live producer rankings, weekly drop tracking, and peer-powered strain reviews across multiple states." 
+      },
+      { 
+        id: 2, 
+        title: "More Projects Coming Soon", 
+        date: "2026", 
+        description: "New products and services are in active development. Stay tuned for more announcements as we continue expanding the Terpmetrix ecosystem." 
+      }
     ]
   };
   
