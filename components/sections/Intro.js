@@ -1,13 +1,52 @@
+import { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
 const Intro = () => {
+  const [scrollY, setScrollY] = useState(0);
+  const [mousePos, setMousePos] = useState({ x: -1000, y: -1000 });
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+    };
+
+    const handleMouseMove = (e) => {
+      if (!sectionRef.current) return;
+      const rect = sectionRef.current.getBoundingClientRect();
+      setMousePos({ 
+        x: e.clientX - rect.left, 
+        y: e.clientY - rect.top 
+      });
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("mousemove", handleMouseMove, { passive: true });
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("mousemove", handleMouseMove);
+    };
+  }, []);
+
   return (
-    <section className="intro-section">
+    <section className="intro-section" ref={sectionRef}>
       {/* Animated background orbs */}
       <div className="bg-orb orb-1"></div>
       <div className="bg-orb orb-2"></div>
       <div className="bg-orb orb-3"></div>
+
+      {/* Glowing Grid with Gravity Well */}
+      <div 
+        className="grid-wrapper"
+        style={{
+          "--mouse-x": `${mousePos.x}px`,
+          "--mouse-y": `${mousePos.y}px`
+        }}
+      >
+        <div className="grid-bg"></div>
+        <div className="mouse-glow"></div>
+      </div>
       
       <div className="container">
         <div className="row align-items-center">
@@ -29,8 +68,15 @@ const Intro = () => {
               </div>
             </div>
           </div>
-          <div className="col-lg-6" data-aos="fade-left" data-aos-delay="200">
-            <div className="intro-image">
+          <div className="col-lg-6">
+            <div 
+              className="intro-image"
+              style={{
+                "--scroll-y": scrollY,
+                "--glow-opacity": Math.min(0.7, 0.15 + scrollY * 0.0015),
+                "--glow-spread": `${40 + scrollY * 0.2}px`,
+              }}
+            >
               <Image width={1000} height={500} src="/images/hero.png" alt="Cannabis Technology" className="img-fluid" />
             </div>
           </div>
@@ -86,6 +132,49 @@ const Intro = () => {
           0%, 100% { transform: translateY(0) scale(1); }
           50% { transform: translateY(-30px) scale(1.05); }
         }
+
+        /* Grid Background with Gravity Well Effect */
+        .grid-wrapper {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          pointer-events: none;
+          z-index: 0;
+        }
+
+        .grid-bg {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          background-image: 
+            linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+          background-size: 60px 60px;
+          mask-image: radial-gradient(
+            circle 500px at var(--mouse-x, 50%) var(--mouse-y, 50%),
+            rgba(0, 0, 0, 1) 0%,
+            transparent 100%
+          );
+          -webkit-mask-image: radial-gradient(
+            circle 500px at var(--mouse-x, 50%) var(--mouse-y, 50%),
+            rgba(0, 0, 0, 1) 0%,
+            transparent 100%
+          );
+        }
+
+        .mouse-glow {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          background: radial-gradient(
+            circle 400px at var(--mouse-x, 50%) var(--mouse-y, 50%),
+            rgba(16, 185, 129, 0.08) 0%,
+            transparent 100%
+          );
+        }
+
         
         .badge-tag {
           display: inline-block;
@@ -162,13 +251,15 @@ const Intro = () => {
           border-radius: 16px;
           overflow: hidden;
           border: 1px solid var(--dark-border);
-          box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 40px var(--primary-glow);
-          transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+          transform: translateY(calc(var(--scroll-y, 0) * 0.014px));
+          box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4), 0 0 var(--glow-spread, 40px) rgba(16, 185, 129, var(--glow-opacity, 0.15));
+          transition: transform 0.2s cubic-bezier(0.1, 0, 0.1, 1), box-shadow 0.2s cubic-bezier(0.1, 0, 0.1, 1);
+          will-change: transform, box-shadow;
         }
         
         .intro-image:hover {
-          transform: translateY(-8px);
-          box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5), 0 0 60px var(--primary-glow);
+          transform: translateY(calc((var(--scroll-y, 0) * 0.014px) - 8px));
+          box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5), 0 0 calc(var(--glow-spread, 40px) + 20px) rgba(16, 185, 129, calc(var(--glow-opacity, 0.15) + 0.2));
         }
         
         @media (max-width: 991px) {
@@ -206,10 +297,12 @@ const Intro = () => {
           
           .intro-buttons {
             flex-direction: column;
+            align-items: center;
           }
 
           .intro-buttons :global(.btn) {
-            width: 100%;
+            width: auto;
+            min-width: 220px;
             text-align: center;
           }
         }

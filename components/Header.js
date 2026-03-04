@@ -28,6 +28,21 @@ const Header = () => {
     setIsNavOpen(!isNavOpen);
   };
 
+  useEffect(() => {
+    if (isNavOpen) {
+      document.body.style.overflow = "hidden";
+      document.documentElement.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
+    }
+
+    return () => {
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
+    };
+  }, [isNavOpen]);
+
   const closeNav = () => {
     setIsNavOpen(false);
   };
@@ -47,9 +62,11 @@ const Header = () => {
             className={`hamburger ${isNavOpen ? "active" : ""}`}
             onClick={toggleNav}
           >
-            <span></span>
-            <span></span>
-            <span></span>
+            <svg viewBox="0 0 100 100" width="30" height="30" fill="none" stroke="currentColor" strokeWidth="6" strokeLinecap="round">
+              <path className="line top" d="M 20 30 L 80 30" />
+              <path className="line middle" d="M 20 50 L 80 50" />
+              <path className="line bottom" d="M 20 70 L 80 70" />
+            </svg>
           </div>
 
           <nav className={`navbar ${isNavOpen ? "open" : ""}`}>
@@ -237,37 +254,46 @@ const Header = () => {
 
         .hamburger {
           display: none;
-          flex-direction: column;
-          justify-content: space-between;
-          width: 28px;
-          height: 20px;
           cursor: pointer;
           z-index: 1002;
-          padding: 4px;
+          color: var(--text-primary);
+          font-size: 0;
+          align-items: center;
+          justify-content: center;
         }
 
-        .hamburger span {
-          display: block;
-          height: 2px;
-          background-color: var(--text-primary);
-          border-radius: 2px;
-          transition: all 0.3s ease;
+        .hamburger.active {
+          color: var(--primary);
         }
 
-        .hamburger.active span {
-          background-color: var(--primary);
+        .hamburger .line {
+          transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease;
+          stroke: currentColor;
         }
 
-        .hamburger.active span:nth-child(1) {
-          transform: translateY(9px) rotate(45deg);
+        .hamburger .top {
+          transform-origin: 50px 30px;
         }
 
-        .hamburger.active span:nth-child(2) {
+        .hamburger .middle {
+          transform-origin: 50px 50px;
+        }
+
+        .hamburger .bottom {
+          transform-origin: 50px 70px;
+        }
+
+        .hamburger.active .top {
+          transform: translate(0, 20px) rotate(45deg);
+        }
+
+        .hamburger.active .middle {
           opacity: 0;
+          transform: scaleX(0);
         }
 
-        .hamburger.active span:nth-child(3) {
-          transform: translateY(-9px) rotate(-45deg);
+        .hamburger.active .bottom {
+          transform: translate(0, -20px) rotate(-45deg);
         }
 
         .nav-overlay {
@@ -286,10 +312,10 @@ const Header = () => {
             left: 0;
             width: 100%;
             height: 100vh;
-            background: rgba(0, 0, 0, 0.5);
+            background: rgba(0, 0, 0, 0.6);
             z-index: 999;
-            backdrop-filter: blur(4px);
-            -webkit-backdrop-filter: blur(4px);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
           }
 
           .navbar {
@@ -298,13 +324,16 @@ const Header = () => {
             right: 0;
             height: 100vh;
             width: 280px;
-            background: var(--dark-surface);
-            border-left: 1px solid var(--dark-border);
-            box-shadow: -10px 0 40px rgba(0, 0, 0, 0.4);
+            background: rgba(12, 12, 16, 0.65);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border-left: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: -10px 0 40px rgba(0, 0, 0, 0.6);
             padding: 100px 30px 40px;
             transform: translateX(100%);
             overflow-y: auto;
             z-index: 1001;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
           }
 
           .navbar.open {
