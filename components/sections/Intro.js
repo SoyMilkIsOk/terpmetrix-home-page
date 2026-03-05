@@ -4,35 +4,45 @@ import Image from 'next/image';
 
 // Grid configuration
 const GRID_SPACING = 30;
-const GRID_LINE_COLOR = 'rgba(16, 185, 129, 0.08)';
-const GRID_LINE_COLOR_BRIGHT = 'rgba(16, 185, 129, 0.25)';
+const GRID_LINE_BASE_ALPHA = 0.08;
 const INFLUENCE_RADIUS = 300;
+const INFLUENCE_RADIUS_SQ = INFLUENCE_RADIUS * INFLUENCE_RADIUS;
 const MAX_DISPLACEMENT = 14;
 const LERP_SPEED = 0.08;
+const POINT_LERP = 0.12;
 
 // Mobile config
 const MOBILE_BULGE_COUNT = 3;
 const MOBILE_BULGE_RADIUS = 180;
+const MOBILE_BULGE_RADIUS_SQ = MOBILE_BULGE_RADIUS * MOBILE_BULGE_RADIUS;
 const MOBILE_MAX_DISPLACEMENT = 12;
-const MOBILE_DRIFT_SPEED = 0.9; // px per frame
+
+// Pre-computed for displacement falloff: distSq > rSq * 4 is the cutoff
+const DESKTOP_CUTOFF_SQ = INFLUENCE_RADIUS_SQ * 4;
+const MOBILE_CUTOFF_SQ = MOBILE_BULGE_RADIUS_SQ * 4;
+
+// Overfill: extend canvas beyond section bounds so the gradient fade
+// happens outside the visible area. overflow:hidden on the section clips it.
+const OVERFILL = 200;
 
 const Intro = () => {
   const [scrollY, setScrollY] = useState(0);
   const sectionRef = useRef(null);
-  const svgRef = useRef(null);
+  const canvasRef = useRef(null);
   const glowRef = useRef(null);
   const animFrameRef = useRef(null);
   const mouseRef = useRef({ x: -1000, y: -1000 });
   const currentMouseRef = useRef({ x: -1000, y: -1000 });
   const isMobileRef = useRef(false);
   const bulgePointsRef = useRef([]);
-  const linesRef = useRef({ horizontal: [], vertical: [] });
+  const gridDataRef = useRef(null);
   const dimensionsRef = useRef({ width: 0, height: 0 });
+  const dprRef = useRef(1);
 
-  // Build SVG grid lines
+  // Build grid data (points arrays for horizontal and vertical lines)
   const buildGrid = useCallback(() => {
-    const svg = svgRef.current;
-    if (!svg) return;
+    const canvas = canvasRef.current;
+    if (!canvas) return;
 
     const rect = sectionRef.current?.getBoundingClientRect();
     if (!rect) return;
@@ -41,130 +51,51 @@ const Intro = () => {
     const h = rect.height;
     dimensionsRef.current = { width: w, height: h };
 
-    svg.setAttribute('viewBox', `0 0 ${w} ${h}`);
-    svg.setAttribute('width', w);
-    svg.setAttribute('height', h);
+    // Canvas is oversized by OVERFILL on each side; CSS positions it at -OVERFILL
+    const cw = w + OVERFILL * 2;
+    const ch = h + OVERFILL * 2;
 
-    // Clear existing lines
-    while (svg.lastChild) {
-      if (svg.lastChild.tagName !== 'defs') {
-        svg.removeChild(svg.lastChild);
-      } else {
-        break;
-      }
-    }
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    dprRef.current = dpr;
+    canvas.width = cw * dpr;
+    canvas.height = ch * dpr;
+    canvas.style.width = `${cw}px`;
+    canvas.style.height = `${ch}px`;
 
-    const hLines = [];
-    const vLines = [];
-
-    // Horizontal lines
-    for (let y = 0; y <= h; y += GRID_SPACING) {
-      const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-      line.setAttribute('x1', 0);
-      line.setAttribute('y1', y);
-      line.setAttribute('x2', w);
-      line.setAttribute('y2', y);
-      line.setAttribute('stroke', GRID_LINE_COLOR);
-      line.setAttribute('stroke-width', '0.5');
-      line.setAttribute('data-oy', y);
-      svg.appendChild(line);
-      hLines.push({ el: line, oy: y, segments: Math.ceil(w / GRID_SPACING) });
-    }
-
-    // Vertical lines
-    for (let x = 0; x <= w; x += GRID_SPACING) {
-      const line = document.createElementNS('http://www.w3.org/2000/svg', 'line');
-      line.setAttribute('x1', x);
-      line.setAttribute('y1', 0);
-      line.setAttribute('x2', x);
-      line.setAttribute('y2', h);
-      line.setAttribute('stroke', GRID_LINE_COLOR);
-      line.setAttribute('stroke-width', '0.5');
-      line.setAttribute('data-ox', x);
-      svg.appendChild(line);
-      vLines.push({ el: line, ox: x, segments: Math.ceil(h / GRID_SPACING) });
-    }
-
-    // Replace lines with smooth path elements for organic distortion
-    const newHLines = [];
-    hLines.forEach(({ oy }) => {
+    // Build point arrays across the oversized area
+    // Coordinates are in canvas-local space (0,0 = top-left of oversized canvas)
+    const horizontalLines = [];
+    for (let y = 0; y <= ch; y += GRID_SPACING) {
       const points = [];
-      for (let x = 0; x <= w; x += GRID_SPACING) {
-        points.push({ ox: x, oy, cx: x, cy: oy });
+      for (let x = 0; x <= cw; x += GRID_SPACING) {
+        points.push({ ox: x, oy: y, cx: x, cy: y });
       }
-      const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-      path.setAttribute('fill', 'none');
-      path.setAttribute('stroke', GRID_LINE_COLOR);
-      path.setAttribute('stroke-width', '0.5');
-      path.setAttribute('d', pointsToSmoothPath(points));
-      svg.appendChild(path);
-      newHLines.push({ el: path, points });
-    });
+      horizontalLines.push(points);
+    }
 
-    const newVLines = [];
-    vLines.forEach(({ ox }) => {
+    const verticalLines = [];
+    for (let x = 0; x <= cw; x += GRID_SPACING) {
       const points = [];
-      for (let y = 0; y <= h; y += GRID_SPACING) {
-        points.push({ ox, oy: y, cx: ox, cy: y });
+      for (let y = 0; y <= ch; y += GRID_SPACING) {
+        points.push({ ox: x, oy: y, cx: x, cy: y });
       }
-      const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-      path.setAttribute('fill', 'none');
-      path.setAttribute('stroke', GRID_LINE_COLOR);
-      path.setAttribute('stroke-width', '0.5');
-      path.setAttribute('d', pointsToSmoothPath(points));
-      svg.appendChild(path);
-      newVLines.push({ el: path, points });
-    });
+      verticalLines.push(points);
+    }
 
-    // Remove the simple lines, keep only smooth paths
-    hLines.forEach(l => l.el.remove());
-    vLines.forEach(l => l.el.remove());
-
-    linesRef.current = { horizontal: newHLines, vertical: newVLines };
+    gridDataRef.current = { horizontal: horizontalLines, vertical: verticalLines };
   }, []);
 
-  // Convert displaced points to a smooth SVG path using Catmull-Rom-style curves
-  const pointsToSmoothPath = (points) => {
-    if (points.length < 2) return '';
-    if (points.length === 2) {
-      return `M${points[0].cx.toFixed(1)},${points[0].cy.toFixed(1)} L${points[1].cx.toFixed(1)},${points[1].cy.toFixed(1)}`;
-    }
-    
-    let d = `M${points[0].cx.toFixed(1)},${points[0].cy.toFixed(1)}`;
-    
-    // First segment: quadratic curve to midpoint of first two points
-    const mid0x = (points[0].cx + points[1].cx) / 2;
-    const mid0y = (points[0].cy + points[1].cy) / 2;
-    d += ` Q${points[0].cx.toFixed(1)},${points[0].cy.toFixed(1)} ${mid0x.toFixed(1)},${mid0y.toFixed(1)}`;
-    
-    // Middle segments: smooth quadratic curves through midpoints, using vertices as control points
-    for (let i = 1; i < points.length - 1; i++) {
-      const midX = (points[i].cx + points[i + 1].cx) / 2;
-      const midY = (points[i].cy + points[i + 1].cy) / 2;
-      d += ` Q${points[i].cx.toFixed(1)},${points[i].cy.toFixed(1)} ${midX.toFixed(1)},${midY.toFixed(1)}`;
-    }
-    
-    // Last segment: line to final point
-    const last = points[points.length - 1];
-    d += ` T${last.cx.toFixed(1)},${last.cy.toFixed(1)}`;
-    
-    return d;
-  };
-
-  // Displacement function for a single point given a gravity source
-  const displace = (px, py, gx, gy, radius, maxDisp) => {
+  // Displacement function (inlined for performance in the hot loop,
+  // but kept here as the reference implementation)
+  const displace = (px, py, gx, gy, radiusSq, halfRadiusSq, cutoffSq, maxDisp) => {
     const dx = px - gx;
     const dy = py - gy;
     const distSq = dx * dx + dy * dy;
-    const rSq = radius * radius;
-    if (distSq > rSq * 4) return { dx: 0, dy: 0 };
+    if (distSq > cutoffSq) return 0; // return 0 = no displacement
     const dist = Math.sqrt(distSq);
-    if (dist < 1) return { dx: 0, dy: 0 };
-    const strength = maxDisp * Math.exp(-distSq / (rSq * 0.5));
-    return {
-      dx: (dx / dist) * strength,
-      dy: (dy / dist) * strength,
-    };
+    if (dist < 1) return 0;
+    const strength = maxDisp * Math.exp(-distSq / halfRadiusSq);
+    return { dx: (dx / dist) * strength, dy: (dy / dist) * strength };
   };
 
   // Initialize mobile bulge points
@@ -186,14 +117,58 @@ const Intro = () => {
     bulgePointsRef.current = points;
   }, []);
 
+  // Draw a smooth curve through points using quadratic bezier (Catmull-Rom style)
+  // Draws directly on the canvas context - no string building
+  const drawSmoothLine = (ctx, points) => {
+    const len = points.length;
+    if (len < 2) return;
+
+    ctx.beginPath();
+    ctx.moveTo(points[0].cx, points[0].cy);
+
+    if (len === 2) {
+      ctx.lineTo(points[1].cx, points[1].cy);
+      ctx.stroke();
+      return;
+    }
+
+    // First segment
+    const mid0x = (points[0].cx + points[1].cx) * 0.5;
+    const mid0y = (points[0].cy + points[1].cy) * 0.5;
+    ctx.quadraticCurveTo(points[0].cx, points[0].cy, mid0x, mid0y);
+
+    // Middle segments
+    for (let i = 1; i < len - 1; i++) {
+      const midX = (points[i].cx + points[i + 1].cx) * 0.5;
+      const midY = (points[i].cy + points[i + 1].cy) * 0.5;
+      ctx.quadraticCurveTo(points[i].cx, points[i].cy, midX, midY);
+    }
+
+    // Last segment
+    const last = points[len - 1];
+    ctx.lineTo(last.cx, last.cy);
+    ctx.stroke();
+  };
+
   // Animation loop
   const animate = useCallback(() => {
-    const { horizontal, vertical } = linesRef.current;
-    if (!horizontal.length && !vertical.length) {
+    const gridData = gridDataRef.current;
+    if (!gridData) {
       animFrameRef.current = requestAnimationFrame(animate);
       return;
     }
 
+    const canvas = canvasRef.current;
+    if (!canvas) {
+      animFrameRef.current = requestAnimationFrame(animate);
+      return;
+    }
+
+    const ctx = canvas.getContext('2d');
+    const { width: w, height: h } = dimensionsRef.current;
+    const cw = w + OVERFILL * 2;
+    const ch = h + OVERFILL * 2;
+    const dpr = dprRef.current;
     const isMobile = isMobileRef.current;
 
     if (!isMobile) {
@@ -204,99 +179,142 @@ const Intro = () => {
 
     // Mobile: animate bulge points (drift + pulse)
     if (isMobile) {
-      const now = performance.now() / 1000;
-      bulgePointsRef.current.forEach(bp => {
-        // Drift toward target
+      const now = performance.now() * 0.001;
+      const bulges = bulgePointsRef.current;
+      for (let i = 0; i < bulges.length; i++) {
+        const bp = bulges[i];
         bp.x += (bp.targetX - bp.x) * 0.005;
         bp.y += (bp.targetY - bp.y) * 0.005;
 
-        // If close to target, pick new target
-        const driftDist = Math.sqrt((bp.targetX - bp.x) ** 2 + (bp.targetY - bp.y) ** 2);
-        if (driftDist < 20) {
-          bp.targetX = Math.random() * dimensionsRef.current.width;
-          bp.targetY = Math.random() * dimensionsRef.current.height;
+        const ddx = bp.targetX - bp.x;
+        const ddy = bp.targetY - bp.y;
+        if (ddx * ddx + ddy * ddy < 400) {
+          bp.targetX = Math.random() * w;
+          bp.targetY = Math.random() * h;
         }
 
-        // Pulse strength
         bp.strength = bp.targetStrength * (0.5 + 0.5 * Math.sin(now * 0.8 + bp.phase));
-      });
+      }
     }
 
-    // Compute displacement for all polyline points
-    const allPolylines = [...horizontal, ...vertical];
+    // Mouse coords are in section-local space; offset to canvas-local space
+    const mx = currentMouseRef.current.x + OVERFILL;
+    const my = currentMouseRef.current.y + OVERFILL;
+    const halfRadSqDesktop = INFLUENCE_RADIUS_SQ * 0.5;
+    const halfRadSqMobile = MOBILE_BULGE_RADIUS_SQ * 0.5;
+    const allLines = [...gridData.horizontal, ...gridData.vertical];
 
-    allPolylines.forEach(({ el, points }) => {
-      let changed = false;
-      points.forEach(pt => {
+    for (let li = 0; li < allLines.length; li++) {
+      const points = allLines[li];
+      for (let pi = 0; pi < points.length; pi++) {
+        const pt = points[pi];
         let totalDx = 0;
         let totalDy = 0;
 
         if (!isMobile) {
           // Desktop: single mouse gravity well
-          const d = displace(
-            pt.ox, pt.oy,
-            currentMouseRef.current.x, currentMouseRef.current.y,
-            INFLUENCE_RADIUS, MAX_DISPLACEMENT
-          );
-          totalDx += d.dx;
-          totalDy += d.dy;
+          const dx = pt.ox - mx;
+          const dy = pt.oy - my;
+          const distSq = dx * dx + dy * dy;
+          if (distSq <= DESKTOP_CUTOFF_SQ && distSq >= 1) {
+            const dist = Math.sqrt(distSq);
+            const strength = MAX_DISPLACEMENT * Math.exp(-distSq / halfRadSqDesktop);
+            totalDx = (dx / dist) * strength;
+            totalDy = (dy / dist) * strength;
+          }
         } else {
           // Mobile: multiple phantom bulge points
-          bulgePointsRef.current.forEach(bp => {
-            const d = displace(
-              pt.ox, pt.oy,
-              bp.x, bp.y,
-              MOBILE_BULGE_RADIUS, MOBILE_MAX_DISPLACEMENT * bp.strength
-            );
-            totalDx += d.dx;
-            totalDy += d.dy;
-          });
+          const bulges = bulgePointsRef.current;
+          for (let bi = 0; bi < bulges.length; bi++) {
+            const bp = bulges[bi];
+            const dx = pt.ox - bp.x;
+            const dy = pt.oy - bp.y;
+            const distSq = dx * dx + dy * dy;
+            if (distSq <= MOBILE_CUTOFF_SQ && distSq >= 1) {
+              const dist = Math.sqrt(distSq);
+              const maxDisp = MOBILE_MAX_DISPLACEMENT * bp.strength;
+              const strength = maxDisp * Math.exp(-distSq / halfRadSqMobile);
+              totalDx += (dx / dist) * strength;
+              totalDy += (dy / dist) * strength;
+            }
+          }
         }
 
         // Lerp toward target displacement
         const newX = pt.ox + totalDx;
         const newY = pt.oy + totalDy;
-        pt.cx += (newX - pt.cx) * 0.12;
-        pt.cy += (newY - pt.cy) * 0.12;
-
-        if (Math.abs(pt.cx - pt.ox) > 0.01 || Math.abs(pt.cy - pt.oy) > 0.01) {
-          changed = true;
-        }
-      });
-
-      if (changed) {
-        el.setAttribute('d', pointsToSmoothPath(points));
-      }
-    });
-
-    // Update line colors near mouse on desktop
-    if (!isMobile) {
-      const mx = currentMouseRef.current.x;
-      const my = currentMouseRef.current.y;
-      allPolylines.forEach(({ el, points }) => {
-        // Check if any point is near mouse
-        let minDist = Infinity;
-        points.forEach(pt => {
-          const d = Math.sqrt((pt.ox - mx) ** 2 + (pt.oy - my) ** 2);
-          if (d < minDist) minDist = d;
-        });
-        const t = Math.max(0, 1 - minDist / (INFLUENCE_RADIUS * 2.5));
-        if (t > 0.01) {
-          const alpha = 0.08 + t * 0.14;
-          el.setAttribute('stroke', `rgba(16, 185, 129, ${alpha.toFixed(3)})`);
-          el.setAttribute('stroke-width', `${0.5 + t * 0.7}`);
-        } else {
-          el.setAttribute('stroke-width', '0.5');
-          el.setAttribute('stroke', GRID_LINE_COLOR);
-        }
-      });
-
-      // Update mouse glow position
-      if (glowRef.current) {
-        glowRef.current.style.setProperty('--mouse-x', `${mx}px`);
-        glowRef.current.style.setProperty('--mouse-y', `${my}px`);
+        pt.cx += (newX - pt.cx) * POINT_LERP;
+        pt.cy += (newY - pt.cy) * POINT_LERP;
       }
     }
+
+    // --- Draw to canvas ---
+    ctx.save();
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, cw, ch);
+
+    // Draw all lines then mask with a radial gradient
+    ctx.lineWidth = 0.5;
+    ctx.lineCap = 'round';
+
+    if (!isMobile) {
+      // Desktop: draw lines with proximity-based brightness
+      const highlightRadius = INFLUENCE_RADIUS * 2.5;
+      const highlightRadiusSq = highlightRadius * highlightRadius;
+
+      for (let li = 0; li < allLines.length; li++) {
+        const points = allLines[li];
+
+        // Find closest point to mouse for this line
+        let minDistSq = Infinity;
+        for (let pi = 0; pi < points.length; pi++) {
+          const ddx = points[pi].ox - mx;
+          const ddy = points[pi].oy - my;
+          const dsq = ddx * ddx + ddy * ddy;
+          if (dsq < minDistSq) minDistSq = dsq;
+        }
+
+        if (minDistSq < highlightRadiusSq) {
+          const minDist = Math.sqrt(minDistSq);
+          const t = 1 - minDist / highlightRadius;
+          const alpha = GRID_LINE_BASE_ALPHA + t * 0.14;
+          ctx.strokeStyle = `rgba(16,185,129,${alpha})`;
+          ctx.lineWidth = 0.5 + t * 0.7;
+        } else {
+          ctx.strokeStyle = `rgba(16,185,129,${GRID_LINE_BASE_ALPHA})`;
+          ctx.lineWidth = 0.5;
+        }
+
+        drawSmoothLine(ctx, points);
+      }
+
+      // Update mouse glow position (section-local coords, not canvas-local)
+      if (glowRef.current) {
+        glowRef.current.style.setProperty('--mouse-x', `${mx - OVERFILL}px`);
+        glowRef.current.style.setProperty('--mouse-y', `${my - OVERFILL}px`);
+      }
+    } else {
+      // Mobile: all lines same color
+      ctx.strokeStyle = `rgba(16,185,129,${GRID_LINE_BASE_ALPHA})`;
+      for (let li = 0; li < allLines.length; li++) {
+        drawSmoothLine(ctx, allLines[li]);
+      }
+    }
+
+    // Apply radial gradient fade mask centered on the visible section area
+    ctx.globalCompositeOperation = 'destination-in';
+    const gcx = cw * 0.5;
+    const gcy = ch * 0.5;
+    const maxR = Math.sqrt(gcx * gcx + gcy * gcy);
+    const grad = ctx.createRadialGradient(gcx, gcy, 0, gcx, gcy, maxR);
+    grad.addColorStop(0, 'rgba(255,255,255,1)');
+    grad.addColorStop(0.5, 'rgba(255,255,255,1)');
+    grad.addColorStop(0.8, 'rgba(255,255,255,0.6)');
+    grad.addColorStop(1.0, 'rgba(255,255,255,0.2)');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, cw, ch);
+
+    ctx.restore();
 
     animFrameRef.current = requestAnimationFrame(animate);
   }, []);
@@ -373,26 +391,12 @@ const Intro = () => {
       <div className="bg-orb orb-2"></div>
       <div className="bg-orb orb-3"></div>
 
-      {/* SVG Grid with Gravity Well */}
+      {/* Canvas Grid with Gravity Well */}
       <div className="grid-wrapper">
-        <svg
-          ref={svgRef}
-          className="grid-svg"
-          preserveAspectRatio="none"
-        >
-          <defs>
-            <radialGradient id="gridFade" cx="50%" cy="50%" r="75%" fx="50%" fy="50%">
-              <stop offset="0%" stopColor="white" stopOpacity="1" />
-              <stop offset="40%" stopColor="white" stopOpacity="1" />
-              <stop offset="70%" stopColor="white" stopOpacity="0.6" />
-              <stop offset="90%" stopColor="white" stopOpacity="0.15" />
-              <stop offset="100%" stopColor="white" stopOpacity="0" />
-            </radialGradient>
-            <mask id="gridMask">
-              <rect width="100%" height="100%" fill="url(#gridFade)" />
-            </mask>
-          </defs>
-        </svg>
+        <canvas
+          ref={canvasRef}
+          className="grid-canvas"
+        />
         <div ref={glowRef} className="mouse-glow"></div>
       </div>
       
@@ -481,7 +485,7 @@ const Intro = () => {
           50% { transform: translateY(-30px) scale(1.05); }
         }
 
-        /* SVG Grid Background */
+        /* Canvas Grid Background */
         .grid-wrapper {
           position: absolute;
           top: 0;
@@ -492,14 +496,10 @@ const Intro = () => {
           z-index: 0;
         }
 
-        .grid-svg {
+        .grid-canvas {
           position: absolute;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          mask: url(#gridMask);
-          -webkit-mask: url(#gridMask);
+          top: -200px;
+          left: -200px;
         }
 
         .mouse-glow {
