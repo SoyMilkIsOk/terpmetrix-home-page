@@ -437,12 +437,14 @@ function getPoint(pts, i) {
 }
 
 function shiftGridRow(grid, cols, r, shift, glitchProb, tintBin, seed) {
-  const { cBuf, bBuf, colBuf, rowC, rowB, rowCol } = grid;
+  const { zBuf, cBuf, bBuf, colBuf, rowZ, rowC, rowB, rowCol } = grid;
   const rowStart = r * cols;
   for (let c = 0; c < cols; c++) {
+    rowZ[c] = zBuf[rowStart + c];
     rowC[c] = cBuf[rowStart + c];
     rowB[c] = bBuf[rowStart + c];
     rowCol[c] = colBuf[rowStart + c];
+    zBuf[rowStart + c] = -999;
     cBuf[rowStart + c] = " ";
     bBuf[rowStart + c] = 0;
     colBuf[rowStart + c] = 0;
@@ -454,6 +456,7 @@ function shiftGridRow(grid, cols, r, shift, glitchProb, tintBin, seed) {
     if (nc < 0 || nc >= cols) continue;
     const h = Math.abs(Math.sin((c + 1) * 12.9898 + seed * 78.233));
     const useGlitch = glitchProb > 0 && h < glitchProb;
+    zBuf[rowStart + nc] = rowZ[c];
     cBuf[rowStart + nc] = useGlitch
       ? GLITCH_GLYPHS[Math.floor((h * 997) % GLITCH_GLYPHS.length)]
       : ch;
@@ -528,8 +531,9 @@ const AsciiCanvas = () => {
     fromWeights: [1, 0, 0],
     toWeights: [1, 0, 0],
     scoopPhase: 0,
-    hoverPhase: 0,
-    dragPhase: 0,
+    localX: -1,
+    localY: -1,
+    localStrength: 0,
     cycleElapsed: 0,
   });
 
@@ -546,6 +550,9 @@ const AsciiCanvas = () => {
     const hueBuf = new Float32Array(LED_COUNT);
     const echoC = new Array(32);
     const echoXY = new Int32Array(64);
+    const localEchoC = new Array(16);
+    const localEchoXY = new Int32Array(32);
+    const localEchoScale = new Float32Array(16);
 
     const lightSize = LIGHT_W * LIGHT_H;
     const accR = new Float32Array(lightSize);
@@ -566,6 +573,7 @@ const AsciiCanvas = () => {
       colBuf: null,
       lBuf: null,
       nextCell: null,
+      rowZ: null,
       rowC: null,
       rowB: null,
       rowCol: null,
@@ -598,6 +606,7 @@ const AsciiCanvas = () => {
       }
       if (cols > grid.rowCap) {
         grid.rowCap = cols;
+        grid.rowZ = new Float32Array(cols);
         grid.rowC = new Array(cols);
         grid.rowB = new Float32Array(cols);
         grid.rowCol = new Uint8Array(cols);
@@ -667,6 +676,14 @@ const AsciiCanvas = () => {
       s.lastY = e.clientY;
       s.velX = 0;
       s.velY = 0;
+      const w = viewMetrics.w;
+      const h = viewMetrics.h;
+      if (w > 0 && h > 0) {
+        const rect = canvas.getBoundingClientRect();
+        s.localX = Math.max(0, Math.min(1, (e.clientX - rect.left) / w));
+        s.localY = Math.max(0, Math.min(1, (e.clientY - rect.top) / h));
+        s.localStrength = 0.85;
+      }
       canvas.setPointerCapture?.(e.pointerId);
     };
 
@@ -674,17 +691,23 @@ const AsciiCanvas = () => {
       const s = stateRef.current;
       const w = viewMetrics.w;
       const h = viewMetrics.h;
-      const rect = canvas.getBoundingClientRect();
-      if (w > 0 && h > 0) {
-        s.hoverX = (e.clientX - rect.left) / w;
-        s.hoverY = (e.clientY - rect.top) / h;
-        s.hovering =
+
+      if (e.pointerType !== "touch" && w > 0 && h > 0) {
+        const rect = canvas.getBoundingClientRect();
+        const nx = (e.clientX - rect.left) / w;
+        const ny = (e.clientY - rect.top) / h;
+        const inside =
           e.clientX >= rect.left &&
           e.clientX <= rect.right &&
           e.clientY >= rect.top &&
           e.clientY <= rect.bottom;
-        if (!s.dragging && s.hovering) {
-          s.hoverPhase = s.hoverX * 1.15 + s.hoverY * 0.4;
+        s.hoverX = nx;
+        s.hoverY = ny;
+        s.hovering = inside;
+        if (inside) {
+          s.localX = nx;
+          s.localY = ny;
+          s.localStrength = 0.85;
         }
       }
 
@@ -693,7 +716,12 @@ const AsciiCanvas = () => {
       const dy = e.clientY - s.lastY;
       const step = Math.hypot(dx, dy);
       s.movedDist += step;
-      s.dragPhase += step * 0.0028;
+      if (w > 0 && h > 0) {
+        const rect = canvas.getBoundingClientRect();
+        s.localX = Math.max(0, Math.min(1, (e.clientX - rect.left) / w));
+        s.localY = Math.max(0, Math.min(1, (e.clientY - rect.top) / h));
+        s.localStrength = 0.9;
+      }
       s.rotY += dx * 0.011;
       s.rotX += dy * 0.011;
       s.velY = dx * 0.0025;
@@ -702,8 +730,11 @@ const AsciiCanvas = () => {
       s.lastY = e.clientY;
     };
 
-    const onPointerUp = () => {
+    const onPointerUp = (e) => {
       const s = stateRef.current;
+      if (e.pointerType === "touch") {
+        s.hovering = false;
+      }
       if (!s.dragging) return;
       s.dragging = false;
       if (s.movedDist < 6) {
@@ -750,7 +781,16 @@ const AsciiCanvas = () => {
       const w1 = s.fromWeights[1] + (s.toWeights[1] - s.fromWeights[1]) * m;
       const w2 = s.fromWeights[2] + (s.toWeights[2] - s.fromWeights[2]) * m;
 
-      s.scoopPhase += (s.dragPhase + s.hoverPhase - s.scoopPhase) * 0.14;
+      const dtSec = dt * 0.001;
+      // 0.095 cycles/sec -> ~4.5 distinct PROYGBIV stops cycled cleanly across the 6s view
+      s.scoopPhase += dtSec * 0.095;
+      if (s.dragging) {
+        // Keep strong subtle interaction feedback while actively dragging
+      } else if (s.hovering) {
+        s.localStrength = Math.max(0.45, s.localStrength * 0.94);
+      } else {
+        s.localStrength *= 0.9;
+      }
 
       if (!s.dragging) {
         s.rotY += 0.01 + s.velY;
@@ -818,6 +858,7 @@ const AsciiCanvas = () => {
         const offsetY = (h - rows * cellH) * 0.5;
         const auroraShift = timeSec * 0.14;
         const scoopBaseHue = sampleProygbivHue(s.scoopPhase);
+        const scoopWaveSpread = 0.085;
         const hasScoop = w0 > 0.01;
         const hasNug = w1 > 0.01;
         const nugLen = nugPoints.length;
@@ -908,7 +949,7 @@ const AsciiCanvas = () => {
                   Math.min(1, 0.2 + depthShade * 0.2 + fresnel * 0.54 + gloss * 0.38)
                 );
                 const sCol = Math.min(1, 0.34 + fresnel * 0.38 + gloss * 0.24);
-                const sHue = sampleProygbivHue(s.scoopPhase + (px + py) * 0.03);
+                const sHue = sampleProygbivHue(s.scoopPhase - (px + py) * scoopWaveSpread);
                 litSum += sLit * w0;
                 colSum += sCol * w0;
                 hueAccum = sHue;
@@ -1078,24 +1119,54 @@ const AsciiCanvas = () => {
 
         // Batch ASCII characters by palette bin so ctx.fillStyle switches ~35x instead of ~2,000x
         bucketHead.fill(-1);
+        let localEchoCount = 0;
+        const localTick = Math.floor(timeSec * 22);
+        const localCyanBin = colorBin(0.5, 0.88);
+        const localMagBin = colorBin(0.88, 0.86);
+        const localYelBin = colorBin(0.145, 0.9);
+        const localBins = [localCyanBin, localMagBin, localYelBin, 7];
+        const localShift = Math.sin(timeSec * 28) * 2.5;
+        const midOoz = 1 / dist;
+        const centerYNorm = centerRow / rows;
+        const aspect = h / Math.max(1, w);
         for (let idx = 0; idx < cellCount; idx++) {
           if (cBuf[idx] === " ") continue;
           let bin = colBuf[idx];
 
-          if (s.hovering) {
+          if (s.localStrength > 0.05 && s.localX >= 0) {
             const c = idx % cols;
             const r = Math.floor(idx / cols);
-            const dx = c / cols - s.hoverX;
-            const dy = r / rows - s.hoverY;
+            const cellOoz = zBuf[idx] > 0 ? zBuf[idx] : midOoz;
+            // True perspective scaling & ray parallax from depth Z-buffer (bigger up close, smaller farther back)
+            const depthScale = Math.max(0.58, Math.min(1.7, cellOoz / midOoz));
+            const parX = (s.localX - 0.5) * (depthScale - 1) * 0.16;
+            const parY = (s.localY - centerYNorm) * (depthScale - 1) * 0.16;
+            const dx = c / cols - (s.localX + parX);
+            const dy = (r / rows - (s.localY + parY)) * aspect;
+            const spotR2 = 0.0068 * depthScale * depthScale;
             const d2 = dx * dx + dy * dy;
-            if (d2 < 0.025) {
-              if (bin < MONO_COUNT) {
-                const boosted = Math.min(1, bBuf[idx] + (1 - d2 / 0.025) * 0.35);
+            if (d2 < spotR2) {
+              const falloff = (1 - d2 / spotR2) * s.localStrength;
+              const noise = Math.abs(Math.sin(c * 13.7 + r * 29.3 + localTick * 17.3));
+              if (falloff > 0.16 && noise > 0.56 - falloff * 0.34) {
+                const gCh = GLITCH_GLYPHS[Math.floor((noise * 997) % GLITCH_GLYPHS.length)];
+                cBuf[idx] = gCh;
+                bin = localBins[(c + r + localTick) & 3];
+                if (localEchoCount < 14 && ((idx + localTick) & 1) === 0) {
+                  localEchoC[localEchoCount] = gCh;
+                  localEchoXY[localEchoCount * 2] = c;
+                  localEchoXY[localEchoCount * 2 + 1] = r;
+                  localEchoScale[localEchoCount] = depthScale;
+                  localEchoCount++;
+                }
+              } else if (bin < MONO_COUNT) {
+                const boosted = Math.min(1, bBuf[idx] + falloff * 0.22);
                 bin = monoBin(boosted);
               } else {
                 const hb = Math.floor((bin - MONO_COUNT) / LUM_LEVELS);
                 const lv = (bin - MONO_COUNT) % LUM_LEVELS;
-                bin = MONO_COUNT + hb * LUM_LEVELS + Math.min(LUM_LEVELS - 1, lv + 2);
+                const lvBoost = falloff > 0.3 ? 1 : 0;
+                bin = MONO_COUNT + hb * LUM_LEVELS + Math.min(LUM_LEVELS - 1, lv + lvBoost);
               }
             }
           }
@@ -1108,6 +1179,27 @@ const AsciiCanvas = () => {
         ctx.font = `${fontSize}px "JetBrains Mono", ui-monospace, monospace`;
         ctx.textBaseline = "top";
         ctx.globalAlpha = 1;
+
+        if (localEchoCount > 0) {
+          ctx.globalAlpha = Math.min(0.45, s.localStrength * 0.45);
+          ctx.fillStyle = PALETTE[localCyanBin];
+          for (let e = 0; e < localEchoCount; e++) {
+            ctx.fillText(
+              localEchoC[e],
+              offsetX + localEchoXY[e * 2] * cellW - localShift * localEchoScale[e],
+              offsetY + localEchoXY[e * 2 + 1] * cellH
+            );
+          }
+          ctx.fillStyle = PALETTE[localMagBin];
+          for (let e = 0; e < localEchoCount; e++) {
+            ctx.fillText(
+              localEchoC[e],
+              offsetX + localEchoXY[e * 2] * cellW + localShift * localEchoScale[e],
+              offsetY + localEchoXY[e * 2 + 1] * cellH
+            );
+          }
+          ctx.globalAlpha = 1;
+        }
 
         if (echoCount > 0) {
           ctx.globalAlpha = Math.min(0.65, glitchEnv * 0.7);

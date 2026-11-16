@@ -163,24 +163,36 @@ const HeroSection = ({ onRequestBriefing }) => {
           }
 
           .hero-copy {
+            position: relative;
             grid-row: 1;
             grid-column: 1;
             z-index: 2;
             align-self: end;
-            pointer-events: none;
-            margin-top: 205px;
-            padding: 64px 0 32px;
+            pointer-events: auto;
+            touch-action: pan-y;
+            margin: 256px -24px 0;
+            padding: 16px 24px 32px;
             background: linear-gradient(
               to top,
-              rgba(5, 5, 6, 0.96) 0%,
-              rgba(5, 5, 6, 0.88) 54%,
-              rgba(5, 5, 6, 0.42) 80%,
-              rgba(5, 5, 6, 0) 100%
+              rgba(5, 5, 6, 0.97) 0%,
+              rgba(5, 5, 6, 0.88) 100%
             );
           }
 
-          .hero-actions {
-            pointer-events: auto;
+          .hero-copy::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 100%;
+            height: 52px;
+            pointer-events: none;
+            background: linear-gradient(
+              to top,
+              rgba(5, 5, 6, 0.88) 0%,
+              rgba(5, 5, 6, 0.35) 55%,
+              rgba(5, 5, 6, 0) 100%
+            );
           }
 
           h1 {
@@ -195,6 +207,13 @@ const HeroSection = ({ onRequestBriefing }) => {
           }
         }
 
+        @media (max-width: 640px) {
+          .hero-copy {
+            margin: 256px -16px 0;
+            padding: 16px 16px 32px;
+          }
+        }
+
         @media (max-width: 520px) {
           .hero-section {
             min-height: 560px;
@@ -205,7 +224,7 @@ const HeroSection = ({ onRequestBriefing }) => {
           }
 
           .hero-copy {
-            margin-top: 200px;
+            margin-top: 250px;
           }
 
           .hero-btn {
