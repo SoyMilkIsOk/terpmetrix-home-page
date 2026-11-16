@@ -9,7 +9,7 @@ const HeroSection = ({ onRequestBriefing }) => {
             <h1>PRECISION BUILT FOR THE PLANT.</h1>
 
             <p className="hero-lead">
-              Hardware, optics, and market intelligence built quietly in
+              Hardware, optics, and market intelligence built in
               Colorado since 2023.
             </p>
 
