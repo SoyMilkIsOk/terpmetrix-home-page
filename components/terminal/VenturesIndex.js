@@ -4,13 +4,14 @@ const VENTURES = [
   {
     id: "01",
     name: "TERPSCOOPS",
-    category: "PRECISION HARDWARE",
+    category: "HARDWARE AT SCALE",
     status: "LIVE",
     summary:
-      "Pocket-sized herb scoops built to sit inside standard grinders—available in acrylic, steel, titanium, and solid silver.",
+      "Pocket-sized herb scoops built to sit inside standard grinders—available in acrylic, steel, titanium, and solid silver. 5,000+ deployed to customers in 48 states and 4 countries.",
     href: "https://terpscoops.com",
-    cta: "TERPSCOOPS.COM",
-    classified: false,
+    cta: "SHOP",
+    secondaryHref: "https://instagram.com/terpscoops",
+    secondaryCta: "INSTAGRAM",
   },
   {
     id: "02",
@@ -20,8 +21,7 @@ const VENTURES = [
     summary:
       "Community-ranked cultivators and strains scored on flavor, effect, and smoke—with live weekly drop tracking.",
     href: "https://terptier.com",
-    cta: "TERPTIER.COM",
-    classified: false,
+    cta: "TERPTIER",
   },
   {
     id: "03",
@@ -31,8 +31,7 @@ const VENTURES = [
     summary:
       "Ultra-macro flower, trichome, and rosin photography for cultivators, hashmakers, and cannabis brands.",
     href: "https://terpfocus.com",
-    cta: "TERPFOCUS.COM",
-    classified: false,
+    cta: "TERPFOCUS",
   },
   {
     id: "04",
@@ -43,17 +42,29 @@ const VENTURES = [
       "Custom websites, compliant e-commerce, and digital branding built specifically for cannabis operators.",
     href: "https://calendly.com/terps-terpmetrix/quote-call",
     cta: "SCHEDULE CALL",
-    classified: false,
   },
   {
     id: "05",
-    name: "██████████",
-    category: "STEALTH R&D",
-    status: "[ CLASSIFIED ]",
-    summary: "Confidential R&D. Briefings available upon request.",
+    name: "PUFFSN0W",
+    category: "OPEN-SOURCE HARDWARE",
+    status: "LIVE",
+    summary:
+      "Custom companion app for Puffco users to create heat curve settings and unlock full device customization. And an open-source Python library.",
+    href: "https://puffsn0w.terpscoops.com",
+    cta: "PUFFSN0W",
+    secondaryHref: "https://puffco-py.soymilkisok.com",
+    secondaryCta: "PUFFCO-PY",
+  },
+  {
+    id: "06",
+    name: "TERPMETRIX LABS",
+    category: "INTERNAL PROTOTYPING",
+    status: "IN DEV",
+    summary:
+      "Early-stage hardware prototypes, connected tabletop accessories, and optical tools currently in development in Boulder.",
     href: "#access",
-    cta: "REQUEST BRIEFING",
-    classified: true,
+    cta: "INQUIRE",
+    internalAction: true,
   },
 ];
 
@@ -71,15 +82,23 @@ const VenturesIndex = ({ onRequestBriefing }) => {
             return (
               <div
                 key={item.id}
-                className={`venture-row ${isOpen ? "open" : ""} ${
-                  item.classified ? "classified" : ""
-                }`}
+                className={`venture-row ${isOpen ? "open" : ""}`}
                 onMouseEnter={() => setActiveId(item.id)}
                 onClick={() => setActiveId(item.id)}
               >
                 <div className="row-main">
                   <span className="col-id">[ {item.id} ]</span>
-                  <span className="col-name">{item.name}</span>
+                  <span className="col-name">
+                    {item.name.includes("0") ? (
+                      <>
+                        {item.name.split("0")[0]}
+                        <span className="slashed-zero">0</span>
+                        {item.name.split("0").slice(1).join("0")}
+                      </>
+                    ) : (
+                      item.name
+                    )}
+                  </span>
                   <span className="col-cat">{item.category}</span>
                   <span className="col-status">{item.status}</span>
                 </div>
@@ -88,7 +107,7 @@ const VenturesIndex = ({ onRequestBriefing }) => {
                   <div className="row-drawer">
                     <p className="drawer-summary">{item.summary}</p>
                     <div className="drawer-action">
-                      {item.classified ? (
+                      {item.internalAction ? (
                         <button
                           type="button"
                           className="row-btn"
@@ -100,15 +119,28 @@ const VenturesIndex = ({ onRequestBriefing }) => {
                           {item.cta} &rarr;
                         </button>
                       ) : (
-                        <a
-                          href={item.href}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="row-btn"
-                          onClick={(e) => e.stopPropagation()}
-                        >
-                          {item.cta} &#8599;
-                        </a>
+                        <>
+                          <a
+                            href={item.href}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="row-btn"
+                            onClick={(e) => e.stopPropagation()}
+                          >
+                            {item.cta} &#8599;
+                          </a>
+                          {item.secondaryHref && (
+                            <a
+                              href={item.secondaryHref}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="row-btn"
+                              onClick={(e) => e.stopPropagation()}
+                            >
+                              {item.secondaryCta} &#8599;
+                            </a>
+                          )}
+                        </>
                       )}
                     </div>
                   </div>
@@ -121,6 +153,8 @@ const VenturesIndex = ({ onRequestBriefing }) => {
 
       <style jsx>{`
         .ventures-section {
+          position: relative;
+          z-index: 1;
           padding: 68px 0;
           border-bottom: 1px solid var(--border-line);
         }
@@ -181,9 +215,24 @@ const VenturesIndex = ({ onRequestBriefing }) => {
           color: var(--text-white);
         }
 
-        .venture-row.classified .col-name {
-          letter-spacing: 0.08em;
-          color: var(--text-silver);
+        .slashed-zero {
+          position: relative;
+          display: inline-block;
+          line-height: 1;
+          letter-spacing: 0;
+          margin-right: 0.02em;
+        }
+
+        .slashed-zero::after {
+          content: "";
+          position: absolute;
+          left: 49.5%;
+          top: 49.5%;
+          width: 0.66em;
+          height: 0.095em;
+          background: currentColor;
+          transform: translate(-50%, -50%) rotate(-56deg);
+          pointer-events: none;
         }
 
         .col-cat {
@@ -199,13 +248,6 @@ const VenturesIndex = ({ onRequestBriefing }) => {
           letter-spacing: 0.1em;
           color: var(--text-silver);
           text-align: right;
-        }
-
-        .venture-row.classified .col-status {
-          color: #ffffff;
-          border: 1px solid var(--border-strong);
-          padding: 4px 8px;
-          justify-self: end;
         }
 
         .row-drawer {
@@ -235,6 +277,13 @@ const VenturesIndex = ({ onRequestBriefing }) => {
           color: var(--text-silver);
           margin: 0;
           max-width: 660px;
+        }
+
+        .drawer-action {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 10px;
+          flex-shrink: 0;
         }
 
         .row-btn {

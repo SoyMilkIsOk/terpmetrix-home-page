@@ -35,11 +35,18 @@ const HeroSection = ({ onRequestBriefing }) => {
 
       <style jsx>{`
         .hero-section {
+          position: relative;
+          isolation: isolate;
           padding: 12px 0 24px;
           min-height: 760px;
           display: flex;
           align-items: center;
           border-bottom: 1px solid var(--border-line);
+          background: radial-gradient(
+            ellipse 68% 76% at 64% 50%,
+            rgba(255, 255, 255, 0.045) 0%,
+            rgba(5, 5, 6, 0) 72%
+          );
           overflow: hidden;
         }
 
@@ -56,7 +63,6 @@ const HeroSection = ({ onRequestBriefing }) => {
         }
 
         .hero-visual {
-          position: relative;
           z-index: 1;
         }
 
@@ -134,6 +140,11 @@ const HeroSection = ({ onRequestBriefing }) => {
             padding: 0;
             min-height: 580px;
             align-items: stretch;
+            background: radial-gradient(
+              circle at 50% 36%,
+              rgba(255, 255, 255, 0.05) 0%,
+              rgba(5, 5, 6, 0) 60%
+            );
           }
 
           .hero-grid {

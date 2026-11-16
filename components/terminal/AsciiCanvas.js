@@ -719,6 +719,7 @@ const AsciiCanvas = () => {
     window.addEventListener("resize", resize);
     const ro = typeof ResizeObserver !== "undefined" ? new ResizeObserver(resize) : null;
     ro?.observe(canvas);
+    ro?.observe(lightCanvas);
     canvas.addEventListener("pointerdown", onPointerDown);
     window.addEventListener("pointermove", onPointerMove);
     window.addEventListener("pointerup", onPointerUp);
@@ -1032,8 +1033,8 @@ const AsciiCanvas = () => {
         {
           const cxL = (viewMetrics.offX + w * 0.5) * viewMetrics.scaleX;
           const cyL = (viewMetrics.offY + (centerRow / rows) * h) * viewMetrics.scaleY;
-          const beamDx = Math.sin(s.rotY) * (isMobile ? 9 : 15);
-          const beamDy = Math.cos(s.rotY) * 3.5 + (isMobile ? 4 : 7);
+          const beamDx = Math.sin(s.rotY) * (isMobile ? 8 : 11);
+          const beamDy = Math.cos(s.rotY) * 3.5 + (isMobile ? 4 : 6);
           const spillAmp = w0 * 4 + w1 * 7 + w2 * 9.5 + glitchEnv * 9;
           const ledSpillHue = (0.39 + s.rotY * 0.08 - auroraShift) % 1;
           let baseSpillHue = lerpHue(
@@ -1045,13 +1046,13 @@ const AsciiCanvas = () => {
             baseSpillHue = lerpHue(baseSpillHue, (now * 0.004) % 1, glitchEnv * 0.65);
           }
 
-          for (let dy = -10; dy <= 10; dy++) {
+          for (let dy = -11; dy <= 11; dy++) {
             const ly = Math.round(cyL + beamDy + dy);
             if (ly < 0 || ly >= LIGHT_H) continue;
-            for (let dx = -16; dx <= 16; dx++) {
+            for (let dx = -22; dx <= 22; dx++) {
               const lx = Math.round(cxL + beamDx + dx);
               if (lx < 0 || lx >= LIGHT_W) continue;
-              const d2 = (dx * dx) / 256 + (dy * dy) / 100;
+              const d2 = (dx * dx) / 484 + (dy * dy) / 121;
               if (d2 < 1) {
                 const falloff = (1 - d2) * (1 - d2) * spillAmp;
                 const sb = colorBin(baseSpillHue + dx * 0.012 * (w2 + w0 * 0.35), 0.72);
@@ -1174,21 +1175,15 @@ const AsciiCanvas = () => {
         }
 
         .ascii-viewport {
-          position: relative;
           height: 740px;
           width: 100%;
-          background: radial-gradient(
-            circle at 50% 50%,
-            rgba(255, 255, 255, 0.045) 0%,
-            rgba(5, 5, 6, 0) 68%
-          );
         }
 
         .ascii-light-aura {
           position: absolute;
-          inset: -140px -180px -140px -360px;
-          width: calc(100% + 540px);
-          height: calc(100% + 280px);
+          inset: 0;
+          width: 100%;
+          height: 100%;
           pointer-events: none;
           mix-blend-mode: screen;
           z-index: 0;
@@ -1211,17 +1206,6 @@ const AsciiCanvas = () => {
         @media (max-width: 960px) {
           .ascii-viewport {
             height: 600px;
-            background: radial-gradient(
-              circle at 50% 36%,
-              rgba(255, 255, 255, 0.05) 0%,
-              rgba(5, 5, 6, 0) 60%
-            );
-          }
-
-          .ascii-light-aura {
-            inset: -70px -24px -130px -24px;
-            width: calc(100% + 48px);
-            height: calc(100% + 200px);
           }
         }
 
