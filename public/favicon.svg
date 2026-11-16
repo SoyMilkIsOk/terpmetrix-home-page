@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E2127"/>
+      <stop offset="55%" stop-color="#0A0B0D"/>
+      <stop offset="100%" stop-color="#040405"/>
+    </linearGradient>
+    <linearGradient id="rim" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="rgba(255,255,255,0.24)"/>
+      <stop offset="100%" stop-color="rgba(255,255,255,0.04)"/>
+    </linearGradient>
+  </defs>
+  <rect x="14" y="14" width="484" height="484" rx="114" fill="url(#bg)" stroke="url(#rim)" stroke-width="4"/>
+  <text x="256" y="272" text-anchor="middle" dominant-baseline="central" font-family="-apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Avenir Next', 'Helvetica Neue', sans-serif" font-size="238" font-weight="700" letter-spacing="8" fill="#F5F6F8"><tspan fill="#B4BAC4" font-weight="500">[</tspan>T<tspan fill="#B4BAC4" font-weight="500">]</tspan></text>
+</svg>

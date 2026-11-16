@@ -1,36 +1,39 @@
-import { useEffect } from 'react';
+import { useState } from "react";
 import Layout from "../components/Layout";
-import Header from "../components/Header";
-import Footer from '../components/Footer';
-import Intro from '../components/sections/Intro';
-import ProductDevelopment from '../components/sections/ProductDevelopment';
-import ProjectsTimeline from '../components/sections/ProjectsTimeline';
-import StayInformed from '../components/sections/StayInformed';
-import AOS from 'aos';
-import 'aos/dist/aos.css';
+import TopBar from "../components/terminal/TopBar";
+import HeroSection from "../components/terminal/HeroSection";
+import VenturesIndex from "../components/terminal/VenturesIndex";
+// import Chronology from "../components/terminal/Chronology";
+import BriefingForm from "../components/terminal/BriefingForm";
+import TerminalFooter from "../components/terminal/TerminalFooter";
 
 const Index = () => {
-  useEffect(() => {
-    // Initialize AOS animation library
-    AOS.init({
-      duration: 800,
-      once: false,
-      mirror: true,
-    });
-  }, []);
+  const [preselectedSubject, setPreselectedSubject] =
+    useState("Investor Briefing");
+
+  const handleRequestBriefing = (subject = "Investor Briefing") => {
+    setPreselectedSubject(subject);
+    const el = document.getElementById("access");
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    }
+  };
 
   return (
-    <Layout pageTitle="The Future of Cannatech - Terpmetrix">
-      <Header />
+    <Layout
+      pageTitle="Precision Cannabis Technology & Hardware | Terpmetrix"
+      ogTitle="Terpmetrix — Precision Cannabis Technology & Hardware"
+    >
+      <TopBar />
       <main>
-        <Intro />
-        <ProductDevelopment />
-        <ProjectsTimeline />
-        <StayInformed />
+        <HeroSection onRequestBriefing={handleRequestBriefing} />
+        <VenturesIndex onRequestBriefing={handleRequestBriefing} />
+        {/* <Chronology /> */}
+        <BriefingForm preselectedSubject={preselectedSubject} />
       </main>
-      <Footer />
+      <TerminalFooter />
     </Layout>
-  )
-}
+  );
+};
 
 export default Index;
