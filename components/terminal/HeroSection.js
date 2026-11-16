@@ -6,7 +6,7 @@ const HeroSection = ({ onRequestBriefing }) => {
       <div className="tmx-container">
         <div className="hero-grid">
           <div className="hero-copy">
-            <h1>PRECISION IN A SPACE BUILT ON GUESSWORK.</h1>
+            <h1>PRECISION BUILT FOR THE PLANT.</h1>
 
             <p className="hero-lead">
               Hardware, optics, and market intelligence built quietly in

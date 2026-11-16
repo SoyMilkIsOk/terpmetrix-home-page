@@ -52,7 +52,7 @@ const Layout = ({
         <meta property="og:image:height" content="630" />
         <meta
           property="og:image:alt"
-          content="Precision in a space built on guesswork — Terpmetrix"
+          content="Precision built for the plant — Terpmetrix"
         />
 
         {/* Twitter / X Link Preview */}
