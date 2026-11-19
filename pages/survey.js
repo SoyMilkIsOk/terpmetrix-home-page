@@ -5,7 +5,11 @@ import Footer from '../components/Footer';
 
 const Survey = () => {
   return (
-    <Layout pageTitle="Survey Page - Double Lemon Gucci">
+    <Layout
+      pageTitle="Survey Page - Double Lemon Gucci"
+      description="Product survey — Terpmetrix."
+      noindex
+    >
       <Header />
       <SurveyForm />
       <Footer />

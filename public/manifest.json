@@ -1,6 +1,8 @@
 {
   "name": "Terpmetrix",
   "short_name": "Terpmetrix",
+  "description": "Precision built for the plant. Hardware, optics, and market intelligence built in Colorado since 2023.",
+  "start_url": "/",
   "theme_color": "#050506",
   "background_color": "#050506",
   "display": "standalone",

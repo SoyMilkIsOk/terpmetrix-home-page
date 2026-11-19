@@ -3,7 +3,11 @@ import Layout from "../components/Layout";
 
 const SuccessPage = () => {
   return (
-    <Layout pageTitle="TERPMETRIX // Inquiry Received">
+    <Layout
+      pageTitle="TERPMETRIX // Inquiry Received"
+      description="Thank you for reaching out to Terpmetrix."
+      noindex
+    >
       <main className="success-wrap">
         <div className="success-box">
           <div className="badge">[ RECEIVED ]</div>

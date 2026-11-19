@@ -63,7 +63,7 @@ const BriefingForm = ({ preselectedSubject }) => {
   return (
     <section id="access" className="access-section">
       <div className="tmx-container">
-        <div className="section-kicker">02 // INQUIRE</div>
+        <h2 className="section-kicker">02 // INQUIRE</h2>
 
         <div className="access-grid">
           <div className="direct-lines">
@@ -206,9 +206,10 @@ const BriefingForm = ({ preselectedSubject }) => {
         .section-kicker {
           font-family: var(--font-mono);
           font-size: 11px;
+          font-weight: 400;
           letter-spacing: 0.14em;
           color: var(--text-dim);
-          margin-bottom: 20px;
+          margin: 0 0 20px;
         }
 
         .access-grid {

@@ -4,7 +4,12 @@ import Footer from "../components/Footer";
 
 const JarSale = () => {
   return (
-    <Layout pageTitle="Terpscoop Jar Sale">
+    <Layout
+      pageTitle="TerpScoops Jar Sale | Terpmetrix"
+      ogTitle="TerpScoops Jar Sale — Terpmetrix"
+      description="TerpScoops Jar Sale order form — Terpmetrix."
+      canonicalPath="/sale"
+    >
       <Header />
       <div className="container">
         <iframe

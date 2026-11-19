@@ -1,5 +1,4 @@
 import { useEffect, useRef } from "react";
-import Head from "next/head";
 import Link from "next/link";
 import Layout from "../components/Layout";
 import TerminalFooter from "../components/terminal/TerminalFooter";
@@ -195,10 +194,9 @@ const Custom404Page = () => {
     <Layout
       pageTitle="404 // Route Not Found | Terpmetrix"
       ogTitle="404 // Signal Not Found — Terpmetrix"
+      description="The requested route could not be found on Terpmetrix."
+      noindex
     >
-      <Head>
-        <meta name="robots" content="noindex" />
-      </Head>
 
       <header className="nf-topbar">
         <div className="tmx-container">

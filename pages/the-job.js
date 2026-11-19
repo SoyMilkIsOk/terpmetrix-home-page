@@ -5,7 +5,7 @@ import Footer from '../components/Footer';
 
 const TheJob = () => {
   return (
-    <Layout pageTitle="The Job @ Terpmetrix">
+    <Layout pageTitle="The Job @ Terpmetrix" noindex>
       <Header />
       <Hero />
       <Footer />

@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /og-framer
+
+Sitemap: https://terpmetrix.com/sitemap.xml

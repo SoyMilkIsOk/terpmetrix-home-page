@@ -74,7 +74,7 @@ const VenturesIndex = ({ onRequestBriefing }) => {
   return (
     <section id="ventures" className="ventures-section">
       <div className="tmx-container">
-        <div className="section-kicker">01 // VENTURES</div>
+        <h2 className="section-kicker">01 // VENTURES</h2>
 
         <div className="ventures-table">
           {VENTURES.map((item) => {
@@ -104,7 +104,7 @@ const VenturesIndex = ({ onRequestBriefing }) => {
                 </div>
 
                 {isOpen && (
-                  <div className="row-drawer">
+                  <div className="row-drawer" data-nosnippet>
                     <p className="drawer-summary">{item.summary}</p>
                     <div className="drawer-action">
                       {item.internalAction ? (
@@ -162,9 +162,10 @@ const VenturesIndex = ({ onRequestBriefing }) => {
         .section-kicker {
           font-family: var(--font-mono);
           font-size: 11px;
+          font-weight: 400;
           letter-spacing: 0.14em;
           color: var(--text-dim);
-          margin-bottom: 20px;
+          margin: 0 0 20px;
         }
 
         .ventures-table {
